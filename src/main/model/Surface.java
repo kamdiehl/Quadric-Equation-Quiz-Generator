@@ -24,9 +24,7 @@ public abstract class Surface {
                 if (termList.get(i).getCoefficient() > 0 && i != 0) {
                     termX += "+ ";
                 }
-                if (termList.get(i).getCoefficient() < 0) {
-                    termX += "- ";
-                }
+
                 termX += termList.get(i).getCoefficient();
 
                 if (termList.get(i).getVariable() == 1) {
