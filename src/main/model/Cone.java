@@ -9,18 +9,18 @@ public class Cone extends Surface {
 
     public void generateCone(QuestionMaster questionMaster) {
 
-        int co1;
-        co1 = (int) (Math.random() * (questionMaster.getMaxValue() - questionMaster.getMinValue() + 1) + questionMaster.getMinValue());
+        int co1 = (int) (Math.random() * (questionMaster.getMaxValue() - questionMaster.getMinValue() + 1)
+                + questionMaster.getMinValue());
 
-        int co2;
-        co2 = (int) (Math.random() * (questionMaster.getMaxValue() - questionMaster.getMinValue() + 1) + questionMaster.getMinValue());
+        int co2 = (int) (Math.random() * (questionMaster.getMaxValue() - questionMaster.getMinValue() + 1)
+                + questionMaster.getMinValue());
 
-        int co3;
-        co3 = (int) (Math.random() * (questionMaster.getMaxValue() - questionMaster.getMinValue() + 1) + questionMaster.getMinValue());
+        int co3 = (int) (Math.random() * (questionMaster.getMaxValue() - questionMaster.getMinValue() + 1)
+                + questionMaster.getMinValue());
         co3 = -co3;
 
-        int co4;
-        co4 = (int) (Math.random() * (questionMaster.getMaxValue() - questionMaster.getMinValue() + 1) + questionMaster.getMinValue());
+        int co4 = (int) (Math.random() * (questionMaster.getMaxValue() - questionMaster.getMinValue() + 1)
+                + questionMaster.getMinValue());
 
         // ax^2 + by^2 - cz^2 = d where a,b,c are random coefficients.
         // var = the variable the integer coefficient is attached to (x,y,z)

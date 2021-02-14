@@ -1,18 +1,20 @@
 package model;
+
 import java.util.ArrayList;
 
 public abstract class Surface {
 
-    ArrayList<Term> termList = new ArrayList<Term>(4);
+    ArrayList<Term> termList = new ArrayList<Term>(4); //WHY ISNT TERM USED
     // Array list called termList containing data type Term has 4 spots,
     // the first three are for the ax^2, by^2, and cz^2 terms, and the
     // last one is for d (an arbitrary integer)
 
+    // HOW DO I WRITE A CLAUSE FOR THIS DON'T FORGET ABOUT IT
     public void createTerm(int co, int var, int si) {
 
         Term newTerm = new Term(co, var, si);
         termList.add(newTerm);
-// still don't get what this boi does can't remember why i made it
+
     }
 
     public String eqToString() {

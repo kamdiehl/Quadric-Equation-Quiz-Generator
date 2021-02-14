@@ -12,6 +12,9 @@ public class QuadricApp {
         runApp();
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes user input, calls new questions until number of questions asked equals
+    //          the quiz length inputted by user.
     public void runApp() {
         input = new Scanner(System.in);
         System.out.println("Enter 1 to start, enter 0 to exit");

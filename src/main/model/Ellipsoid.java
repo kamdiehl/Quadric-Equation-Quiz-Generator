@@ -12,17 +12,17 @@ public class Ellipsoid extends Surface {
     // EFFECTS: Generates 4 integer coefficients for each term in the ellipsoid equation.
     public void generateEllipsoid(QuestionMaster questionMaster) {
 // they could all equal, so fix
-        int co1;
-        co1 = (int)(Math.random() * (questionMaster.getMaxValue() - questionMaster.getMinValue() + 1) + questionMaster.getMinValue());
+        int co1 = (int)(Math.random() * (questionMaster.getMaxValue() - questionMaster.getMinValue() + 1)
+                + questionMaster.getMinValue());
 
-        int co2;
-        co2 = (int)(Math.random() * (questionMaster.getMaxValue() - questionMaster.getMinValue() + 1) + questionMaster.getMinValue());
+        int co2 = (int)(Math.random() * (questionMaster.getMaxValue() - questionMaster.getMinValue() + 1)
+                + questionMaster.getMinValue());
 
-        int co3;
-        co3 = (int)(Math.random() * (questionMaster.getMaxValue() - questionMaster.getMinValue() + 1) + questionMaster.getMinValue());
+        int co3 = (int)(Math.random() * (questionMaster.getMaxValue() - questionMaster.getMinValue() + 1)
+                + questionMaster.getMinValue());
 
-        int co4;
-        co4 = (int)(Math.random() * (questionMaster.getMaxValue() - questionMaster.getMinValue() + 1) + questionMaster.getMinValue());
+        int co4 = (int)(Math.random() * (questionMaster.getMaxValue() - questionMaster.getMinValue() + 1)
+                + questionMaster.getMinValue());
 
         // ax^2 + by^2 + cz^2 = d where a,b,c are random coefficients.
         // var = the variable the coefficient is attached to (x,y,z)

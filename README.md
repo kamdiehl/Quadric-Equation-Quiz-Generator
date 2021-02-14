@@ -8,6 +8,8 @@ program:
 - Hyperboloid of one sheet
 - Hyperboloid of two sheets
 
+For now, I've only included 3/6 of the above equations.
+
 ***What will the application do?***
 
 This application is intended to be a study device for identifying quadric surfaces solely based of their equation.
@@ -36,4 +38,6 @@ be unreliable and too short. To my surprise, no such program exists, so I though
 
 ## User Stories
 - As a user, I want to be able to choose the number of questions that I will be tested on.
-- As a user, I want to
+- As a user, I want to see the answer if I get a question wrong.
+- As a user, I want to see my fraction based score for the quiz I just completed.
+- As a user, I want to see my overall average for this quiz session until I exit the program.
