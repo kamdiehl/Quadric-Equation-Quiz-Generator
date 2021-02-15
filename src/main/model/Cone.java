@@ -10,6 +10,8 @@ public class Cone extends Surface {
         // Equation: ax^2 + by^2 - cz^2 = d
     }
 
+    // REQUIRES: co1, co2, co3 > 0.
+    // EFFECTS: creates the coefficients for each term in the equation of a cone.
     public void generateCone(QuestionMaster questionMaster) {
 
         int co1 = (int) (Math.random() * (questionMaster.getMaxValue() - questionMaster.getMinValue() + 1)

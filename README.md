@@ -12,11 +12,11 @@ For now, I've only included 3/6 of the above equations.
 
 ***What will the application do?***
 
-This application is intended to be a study device for identifying quadric surfaces solely based of their equation.
-Each of the quadric surfaces have distinct criteria for there equations, for example, an ellipsoid's equation must have
+This application intends to be a study device for identifying quadric surfaces solely based on their equation.
+Each of the quadric surfaces have distinct criteria for their equations, for example, an ellipsoid's equation must have
 every variable *x,y,z* be positive. The user will input the number of questions they want generated, and the program 
 will generate that number of quadric equations for the student to identify. They will be able to type in a box their 
-answer, and if it's correct they can proceed to the next question. Infinitley.
+answer, and if it's correct they can proceed to a new question. 
 
 
 ***Who will use it?***
@@ -28,7 +28,6 @@ surfaces, since 10 questions per unit is not nearly enough. In this case, they c
 students and have it generate infinite questions, thus never recieving a complaint about "not enough homework" ever 
 again.
 - Me
-- My TA who, when prompted, gave the example of a **square** when listing quadric surfaces.
 
 ***Why is this project of interest?***
 

@@ -5,8 +5,8 @@ import model.Ellipsoid;
 import model.Sphere;
 import java.util.Scanner;
 
-public class QuestionMaster {
 // This class handles the making of the questions that are presented to user. It also handles the user input.
+public class QuestionMaster {
 
     // These provide the range of what the coefficients a,b,c can exist between
     private int maxValue = 10;

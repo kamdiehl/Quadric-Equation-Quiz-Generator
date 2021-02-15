@@ -2,6 +2,8 @@ package ui;
 
 import java.util.Scanner;
 
+// This class is the face of the Surface Generator, provides method for main() to call and start the app,
+// and processes user input.
 public class QuadricApp {
 
     private Scanner input;
@@ -13,7 +15,6 @@ public class QuadricApp {
         runApp();
     }
 
-    // MODIFIES: this
     // EFFECTS: processes user input, calls new questions until number of questions asked equals
     //          the quiz length inputted by user.
     public void runApp() {

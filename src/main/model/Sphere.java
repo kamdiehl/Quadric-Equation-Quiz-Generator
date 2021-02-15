@@ -9,6 +9,9 @@ public class Sphere extends Surface {
         // Equation: ax^2 + by^2 + cz^2 = d where (a = b = c)
     }
 
+    // REQUIRES: co1, co4 > 0.
+    // MODIFIES:
+    // EFFECTS: creates the coefficients for each term in the equation of a sphere.
     public void generateSphere(QuestionMaster questionMaster) {
         int co1 = (int)(Math.random() * (questionMaster.getMaxValue() - questionMaster.getMinValue() + 1)
                 + questionMaster.getMinValue());

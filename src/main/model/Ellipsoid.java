@@ -10,11 +10,10 @@ public class Ellipsoid extends Surface {
         // Equation: ax^2 + by^2 + cz^2 = d
     }
 
-    // REQUIRES: minValue > 0
-    // MODIFIES:
+    // REQUIRES: co1, co2, co3 > 0.
     // EFFECTS: Generates 4 integer coefficients for each term in the ellipsoid equation.
     public void generateEllipsoid(QuestionMaster questionMaster) {
-// they could all equal, so fix
+
         int co1 = (int)(Math.random() * (questionMaster.getMaxValue() - questionMaster.getMinValue() + 1)
                 + questionMaster.getMinValue());
 

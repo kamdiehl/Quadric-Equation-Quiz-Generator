@@ -5,11 +5,15 @@ import java.util.ArrayList;
 public abstract class Surface {
 // Abstract class
 
+    private String localEql = "";
+
     ArrayList<Term> termList = new ArrayList<Term>(4);
     // Array list called termList containing data type Term has 4 spots,
     // the first three are for the ax^2, by^2, and cz^2 terms, and the
     // last one is for d (an arbitrary integer)
 
+    // MODIFIES: this
+    // EFFECTS: Adds new term to the list of terms needed for an equation
     public void createTerm(int co, int var, int si) {
 
         Term newTerm = new Term(co, var, si);
@@ -29,9 +33,8 @@ public abstract class Surface {
 
     }
 
-    private String localEql = "";
-
-
+    // REQUIRES: instantiated array list of terms.
+    // EFFECTS: Turns the LHS of the equation (including the variables) into a string.
     public String lhsEq() {
         for (int i = 0; i < 4; i++) {
             if (termList.get(i).getSide() == 0) {
@@ -61,7 +64,8 @@ public abstract class Surface {
         return localEql;
     }
 
-
+    // REQUIRES: instantiated array list of terms.
+    // EFFECTS: Turns the RHS of the equation into a string.
     public String rhsEq() {
         String localEq = "";
         for (int i = 0; i < 4; i++) {

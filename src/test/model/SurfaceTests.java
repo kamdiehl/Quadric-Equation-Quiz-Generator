@@ -1,9 +1,8 @@
 package model;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ui.QuestionMaster;
-
+import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 // Test class where model directory methods are tested
@@ -92,6 +91,7 @@ class SurfaceTests {
         assertEquals("2x^2 + 4y^2 -6z^2 = 9",eq);
 
     }
+
 
 }
 
