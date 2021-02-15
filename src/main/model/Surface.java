@@ -3,13 +3,13 @@ package model;
 import java.util.ArrayList;
 
 public abstract class Surface {
+// Abstract class
 
-    ArrayList<Term> termList = new ArrayList<Term>(4); //WHY ISNT TERM USED
+    ArrayList<Term> termList = new ArrayList<Term>(4);
     // Array list called termList containing data type Term has 4 spots,
     // the first three are for the ax^2, by^2, and cz^2 terms, and the
     // last one is for d (an arbitrary integer)
 
-    // HOW DO I WRITE A CLAUSE FOR THIS DON'T FORGET ABOUT IT
     public void createTerm(int co, int var, int si) {
 
         Term newTerm = new Term(co, var, si);
@@ -17,8 +17,22 @@ public abstract class Surface {
 
     }
 
+
+    // MODIFIES: this
+    // EFFECTS: Combines the string version of the LHS with the string version of the RHS
     public String eqToString() {
         String eq = "";
+        eq += lhsEq();
+        eq += "= ";
+        eq += rhsEq();
+        return eq;
+
+    }
+
+    private String localEql = "";
+
+
+    public String lhsEq() {
         for (int i = 0; i < 4; i++) {
             if (termList.get(i).getSide() == 0) {
                 String termX = "";
@@ -41,13 +55,15 @@ public abstract class Surface {
                 if (termList.get(i).getVariable() == 4) {
                     termX += termList.get(i).getCoefficient();
                 }
-                eq += termX;
-
+                localEql += termX;
             }
-
         }
-        eq += "= ";
+        return localEql;
+    }
 
+
+    public String rhsEq() {
+        String localEq = "";
         for (int i = 0; i < 4; i++) {
             if (termList.get(i).getSide() == 1) {
                 String termX = "";
@@ -64,14 +80,12 @@ public abstract class Surface {
                 if (termList.get(i).getVariable() == 4) {
                     termX += termList.get(i).getCoefficient();
                 }
-                eq += termX;
-
+                localEq += termX;
             }
-
         }
-        return eq;
-
+        return localEq;
     }
+
 
 }
 

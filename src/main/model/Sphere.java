@@ -1,7 +1,9 @@
 package model;
 
+import ui.QuestionMaster;
+
+// sub-class of Surface, contains the criteria needed for an equation of a sphere.
 public class Sphere extends Surface {
-// sub-class of Surface
 
     public Sphere() {
         // Equation: ax^2 + by^2 + cz^2 = d where (a = b = c)

@@ -1,7 +1,10 @@
 package model;
 
+import ui.QuestionMaster;
+
+// sub-class of Surface, contains the criteria needed for an equation of a cone. This includes 4 coefficients
+// attached to variables in the createTerm method. One coefficient is negative.
 public class Cone extends Surface {
-    // sub-class of abstract class Surface
 
     public Cone() {
         // Equation: ax^2 + by^2 - cz^2 = d

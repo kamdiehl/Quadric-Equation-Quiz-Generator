@@ -1,11 +1,12 @@
 package ui;
 
-import model.QuestionMaster;
 import java.util.Scanner;
 
 public class QuadricApp {
 
     private Scanner input;
+    private int correctAnswers;
+    private int questionsAsked;
 
     // EFFECTS: Starts the quadric surface generator application
     public QuadricApp() {
@@ -28,6 +29,10 @@ public class QuadricApp {
                 newQuiz.askQuestion();
             }
             System.out.println("Quiz score: " + newQuiz.getCorrectAnswers() + "/" + newQuiz.getQuizLength());
+            correctAnswers += newQuiz.getCorrectAnswers();
+            questionsAsked += newQuiz.getQuizLength();
+            System.out.println("Overall score: " + correctAnswers + "/" + questionsAsked);
+
             System.out.println("Enter 1 to start, enter 0 to exit");
             userInput = input.nextInt();
         }
