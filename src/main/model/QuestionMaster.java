@@ -26,7 +26,7 @@ public class QuestionMaster {
         quizLength = ql;
     }
 
-    public List<QuizEntry> createNewQuestions(int numOfQuestions) {  // IS THIS THE RIGHT RETURN TYPE
+    public List<QuizEntry> createNewQuestionList(int numOfQuestions) {  // IS THIS THE RIGHT RETURN TYPE
         quizLength = numOfQuestions; // yes no?
         for (int i = 0; i < numOfQuestions; i++) {
             QuizEntry question = new QuizEntry();
@@ -50,7 +50,7 @@ public class QuestionMaster {
 
 
     // EFFECTS: Randomizes number that chooses an equation to quiz user.
-    public void askQuestion() {
+    public void askQuestion() {  //MOVED THIS INTO QUIZ ENTER GENERATESURFACENUM METHOD
 
         input = new Scanner(System.in);
         int maxSurfaceCount = 3;
@@ -69,7 +69,7 @@ public class QuestionMaster {
         }
     }
 
-// 
+
     // EFFECTS: Generates a sphere equation to present to user, adds 1 to correct answers if right
     void sphereQuestion() {
         Sphere s = new Sphere();
