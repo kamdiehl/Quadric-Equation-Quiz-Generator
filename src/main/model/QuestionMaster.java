@@ -16,7 +16,7 @@ public class QuestionMaster {
     private List<QuizEntry> questionList;
 
     private int quizLength;
-    private Scanner input;
+    private Scanner input; //get rid of this and make the ui package deal wth it
 
 
     // Constructor
@@ -26,12 +26,13 @@ public class QuestionMaster {
         quizLength = ql;
     }
 
-    public void createNewQuestions(int numOfQuestions) {  // IS THIS THE RIGHT RETURN TYPE
-
+    public List<QuizEntry> createNewQuestions(int numOfQuestions) {  // IS THIS THE RIGHT RETURN TYPE
+        quizLength = numOfQuestions; // yes no?
         for (int i = 0; i < numOfQuestions; i++) {
             QuizEntry question = new QuizEntry();
             questionList.add(question);
         }
+        return questionList;
     }
 
 
