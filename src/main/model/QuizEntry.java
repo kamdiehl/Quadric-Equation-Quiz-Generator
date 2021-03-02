@@ -1,7 +1,7 @@
 package model;
 
+// This class creates 1 quiz question (an equation) that will be added to the list of questions in QuestionMaster.
 public class QuizEntry {
-    // This class creates 1 quiz question (an equation) that will be added to the list of questions in QuestionMaster.
     private String question;
     private String answer;
 
