@@ -10,6 +10,7 @@ import java.util.Scanner;
 public class QuadricApp {
 
     private Scanner input;
+    private int overallCorrectAnswers;
     private int correctAnswers;
     private int questionsAsked;
     private int currentQuestion;
@@ -34,18 +35,23 @@ public class QuadricApp {
 
             QuestionMaster newQuiz = new QuestionMaster(userInput2, 10, 1);
             newQuiz.createNewQuestionList(userInput2);
+            currentQuestion = 0;
+            correctAnswers = 0;
 
 
             for (int i = 0; i < userInput2; i++) { // loop for each of the questions made
                 QuizEntry currentQuiz = newQuiz.getQuestionList().get(i); // get i index question/answer pair
 
-                System.out.println(currentQuiz.getQuestion()); // print question to user
+                String currentEquation = currentQuiz.getQuestion();
+
+                System.out.println(currentEquation); // print question to user
 
                 String userAnswer = input.next();  // debugger says getQuestion above is NULL
                 Boolean isCorrect = checkAnswer(userAnswer, currentQuiz.getAnswer());
 
                 if (isCorrect) {
                     System.out.println("Correct!");
+                    overallCorrectAnswers++;
                     correctAnswers++;
                 } else {
                     System.out.println("Incorrect");
@@ -53,15 +59,17 @@ public class QuadricApp {
                 currentQuestion++;
             }
 
-            System.out.println("Quiz score: " + newQuiz.getCorrectAnswers() + "/" + newQuiz.getQuizLength());
-            correctAnswers += newQuiz.getCorrectAnswers();
+            System.out.println("Quiz score: " + correctAnswers + "/" + newQuiz.getQuizLength());
+            overallCorrectAnswers += newQuiz.getCorrectAnswers();
             questionsAsked += newQuiz.getQuizLength();
-            System.out.println("Overall score: " + correctAnswers + "/" + questionsAsked);
+            System.out.println("Overall score: " + overallCorrectAnswers + "/" + questionsAsked);
 
             System.out.println("Enter 1 to start, enter 0 to exit");
             userInput = input.nextInt();
         }
     }
+
+
 
 
 

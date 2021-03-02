@@ -1,19 +1,23 @@
 package model;
 
 public class QuizEntry {
+    // This class creates 1 quiz question (an equation) that will be added to the list of questions in QuestionMaster.
     private String question;
     private String answer;
 
     int maxValue = 10;
     int minValue = 1;
 
-    public QuizEntry(String question, String answer) {
+    // Constructor
+    public QuizEntry() {
         generateSurfaceQ();
         this.question = getQuestion();
         this.answer = getAnswer();
 
     }
 
+
+    // EFFECTS: Generates random number to randomly call a surface to construct an equation.
     public void generateSurfaceQ() {
         int maxSurfaceCount = 3;
         int randNum = (int)(Math.random() * (maxSurfaceCount - 1 + 1) + 1);
@@ -31,37 +35,32 @@ public class QuizEntry {
         }
     }
 
+
     // EFFECTS: Generates a sphere equation to present to user
     void sphereQuestion() {
         Sphere s = new Sphere();
         s.generateSphere(maxValue, minValue);
-        System.out.println(s.eqToString());
         question = s.eqToString();
         answer = "sphere";
     }
+
 
     // EFFECTS: Generates an ellipsoid equation to present to user
     void ellipsoidQuestion() {
         Ellipsoid e = new Ellipsoid();
         e.generateEllipsoid(maxValue, minValue);
-        System.out.println(e.eqToString());
         question = e.eqToString();
         answer = "ellipsoid";
     }
+
 
     // EFFECTS: Generates a cone equation to present to user
     void coneQuestion() {
         Cone c = new Cone();
         c.generateCone(maxValue, minValue);
-        System.out.println(c.eqToString());
         question = c.eqToString();
         answer = "cone";
     }
-
-
-
-
-
 
 
 

@@ -21,7 +21,6 @@ public abstract class Surface {
 
     }
 
-
     // MODIFIES: this
     // EFFECTS: Combines the string version of the LHS with the string version of the RHS
     public String eqToString() {

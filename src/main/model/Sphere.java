@@ -10,7 +10,6 @@ public class Sphere extends Surface {
     }
 
     // REQUIRES: co1, co4 > 0.
-    // MODIFIES:
     // EFFECTS: creates the coefficients for each term in the equation of a sphere.
     public void generateSphere(int maxRange, int minRange) {
         maxValue = maxRange;
