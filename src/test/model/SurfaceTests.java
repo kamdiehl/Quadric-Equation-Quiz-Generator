@@ -1,8 +1,9 @@
 package model;
 
 import org.junit.jupiter.api.Test;
-
+import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 // Test class where model directory methods are tested
 class SurfaceTests {
@@ -88,6 +89,61 @@ class SurfaceTests {
         String eq = c.eqToString();
 
         assertEquals("2x^2 + 4y^2 -6z^2 = 9",eq);
+
+    }
+
+
+    @Test
+    void testSphereQuestion() {
+
+        QuizEntry equation = new QuizEntry();
+        equation.sphereQuestion();
+
+        assertEquals("sphere", equation.getAnswer());
+        assertFalse("cone".equals(equation.getAnswer()));
+        assertFalse("ellipsoid".equals(equation.getAnswer()));
+    }
+
+    @Test
+    void testEllipsoidQuestion() {
+
+        QuizEntry equation = new QuizEntry();
+        equation.ellipsoidQuestion();
+
+        assertEquals("ellipsoid", equation.getAnswer());
+        assertFalse("cone".equals(equation.getAnswer()));
+        assertFalse("sphere".equals(equation.getAnswer()));
+    }
+
+    @Test
+    void testConeQuestion() {
+
+        QuizEntry equation = new QuizEntry();
+        equation.coneQuestion();
+
+        assertEquals("cone", equation.getAnswer());
+        assertFalse("ellipsoid".equals(equation.getAnswer()));
+        assertFalse("sphere".equals(equation.getAnswer()));
+    }
+
+
+    @Test
+    void testCreateNewQuestionList() {
+
+        int numOfQuestions = 5;
+        QuestionMaster newQuiz = new QuestionMaster(numOfQuestions, 10, 1);
+
+        List<QuizEntry> questionList = newQuiz.createNewQuestionList(numOfQuestions);
+
+        assertEquals(5, questionList.size());
+
+        List<QuizEntry> testGet = newQuiz.getQuestionList();
+
+        assertEquals(5, testGet.size());
+
+        // prior to starting
+        assertEquals(0, newQuiz.getCorrectAnswers());
+
 
     }
 

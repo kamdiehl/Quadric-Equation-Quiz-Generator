@@ -2,7 +2,6 @@ package ui;
 
 import model.QuestionMaster;
 import model.QuizEntry;
-
 import java.util.Scanner;
 
 // This class is the face of the Surface Generator, provides method for main() to call and start the app,
@@ -36,7 +35,6 @@ public class QuadricApp {
             newQuiz.createNewQuestionList(userInput2);
             currentQuestion = 0;
             correctAnswers = 0;
-
 
             for (int i = 0; i < userInput2; i++) { // loop for each of the questions made
                 QuizEntry currentQuiz = newQuiz.getQuestionList().get(i); // get i index question/answer pair

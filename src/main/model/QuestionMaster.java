@@ -2,7 +2,6 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 // This class handles the making of the full QUIZ. It calls QuizEntry the number of times the user wants to be tested
 // and makes a list of questions that will be iterated through during the quiz.
