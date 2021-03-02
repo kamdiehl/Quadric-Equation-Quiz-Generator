@@ -7,8 +7,10 @@ public class QuizEntry {
     int maxValue = 10;
     int minValue = 1;
 
-    public QuizEntry() {
+    public QuizEntry(String question, String answer) {
         generateSurfaceQ();
+        this.question = getQuestion();
+        this.answer = getAnswer();
 
     }
 
@@ -55,6 +57,10 @@ public class QuizEntry {
         question = c.eqToString();
         answer = "cone";
     }
+
+
+
+
 
 
 

@@ -10,13 +10,17 @@ public class QuestionMaster {
     // These provide the range of what the coefficients a,b,c can exist between
     private int maxValue = 10;
     private int minValue = 1; //WHY ARENT THESE BEING USED NOW
+
     // These keep track of what question user is on, number of correct answers, and quiz length
     private int currentQuestion;
     private int correctAnswers;
+    private String answer;
+    private String question;
 
     private ArrayList<QuizEntry> questionList;
 
     private int quizLength;
+
     private Scanner input; //get rid of this and make the ui package deal wth it
 
 
@@ -25,15 +29,18 @@ public class QuestionMaster {
         maxValue = maxVal;
         minValue = minVal;
         quizLength = ql;
+        questionList = new ArrayList<>();
+
     }
 
     public List<QuizEntry> createNewQuestionList(int numOfQuestions) {  // IS THIS THE RIGHT RETURN TYPE
         quizLength = numOfQuestions; // yes no?
-        questionList = new ArrayList<>();
+        QuestionMaster newQu = new QuestionMaster(getQuizLength(), getMaxValue(), getMinValue());
 
         for (int i = 0; i < numOfQuestions; i++) {
-            QuizEntry question = new QuizEntry();
-            questionList.add(question);
+            QuizEntry newQuestion = new QuizEntry(newQu.question, newQu.answer); // its probably null cuz of
+
+            questionList.add(newQuestion);
         }
         return questionList;
     }
@@ -43,34 +50,6 @@ public class QuestionMaster {
 
 
 
-
-
-
-
-
-
-
-
-
-    // EFFECTS: Randomizes number that chooses an equation to quiz user.
-    public void askQuestion() {  //MOVED THIS INTO QUIZ ENTER GENERATESURFACENUM METHOD
-
-        input = new Scanner(System.in);
-        int maxSurfaceCount = 3;
-        int randNum = (int)(Math.random() * (maxSurfaceCount - 1 + 1) + 1);
-
-        if (randNum == 1) {
-            sphereQuestion();
-        }
-
-        if (randNum == 2) {
-            ellipsoidQuestion();
-        }
-
-        if (randNum == 3) {
-            coneQuestion();
-        }
-    }
 
 
     // EFFECTS: Generates a sphere equation to present to user, adds 1 to correct answers if right
