@@ -1,8 +1,6 @@
-package ui;
+package model;
 
-import model.Cone;
-import model.Ellipsoid;
-import model.Sphere;
+import java.util.List;
 import java.util.Scanner;
 
 // This class handles the making of the questions that are presented to user. It also handles the user input.
@@ -10,10 +8,13 @@ public class QuestionMaster {
 
     // These provide the range of what the coefficients a,b,c can exist between
     private int maxValue = 10;
-    private int minValue = 1;
+    private int minValue = 1; //WHY ARENT THESE BEING USED NOW
     // These keep track of what question user is on, number of correct answers, and quiz length
     private int currentQuestion;
     private int correctAnswers;
+
+    private List<QuizEntry> questionList;
+
     private int quizLength;
     private Scanner input;
 
@@ -24,6 +25,27 @@ public class QuestionMaster {
         minValue = minVal;
         quizLength = ql;
     }
+
+    public void createNewQuestions(int numOfQuestions) {  // IS THIS THE RIGHT RETURN TYPE
+
+        for (int i = 0; i < numOfQuestions; i++) {
+            QuizEntry question = new QuizEntry();
+            questionList.add(question);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     // EFFECTS: Randomizes number that chooses an equation to quiz user.
@@ -46,11 +68,11 @@ public class QuestionMaster {
         }
     }
 
-
+// 
     // EFFECTS: Generates a sphere equation to present to user, adds 1 to correct answers if right
     void sphereQuestion() {
         Sphere s = new Sphere();
-        s.generateSphere(this);
+        s.generateSphere(getMaxValue(), getMinValue());
         System.out.println(s.eqToString());
         String userAnswer = input.next();
         if (userAnswer.equals("sphere")) {
@@ -66,7 +88,7 @@ public class QuestionMaster {
     // EFFECTS: Generates an ellipsoid equation to present to user, adds 1 to correct answers if right
     void ellipsoidQuestion() {
         Ellipsoid e = new Ellipsoid();
-        e.generateEllipsoid(this);
+        e.generateEllipsoid(getMaxValue(), getMinValue());
         System.out.println(e.eqToString());
         String userAnswer = input.next();
         if (userAnswer.equals("ellipsoid")) {
@@ -82,7 +104,7 @@ public class QuestionMaster {
     // EFFECTS: Generates a cone equation to present to user, adds 1 to correct answers if right
     void coneQuestion() {
         Cone c = new Cone();
-        c.generateCone(this);
+        c.generateCone(getMaxValue(),getMinValue());
         System.out.println(c.eqToString());
         String userAnswer = input.next();
         if (userAnswer.equals("cone")) {

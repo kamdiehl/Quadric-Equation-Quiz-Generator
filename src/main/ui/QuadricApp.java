@@ -1,5 +1,7 @@
 package ui;
 
+import model.QuestionMaster;
+
 import java.util.Scanner;
 
 // This class is the face of the Surface Generator, provides method for main() to call and start the app,

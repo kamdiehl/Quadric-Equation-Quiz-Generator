@@ -1,8 +1,7 @@
 package model;
 
 import org.junit.jupiter.api.Test;
-import ui.QuestionMaster;
-import static org.junit.jupiter.api.Assertions.*;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 // Test class where model directory methods are tested
@@ -41,7 +40,7 @@ class SurfaceTests {
         s.createTerm(testZ.getCoefficient(),testZ.getVariable(), testZ.getSide());
         s.createTerm(testD.getCoefficient(),testD.getVariable(), testD.getSide());
 
-        s.generateSphere(q);
+        s.generateSphere(q.getMaxValue(), q.getMinValue());
         String eq = s.eqToString();
 
         assertEquals("2x^2 + 2y^2 + 2z^2 = 9",eq);
@@ -63,7 +62,7 @@ class SurfaceTests {
         e.createTerm(testZ.getCoefficient(),testZ.getVariable(), testZ.getSide());
         e.createTerm(testD.getCoefficient(),testD.getVariable(), testD.getSide());
 
-        e.generateEllipsoid(q);
+        e.generateEllipsoid(q.getMaxValue(), q.getMinValue());
         String eq = e.eqToString();
 
         assertEquals("2x^2 + 4y^2 + 6z^2 = 9",eq);
@@ -85,7 +84,7 @@ class SurfaceTests {
         c.createTerm(testZ.getCoefficient(),testZ.getVariable(), testZ.getSide());
         c.createTerm(testD.getCoefficient(),testD.getVariable(), testD.getSide());
 
-        c.generateCone(q);
+        c.generateCone(q.getMaxValue(), q.getMinValue());
         String eq = c.eqToString();
 
         assertEquals("2x^2 + 4y^2 -6z^2 = 9",eq);

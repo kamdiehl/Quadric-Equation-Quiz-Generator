@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 
 public abstract class Surface {
-// Abstract class
+// Abstract class that deals with the creation of the equation by conjoining the terms.
 
     private String localEql = "";
 
