@@ -21,11 +21,10 @@ public class QuadricApp {
         runApp();
     }
 
+
     // EFFECTS: processes user input, calls new questions until number of questions asked equals
     //          the quiz length inputted by user.
-
-    @SuppressWarnings("checkstyle:MethodLength")
-    public void runApp() { // FIX METHOD LENGTH
+    public void runApp() {
         input = new Scanner(System.in);
         System.out.println("Enter 1 to start, enter 0 to exit");
         int userInput = input.nextInt();
@@ -71,8 +70,7 @@ public class QuadricApp {
 
 
 
-
-
+    // EFFECTS: Compares the user's answer to the correct answer for that question, returns true if correct.
     public boolean checkAnswer(String userAnswer, String answer) {
         return userAnswer.equals(answer);
     }
