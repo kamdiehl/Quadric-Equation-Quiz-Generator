@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -13,7 +14,7 @@ public class QuestionMaster {
     private int currentQuestion;
     private int correctAnswers;
 
-    private List<QuizEntry> questionList;
+    private ArrayList<QuizEntry> questionList;
 
     private int quizLength;
     private Scanner input; //get rid of this and make the ui package deal wth it
@@ -28,6 +29,8 @@ public class QuestionMaster {
 
     public List<QuizEntry> createNewQuestionList(int numOfQuestions) {  // IS THIS THE RIGHT RETURN TYPE
         quizLength = numOfQuestions; // yes no?
+        questionList = new ArrayList<>();
+
         for (int i = 0; i < numOfQuestions; i++) {
             QuizEntry question = new QuizEntry();
             questionList.add(question);
@@ -140,6 +143,10 @@ public class QuestionMaster {
 
     public int getCurrentQuestion() {
         return currentQuestion;
+    }
+
+    public List<QuizEntry> getQuestionList() {
+        return questionList;
     }
 
 }
