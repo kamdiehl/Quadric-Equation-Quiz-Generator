@@ -66,6 +66,7 @@ public class QuadricApp {
                 correctAnswers++;
             } else {
                 System.out.println("Incorrect");
+                System.out.println("The answer was " + currentQuiz.getAnswer());
             }
             currentQuestion++;
         }

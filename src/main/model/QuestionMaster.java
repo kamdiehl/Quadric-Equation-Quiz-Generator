@@ -35,7 +35,6 @@ public class QuestionMaster {
             QuizEntry newQuestion = new QuizEntry();
             questionList.add(newQuestion);
         }
-
         return questionList;
     }
 
