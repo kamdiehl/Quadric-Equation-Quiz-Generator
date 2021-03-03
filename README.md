@@ -40,3 +40,11 @@ be unreliable and too short. To my surprise, no such program exists, so I though
 - As a user, I want to see the answer if I get a question wrong.
 - As a user, I want to see my fraction based score for the quiz I just completed.
 - As a user, I want to see my overall average for this quiz session until I exit the program.
+
+**PHASE 2**
+
+(possibilities)
+- As a user, I want to be able to save my overall score from my current session.
+- As a user, when I want to quit the application, I want to be reminded to save my current session
+if I'd like to.
+- As a user, I want to be able to quit the application and reload it later on to carry on where I left off.

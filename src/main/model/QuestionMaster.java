@@ -1,5 +1,8 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +17,10 @@ public class QuestionMaster {
     private int quizLength;
     private int correctAnswers;
     private ArrayList<QuizEntry> questionList;
+
+
+    // JSON
+    private String name;
 
 
     // Constructor
@@ -37,6 +44,32 @@ public class QuestionMaster {
         }
         return questionList;
     }
+
+
+
+    // JSON
+
+
+    //@Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("thingies", equationsToJson());
+        return json;
+    }
+
+
+    // EFFECTS: returns things in this workroom as a JSON array
+    private JSONArray equationsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (QuizEntry qe : questionList) {
+            jsonArray.put(qe.toJson());
+        }
+        return jsonArray;
+    }
+
+
 
 
     // Getters
