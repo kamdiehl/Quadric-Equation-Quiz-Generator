@@ -58,9 +58,8 @@ public class QuadricApp {
             System.out.println(currentEquation); // print 1 question to user
 
             String userAnswer = input.next();
-            Boolean isCorrect = checkAnswer(userAnswer, currentQuiz.getAnswer());
 
-            if (isCorrect) {
+            if (checkAnswer(userAnswer, currentQuiz.getAnswer())) {
                 System.out.println("Correct!");
                 overallCorrectAnswers++;
                 correctAnswers++;
