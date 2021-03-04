@@ -4,6 +4,8 @@ import model.QuestionMaster;
 import model.QuizEntry;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import ui.QuadricApp;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -11,9 +13,13 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Stream;
 
-// How do I properly give citations?
+// How do I properly give citations? Took this from demo
 public class JsonReader {
     private String source;
+    QuadricApp qa;
+    QuestionMaster qm;
+    QuizEntry qe;
+    List<QuizEntry> questionList;
 
 
     // Constructor
@@ -25,10 +31,10 @@ public class JsonReader {
 
     // EFFECTS: reads workroom from file and returns it;
     // throws IOException if an error occurs reading data from file
-    public QuestionMaster read() throws IOException {
+    public QuadricApp read() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
-        return parseQuestionMaster(jsonObject);
+        return parseQuadricApp(jsonObject);
 
     }
 
@@ -36,7 +42,6 @@ public class JsonReader {
     // EFFECTS: reads source file as string and returns it
     public String readFile(String source) throws IOException {
         StringBuilder contentBuilder = new StringBuilder();
-
         try (Stream<String> stream = Files.lines(Paths.get(source), StandardCharsets.UTF_8)) {
             stream.forEach(s -> contentBuilder.append(s));
         }
@@ -46,11 +51,12 @@ public class JsonReader {
 
 
     // EFFECTS: parses QuestionMaster from JSON object and returns it
-    public QuestionMaster parseQuestionMaster(JSONObject jsonObject) {
-        String name = jsonObject.getString("name");
-        QuestionMaster qm = new QuestionMaster(10,10,1);  //change
-        addEquations(qm, jsonObject);
-        return qm;
+    // no. I should have this as "parse incorrect answers from Quadric app"
+    public QuadricApp parseQuadricApp(JSONObject jsonObject) {
+        String quiz = jsonObject.getString("incorrect list");
+        qa = new QuadricApp();
+        addEquations(qa, jsonObject);
+        return qa;
 
     }
 
@@ -58,11 +64,11 @@ public class JsonReader {
 
     // MODIFIES: qm
     // EFFECTS: parses equation list from JSON object and adds them to QuestionMaster.
-    private void addEquations(QuestionMaster qm, JSONObject jsonObject) {
-        JSONArray jsonArray = jsonObject.getJSONArray("thingies");
+    private void addEquations(QuadricApp qa, JSONObject jsonObject) {
+        JSONArray jsonArray = jsonObject.getJSONArray("incorrect list");
         for (Object json : jsonArray) {
-            JSONObject nextThingy = (JSONObject) json;
-            addEquation(qm, nextThingy);
+            JSONObject nextEq = (JSONObject) json;
+            addEquation(qa, nextEq);
         }
     }
 
@@ -70,12 +76,13 @@ public class JsonReader {
 
     // MODIFIES: qm
     // EFFECTS: parses equation (quizEntry) from JSON object and adds it to QuestionMaster.
-    private void addEquation(QuestionMaster qm, JSONObject jsonObject) {
-        String name = jsonObject.getString("name");
-        QuizEntry quizEntry = new QuizEntry();
-        int numOfQuestions = qm.getQuizLength();
-        List<QuizEntry> questionList = qm.createNewQuestionList(numOfQuestions);
-        questionList.add(quizEntry);
+    private void addEquation(QuadricApp qa, JSONObject jsonObject) {
+        String equation = jsonObject.getString("incorrect");
+        qa.addIncorrectEq(equation);
+
+        //int numOfQuestions = qa.getUserInput2();
+        //questionList = qm.createNewQuestionList(numOfQuestions);
+       // questionList.add(qe);
 
     }
 

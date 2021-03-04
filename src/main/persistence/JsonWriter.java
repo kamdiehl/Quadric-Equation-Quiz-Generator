@@ -1,6 +1,7 @@
 package persistence;
 
 import model.QuestionMaster;
+import model.QuizEntry;
 import org.json.JSONObject;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,7 +10,7 @@ import java.io.PrintWriter;
 public class JsonWriter {
     private String destination;
     private PrintWriter writer;
-    private static final int TAB = 4;
+    private static final int TAB = 4; // what do this mean
 
 
     // Constructor
@@ -28,10 +29,12 @@ public class JsonWriter {
 
 
     // MODIFIES: this
-    // EFFECTS: writes JSON representation of QuestionMaster to file
-    public void write(QuestionMaster qm) {
-        JSONObject json = qm.toJson();
-        saveToFile(json.toString(TAB));
+    // EFFECTS: writes JSON representation of a incorrect q (isn't a string already in JSON format)
+    // but no, i should have this as "writes incorrect answer to file"
+    public void write(String eq) {
+       // JSONObject json = eq.toJson();
+        saveToFile(eq); //TAB
+        // I should have this take in a string and then get rid of the .toString()
     }
 
 

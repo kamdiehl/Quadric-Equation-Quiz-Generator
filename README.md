@@ -48,3 +48,5 @@ be unreliable and too short. To my surprise, no such program exists, so I though
 - As a user, when I want to quit the application, I want to be reminded to save my current session
 if I'd like to.
 - As a user, I want to be able to quit the application and reload it later on to carry on where I left off.
+- As a user, I want to be able to be able to save the questions I got wrong
+so I can review them at a later time.
