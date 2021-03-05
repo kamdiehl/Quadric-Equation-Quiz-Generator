@@ -71,15 +71,15 @@ public class QuizEntry {
 
 
     // JSON
-
-   // @Override
-    public JSONObject toJson() {
-        JSONObject json = new JSONObject();
-        json.put("name", name);
-       // json.put("category", );
-        return json;
-    }
-
+//
+//   // @Override
+//    public JSONObject toJson() {
+//        JSONObject json = new JSONObject();
+//        json.put("name", name);
+//       // json.put("category", );
+//        return json;
+//    }
+//
 
 
 

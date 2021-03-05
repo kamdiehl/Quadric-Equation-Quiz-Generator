@@ -20,35 +20,36 @@ public class JsonWriter {
     }
 
 
-    // MODIFIES: this
-    // EFFECTS: opens writer; throws FileNotFoundException if destination file cannot
-    // be opened for writing
-    public void open() throws FileNotFoundException {
-        writer = new PrintWriter(new File(destination));
-    }
-
-
-    // MODIFIES: this
-    // EFFECTS: writes JSON representation of a incorrect q (isn't a string already in JSON format)
-    // but no, i should have this as "writes incorrect answer to file"
-    public void write(String eq) {
-       // JSONObject json = eq.toJson();
-        saveToFile(eq); //TAB
-        // I should have this take in a string and then get rid of the .toString()
-    }
-
-
-    // MODIFIES: this
-    // EFFECTS: closes writer
-    public void close() {
-        writer.close();
-    }
-
-
-    // MODIFIES: this
-    // EFFECTS: writes string to file
-    public void saveToFile(String json) {
-        writer.print(json);
-    }
+//    // MODIFIES: this
+//    // EFFECTS: opens writer; throws FileNotFoundException if destination file cannot
+//    // be opened for writing
+//    public void open() throws FileNotFoundException {
+//        writer = new PrintWriter(new File(destination));
+//    }
+//
+//
+//    // MODIFIES: this
+//    // EFFECTS: writes JSON representation of a incorrect q (isn't a string already in JSON format)
+//    // but no, i should have this as "writes incorrect answer to file"
+//    public void write(String eq) {
+//      //  JSONObject json = eq.toJson();
+//        saveToFile(eq); //TAB why was that there
+//        // I should have this take in a string and then get rid of the .toString()
+//    }
+//
+//
+//    // MODIFIES: this
+//    // EFFECTS: closes writer
+//    public void close() {
+//        writer.close();
+//    }
+//
+//
+//    // MODIFIES: this
+//    // EFFECTS: writes string to file
+//    public void saveToFile(String json) {
+//        writer.print(json);
+//    }
+//    // whats the diff between this and write
 
 }

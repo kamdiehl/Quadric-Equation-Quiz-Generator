@@ -1,0 +1,51 @@
+// idea 1: save overall stats + most recent quiz questions
+// parse JSON to intialize QuizEntry objects + stats data (that will be assigned to QuestionMaster)
+{
+  "totalQuestionsAsked": 45,
+  "totalCorrectAnswers": 15,
+  "totalIncorrectAnswers": 30,
+  "mostRecentQuizQuestions": [
+    {
+      "question": "5 + 6",
+      "answer": "11"
+    },
+    {
+      "question": "12 + 6",
+      "answer": "18"
+    },
+    {
+      "question": "4 - 3",
+      "answer": "1"
+    }
+  ]
+}
+
+// idea 2: save overall stats + individual quiz stats
+// (have to implement QuizResult and QuizResultManager/StatsManager classes)
+// parse JSON to intialize QuizResult objects + stats data (that will be assigned to StatsManager)
+{
+  "totalQuestionsAsked": 45,
+  "totalCorrectAnswers": 15,
+  "totalIncorrectAnswers": 30,
+  "quizResults": [
+    {
+      // "date": "jan 5",
+      "questionsAsked": 10,
+      "correctAnswers": 5,
+      "incorrectAnswers": 5,
+      "coneQuestionsAsked": 6,
+    },
+    {
+      "questionsAsked": 10,
+      "correctAnswers": 5,
+      "incorrectAnswers": 5,
+      "coneQuestionsAsked": 6,
+    },
+    {
+      "questionsAsked": 10,
+      "correctAnswers": 5,
+      "incorrectAnswers": 5,
+      "coneQuestionsAsked": 6,
+    }
+  ]
+}

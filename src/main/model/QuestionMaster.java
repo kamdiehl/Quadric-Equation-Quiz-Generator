@@ -50,24 +50,24 @@ public class QuestionMaster {
     // JSON
 
 
-    //@Override
-    public JSONObject toJson() {
-        JSONObject json = new JSONObject();
-        json.put("name", name);
-        json.put("thingies", equationsToJson());
-        return json;
-    }
-
-
-    // EFFECTS: returns things in this workroom as a JSON array
-    private JSONArray equationsToJson() {
-        JSONArray jsonArray = new JSONArray();
-
-        for (QuizEntry qe : questionList) {
-            jsonArray.put(qe.toJson());
-        }
-        return jsonArray;
-    }
+//    //@Override
+//    public JSONObject toJson() {
+//        JSONObject json = new JSONObject();
+//        json.put("name", name);
+//        json.put("thingies", equationsToJson());
+//        return json;
+//    }
+//
+//
+//    // EFFECTS: returns things in this workroom as a JSON array
+//    private JSONArray equationsToJson() {
+//        JSONArray jsonArray = new JSONArray();
+//
+//        for (QuizEntry qe : questionList) {
+//            jsonArray.put(qe.toJson());
+//        }
+//        return jsonArray;
+//    }
 
 
 
