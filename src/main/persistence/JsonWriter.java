@@ -20,32 +20,28 @@ public class JsonWriter {
         this.destination = destination;
     }
 
-
-//    // MODIFIES: this
-//    // EFFECTS: opens writer; throws FileNotFoundException if destination file cannot
-//    // be opened for writing
-//    public void open() throws FileNotFoundException {
-//        writer = new PrintWriter(new File(destination));
-//    }
-//
-//
 // MODIFIES: this
-    // EFFECTS: writes JSON representation of a incorrect q (isn't a string already in JSON format)
-    // but no, i should have this as "writes incorrect answer to file"
+    // EFFECTS: writes JSON representation of a stat
     public void write(StatsManager stats) {
         JSONObject json = stats.toJson();
         saveToFile(json.toString(TAB));
 
     }
-//
-//
-//    // MODIFIES: this
-//    // EFFECTS: closes writer
-//    public void close() {
-//        writer.close();
-//    }
-//
-//
+
+    // MODIFIES: this
+    // EFFECTS: opens writer; throws FileNotFoundException if destination file cannot
+    // be opened for writing
+    public void open() throws FileNotFoundException {
+        writer = new PrintWriter(new File(destination));
+    }
+
+    // MODIFIES: this
+    // EFFECTS: closes writer
+    public void close() {
+        writer.close();
+    }
+
+
     // MODIFIES: this
     // EFFECTS: writes string to file
 

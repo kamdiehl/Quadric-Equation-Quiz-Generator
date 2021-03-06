@@ -1,13 +1,13 @@
 package ui;
 
-import model.QuestionMaster;
-import model.QuizEntry;
-import model.QuizResult;
-import model.StatsManager;
+import model.*;
 import org.json.JSONObject;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 // This class provides method for main() to call and start the app, and processes user input.
@@ -16,6 +16,7 @@ public class QuadricApp {
     QuestionMaster newQuiz;
     QuizEntry currentQuiz;
     QuizResult result;
+    StatsManager statsManager;
 
     private Scanner input;
     private int userQuizLength;
@@ -48,19 +49,22 @@ public class QuadricApp {
     //          Then calls runQuiz to iterate through question array list.
     public void runApp() {
         input = new Scanner(System.in);
-        System.out.println("Enter 1 to start, enter 0 to exit");
+        System.out.println("Enter 1 to start, enter 0 to exit, 2 to load");
         int userInput = input.nextInt();
-        while (userInput != 0) {
+        while (userInput == 1) {
             System.out.println("How many questions do you want to be asked?");
             userQuizLength = input.nextInt();
             newQuiz.setQuizLength(userQuizLength);
 
-            //newQuiz.setCorrectAnswers(0); // changed from correctAnswers = 0;
 
             runQuiz();
 
             System.out.println("Enter 1 to start, enter 0 to exit");
             userInput = input.nextInt();
+        }
+
+        while (userInput == 2) {
+            loadWorkRoom();
         }
 
     }
@@ -116,45 +120,42 @@ public class QuadricApp {
     }
 
 
-
-
-
-
-
-
     // JSON
-//
-//
-//    // MODIFIES: this
-//    // EFFECTS: adds incorrectEq to a list of incorrect questions
-//    public void addIncorrectEq(String eq) {
-//        incorrectList.add(eq);
-//    }
-//
-//    // EFFECTS: saves incorrectly answered equations to file
-//    private void saveIncorrectEq() {
-//        try {
-//            jsonWriter.open();
-//            jsonWriter.write(currentQuiz.getQuestion());
-//            jsonObject.put("incorrect", currentQuiz.getQuestion());
-//            jsonWriter.close();
-//            System.out.println("Saved " + currentQuiz.getQuestion() + " to " + JSON_STORE);
-//        } catch (FileNotFoundException e) {
-//            System.out.println("Unable to write to file: " + JSON_STORE);
-//        }
-//    }
-//
-//
-//    // MODIFIES: this
-//    // EFFECTS: loads all of the incorrectly answered questions from file.
-//    private void loadIncorrectEq() {
-//        try {
-//            qa = jsonReader.read();
-//            System.out.println("Loaded " + currentQuiz.getQuestion() + " from " + JSON_STORE);
-//        } catch (IOException e) {
-//            System.out.println("Unable to read from file: " + JSON_STORE);
-//        }
-//    }
+
+
+    // EFFECTS: prints all the thingies in workroom to the console
+    private void printThingies() {
+        List<StatValue> thingies = statsManager.getAllStats();
+
+        for (StatValue t : thingies) {
+            System.out.println(t);
+        }
+    }
+
+    // EFFECTS: saves the workroom to file
+    private void saveQuiz() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(statsManager);
+            jsonWriter.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    private void loadWorkRoom() {
+        try {
+            statsManager = jsonReader.read();
+            System.out.println("Loaded " + "quiz history" + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
+
+
+
 
 
 }

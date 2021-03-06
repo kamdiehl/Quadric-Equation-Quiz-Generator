@@ -5,6 +5,7 @@ import org.json.JSONObject;
 import persistence.Writable;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class StatsManager implements Writable {
@@ -59,6 +60,11 @@ public class StatsManager implements Writable {
 
 
     // getters
+
+    // EFFECTS: returns an unmodifiable list of thingies in this workroom
+    public List<StatValue> getAllStats() {
+        return Collections.unmodifiableList(statList);
+    }
 
     public int getTotalCorrectAnswers() {
         return totalCorrectAnswers;

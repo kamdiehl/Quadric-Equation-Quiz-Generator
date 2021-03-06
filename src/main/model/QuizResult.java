@@ -3,7 +3,7 @@ package model;
 import org.json.JSONObject;
 import persistence.Writable;
 
-public class QuizResult implements Writable {
+public class QuizResult {
 
     private int correctAnswers;
     private int incorrectAnswers;
@@ -43,21 +43,21 @@ public class QuizResult implements Writable {
     }
 
 
-    @Override
-    public JSONObject toJson() {
-        JSONObject json = new JSONObject();
-
-        json.put("correctAnswers", correctAnswersName);
-        json.put("correctAnswersValue", correctAnswers);
-
-        json.put("incorrectAnswers", incorrectAnswersName);
-        json.put("incorrectAnswersValue", incorrectAnswers);
-
-        json.put("questionsAsked", questionsAskedName);
-        json.put("questionsAskedValue", quizLength);
-
-        return json;
-    }
+//    @Override
+//    public JSONObject toJson() {
+//        JSONObject json = new JSONObject();
+//
+//        json.put("correctAnswers", correctAnswersName);
+//        json.put("correctAnswersValue", correctAnswers);
+//
+//        json.put("incorrectAnswers", incorrectAnswersName);
+//        json.put("incorrectAnswersValue", incorrectAnswers);
+//
+//        json.put("questionsAsked", questionsAskedName);
+//        json.put("questionsAskedValue", quizLength);
+//
+//        return json;
+//    }
 
 
 }
