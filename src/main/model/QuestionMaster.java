@@ -13,9 +13,10 @@ public class QuestionMaster {
     // These provide the range of what the coefficients a,b,c can exist between
     private int maxValue;
     private int minValue;
+    private int correctAnswers;
     // This is the length of the quiz, and the list of questions the user will be asked.
     private int quizLength;
-    private int correctAnswers;
+    private int overallCorrectAnswers;
     private ArrayList<QuizEntry> questionList;
 
 
@@ -72,7 +73,7 @@ public class QuestionMaster {
 
 
 
-    // Getters
+    // Getters & setters
 
     public int getMaxValue() {
         return maxValue;
@@ -86,11 +87,28 @@ public class QuestionMaster {
         return quizLength;
     }
 
+    public void setQuizLength(int newUserInput) {
+        this.quizLength = newUserInput;
+    }
+
     public List<QuizEntry> getQuestionList() {
         return questionList;
     }
 
     public int getCorrectAnswers() {
         return correctAnswers;
+    }
+
+    public void setCorrectAnswers(int yes) {
+        this.correctAnswers = yes;
+    }
+
+
+    public int getOverallCorrectAnswers() {
+        return overallCorrectAnswers;
+    }
+
+    public void setOverallCorrectAnswers(int correct) {
+        this.overallCorrectAnswers = correct;
     }
 }

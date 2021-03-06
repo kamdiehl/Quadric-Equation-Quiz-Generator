@@ -2,6 +2,7 @@ package persistence;
 
 import model.QuestionMaster;
 import model.QuizEntry;
+import model.StatsManager;
 import org.json.JSONObject;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -28,14 +29,14 @@ public class JsonWriter {
 //    }
 //
 //
-//    // MODIFIES: this
-//    // EFFECTS: writes JSON representation of a incorrect q (isn't a string already in JSON format)
-//    // but no, i should have this as "writes incorrect answer to file"
-//    public void write(String eq) {
-//      //  JSONObject json = eq.toJson();
-//        saveToFile(eq); //TAB why was that there
-//        // I should have this take in a string and then get rid of the .toString()
-//    }
+// MODIFIES: this
+    // EFFECTS: writes JSON representation of a incorrect q (isn't a string already in JSON format)
+    // but no, i should have this as "writes incorrect answer to file"
+    public void write(StatsManager stats) {
+        JSONObject json = stats.toJson();
+        saveToFile(json.toString(TAB));
+
+    }
 //
 //
 //    // MODIFIES: this
@@ -45,11 +46,12 @@ public class JsonWriter {
 //    }
 //
 //
-//    // MODIFIES: this
-//    // EFFECTS: writes string to file
-//    public void saveToFile(String json) {
-//        writer.print(json);
-//    }
-//    // whats the diff between this and write
+    // MODIFIES: this
+    // EFFECTS: writes string to file
+
+    private void saveToFile(String json) {
+        writer.print(json);
+    }
+
 
 }

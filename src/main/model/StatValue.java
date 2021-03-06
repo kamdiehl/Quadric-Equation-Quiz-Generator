@@ -1,0 +1,39 @@
+package model;
+
+import org.json.JSONObject;
+import persistence.Writable;
+
+public class StatValue implements Writable {
+
+    private int value;
+    private StatCategory category;
+
+    // EFFECTS: constructs a thingy with a name and category
+    public StatValue(StatCategory category, int value) {
+        this.value = value;
+        this.category = category;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public StatCategory getCategory() {
+        return category;
+    }
+
+    // EFFECTS: returns string representation of this thingy
+    public String toString() {
+        return category + ": " + value;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("category", category);
+        json.put("value", value);
+        return json;
+    }
+
+
+}

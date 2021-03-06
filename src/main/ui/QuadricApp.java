@@ -2,6 +2,8 @@ package ui;
 
 import model.QuestionMaster;
 import model.QuizEntry;
+import model.QuizResult;
+import model.StatsManager;
 import org.json.JSONObject;
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -13,6 +15,7 @@ public class QuadricApp {
 
     QuestionMaster newQuiz;
     QuizEntry currentQuiz;
+    QuizResult result;
 
     private Scanner input;
     private int userQuizLength;
@@ -30,7 +33,9 @@ public class QuadricApp {
 
     // EFFECTS: Starts the quadric surface generator application
     public QuadricApp() {
+        newQuiz = new QuestionMaster(userQuizLength, 10, 1);
         runApp();
+
 
        // jsonWriter = new JsonWriter(JSON_STORE);
        // jsonReader = new JsonReader(JSON_STORE);
@@ -48,6 +53,9 @@ public class QuadricApp {
         while (userInput != 0) {
             System.out.println("How many questions do you want to be asked?");
             userQuizLength = input.nextInt();
+            newQuiz.setQuizLength(userQuizLength);
+
+            //newQuiz.setCorrectAnswers(0); // changed from correctAnswers = 0;
 
             runQuiz();
 
@@ -63,7 +71,7 @@ public class QuadricApp {
     //          user answer. Once quiz is over, produces results.
     public void runQuiz() {
 
-        newQuiz = new QuestionMaster(userQuizLength, 10, 1);
+        result = new QuizResult(newQuiz);
         newQuiz.createNewQuestionList(userQuizLength);
         currentQuestion = 0;
         correctAnswers = 0;
@@ -93,6 +101,10 @@ public class QuadricApp {
         overallCorrectAnswers += newQuiz.getCorrectAnswers();
         questionsAsked += newQuiz.getQuizLength();
         System.out.println("Overall score: " + overallCorrectAnswers + "/" + questionsAsked);
+        newQuiz.setOverallCorrectAnswers(overallCorrectAnswers);
+
+       // result.displayResults();
+
 
     }
 
@@ -102,6 +114,12 @@ public class QuadricApp {
     public boolean checkAnswer(String userAnswer, String answer) {
         return userAnswer.equals(answer);
     }
+
+
+
+
+
+
 
 
     // JSON
