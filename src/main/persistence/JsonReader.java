@@ -49,8 +49,8 @@ public class JsonReader {
 
     // EFFECTS: parses StatsManager from JSON object and returns it
     private StatsManager parseStatsManager(JSONObject jsonObject) {
-        String history = jsonObject.getString("History");
-        StatsManager stats = new StatsManager();
+        String statistics = jsonObject.getString("statistics");
+        StatsManager stats = new StatsManager(statistics);
         addAllStats(stats, jsonObject);
         return stats;
     }

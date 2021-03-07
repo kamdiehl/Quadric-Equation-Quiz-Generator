@@ -19,15 +19,14 @@ public class StatsManager implements Writable {
     // JSON
     private String history;
 
-
-
     // constructor
-    public StatsManager() {
+    public StatsManager(String stat) {
         statList = new ArrayList<>();
         //this.correctAnswers = qm.getCorrectAnswers();
      //   this.totalCorrectAnswers = qm.getOverallCorrectAnswers(); // this will have to be saved somehow
 
     }
+
 
     // MODIFIES: this
     // EFFECTS: adds another QuizResult to this Statistic List.
@@ -36,12 +35,17 @@ public class StatsManager implements Writable {
     }
 
 
+    // EFFECTS: returns an unmodifiable list of thingies in this workroom
+    public List<StatValue> getAllStats() {
+        return Collections.unmodifiableList(statList);
+    }
+
 
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("History", history);
-        json.put("thingies", statsToJson());
+        json.put("history", history);
+        json.put("statistics", statsToJson());
         return json;
     }
 
@@ -60,11 +64,6 @@ public class StatsManager implements Writable {
 
 
     // getters
-
-    // EFFECTS: returns an unmodifiable list of thingies in this workroom
-    public List<StatValue> getAllStats() {
-        return Collections.unmodifiableList(statList);
-    }
 
     public int getTotalCorrectAnswers() {
         return totalCorrectAnswers;

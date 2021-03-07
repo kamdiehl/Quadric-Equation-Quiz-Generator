@@ -17,6 +17,7 @@ public class QuadricApp {
     QuizEntry currentQuiz;
     QuizResult result;
     StatsManager statsManager;
+    StatValue statValue;
 
     private Scanner input;
     private int userQuizLength;
@@ -26,20 +27,19 @@ public class QuadricApp {
     private int currentQuestion;
 
 
-    private JsonWriter jsonWriter;
-    private JsonReader jsonReader;
     private static final String JSON_STORE = "./data/workroom.json";
     JSONObject jsonObject;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
 
     // EFFECTS: Starts the quadric surface generator application
-    public QuadricApp() {
+    public QuadricApp() throws FileNotFoundException {
         newQuiz = new QuestionMaster(userQuizLength, 10, 1);
+        statsManager = new StatsManager("History");
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runApp();
-
-
-       // jsonWriter = new JsonWriter(JSON_STORE);
-       // jsonReader = new JsonReader(JSON_STORE);
 
     }
 
@@ -56,10 +56,9 @@ public class QuadricApp {
             userQuizLength = input.nextInt();
             newQuiz.setQuizLength(userQuizLength);
 
-
             runQuiz();
 
-            System.out.println("Enter 1 to start, enter 0 to exit");
+            System.out.println("Enter 1 to start, enter 0 to exit, 2 to load");
             userInput = input.nextInt();
         }
 
@@ -107,7 +106,13 @@ public class QuadricApp {
         System.out.println("Overall score: " + overallCorrectAnswers + "/" + questionsAsked);
         newQuiz.setOverallCorrectAnswers(overallCorrectAnswers);
 
-       // result.displayResults();
+        System.out.println("Do you want to save these quiz stats?");
+        System.out.println("1 for yes, 0 for no");
+        int userInput3 = input.nextInt();
+        if (userInput3 != 0) {
+            saveQuiz();
+        }
+
 
 
     }
@@ -134,6 +139,7 @@ public class QuadricApp {
 
     // EFFECTS: saves the workroom to file
     private void saveQuiz() {
+
         try {
             jsonWriter.open();
             jsonWriter.write(statsManager);

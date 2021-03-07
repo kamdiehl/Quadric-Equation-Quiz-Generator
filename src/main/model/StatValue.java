@@ -8,7 +8,7 @@ public class StatValue implements Writable {
     private int value;
     private StatCategory category;
 
-    // EFFECTS: constructs a thingy with a name and category
+    // EFFECTS: constructs a stat with a value and category
     public StatValue(StatCategory category, int value) {
         this.value = value;
         this.category = category;
@@ -22,7 +22,7 @@ public class StatValue implements Writable {
         return category;
     }
 
-    // EFFECTS: returns string representation of this thingy
+    // EFFECTS: returns string representation of this stat.
     public String toString() {
         return category + ": " + value;
     }
