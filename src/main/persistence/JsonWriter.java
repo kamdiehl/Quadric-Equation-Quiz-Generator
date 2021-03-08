@@ -1,6 +1,5 @@
 package persistence;
 
-import model.StatValue;
 import model.StatsManager;
 import org.json.JSONObject;
 import java.io.File;
@@ -10,12 +9,11 @@ import java.io.PrintWriter;
 public class JsonWriter {
     private String destination;
     private PrintWriter writer;
-    private static final int TAB = 4; // what do this mean
+    private static final int TAB = 4;
 
 
     // Constructor
     public JsonWriter(String destination) {
-
         this.destination = destination;
     }
 
@@ -43,7 +41,6 @@ public class JsonWriter {
 
     // MODIFIES: this
     // EFFECTS: writes string to file
-
     private void saveToFile(String json) {
         writer.print(json);
     }

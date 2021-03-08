@@ -11,22 +11,14 @@ import java.util.List;
 public class StatsManager implements Writable {
 // only have the global statistics in this class. QuizResult will have the individual quiz results.
 
-    private int totalCorrectAnswers;
-    private int totalIncorrectAnswers;
-    private int totalQuestionsAsked;
     private List<StatValue> statList;
     private String statHistory;
-
-    // JSON
 
 
     // constructor
     public StatsManager(String statHistory) {
         this.statHistory = statHistory;
         statList = new ArrayList<>();
-        //this.correctAnswers = qm.getCorrectAnswers();
-     //   this.totalCorrectAnswers = qm.getOverallCorrectAnswers(); // this will have to be saved somehow
-
     }
 
     // MODIFIES: this
@@ -57,11 +49,8 @@ public class StatsManager implements Writable {
         for (StatValue i : statList) {
             jsonArray.put(i.toJson());
         }
-
         return jsonArray;
     }
-
-
 
 
     // getters
@@ -69,18 +58,4 @@ public class StatsManager implements Writable {
     public String getStatHistory() {
         return statHistory;
     }
-
-    public int getTotalCorrectAnswers() {
-        return totalCorrectAnswers;
-    }
-
-    public int getTotalIncorrectAnswers() {
-        return totalIncorrectAnswers;
-    }
-
-    public int getTotalQuestionsAsked() {
-        return totalQuestionsAsked;
-    }
-
-
 }

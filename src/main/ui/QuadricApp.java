@@ -15,7 +15,6 @@ public class QuadricApp {
 
     QuestionMaster newQuiz;
     QuizEntry currentQuiz;
-    QuizResult result;
     StatsManager statsManager = new StatsManager("statHistory");
     StatValue statValue;
 
@@ -73,7 +72,6 @@ public class QuadricApp {
     //          user answer. Once quiz is over, produces results.
     public void runQuiz() {
 
-        result = new QuizResult(newQuiz);
         newQuiz.createNewQuestionList(userQuizLength);
         currentQuestion = 0;
         correctAnswers = 0;
@@ -105,7 +103,7 @@ public class QuadricApp {
         System.out.println("Overall score: " + overallCorrectAnswers + "/" + questionsAsked);
         newQuiz.setOverallCorrectAnswers(overallCorrectAnswers);
 
-        addQuizResults();
+        addQuizResults(); // temporary
 
         System.out.println("Do you want to save these quiz stats?");
         System.out.println("1 for yes, 0 for no");
@@ -113,8 +111,6 @@ public class QuadricApp {
         if (userInput3 != 0) {
             saveQuiz();
         }
-
-
     }
 
 
@@ -158,7 +154,6 @@ public class QuadricApp {
         StatCategory category = StatCategory.values()[2];
         lengthStat = new StatValue(category, length);
         return lengthStat;
-
     }
 
 
@@ -180,14 +175,13 @@ public class QuadricApp {
     private void printThingies() {
         List<StatValue> thingies = statsManager.getAllStats();
 
-        for (StatValue t : thingies) {
+        for (StatValue t: thingies) {
             System.out.println(t);
         }
     }
 
     // EFFECTS: saves the workroom to file
     private void saveQuiz() {
-
         try {
             jsonWriter.open();
             jsonWriter.write(statsManager);

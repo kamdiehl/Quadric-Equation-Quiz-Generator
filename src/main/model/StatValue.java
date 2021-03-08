@@ -28,7 +28,6 @@ public class StatValue implements Writable {
     }
 
 
-
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -36,6 +35,4 @@ public class StatValue implements Writable {
         json.put("value", value);
         return json;
     }
-
-
 }
