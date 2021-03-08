@@ -63,6 +63,7 @@ public class QuadricApp {
 
         while (userInput == 2) {
             loadWorkRoom();
+            printThingies();
         }
 
     }
