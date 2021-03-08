@@ -27,6 +27,8 @@ public class StatValue implements Writable {
         return category + ": " + value;
     }
 
+
+
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

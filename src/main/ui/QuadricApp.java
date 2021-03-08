@@ -16,7 +16,7 @@ public class QuadricApp {
     QuestionMaster newQuiz;
     QuizEntry currentQuiz;
     QuizResult result;
-    StatsManager statsManager;
+    StatsManager statsManager = new StatsManager("statHistory");
     StatValue statValue;
 
     private Scanner input;
@@ -36,13 +36,12 @@ public class QuadricApp {
     // EFFECTS: Starts the quadric surface generator application
     public QuadricApp() throws FileNotFoundException {
         newQuiz = new QuestionMaster(userQuizLength, 10, 1);
-        statsManager = new StatsManager("History");
+       // statsManager = new StatsManager("statHistory");
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
         runApp();
 
     }
-
 
 
     // EFFECTS: Initiates the app by asking user if they want to begin and how many questions they want to be asked.
@@ -67,7 +66,6 @@ public class QuadricApp {
         }
 
     }
-
 
 
     // EFFECTS: Causes the QuestionMaster to produce x number of questions and iterates through them after each
@@ -106,6 +104,8 @@ public class QuadricApp {
         System.out.println("Overall score: " + overallCorrectAnswers + "/" + questionsAsked);
         newQuiz.setOverallCorrectAnswers(overallCorrectAnswers);
 
+        addQuizResults();
+
         System.out.println("Do you want to save these quiz stats?");
         System.out.println("1 for yes, 0 for no");
         int userInput3 = input.nextInt();
@@ -114,9 +114,7 @@ public class QuadricApp {
         }
 
 
-
     }
-
 
 
     // EFFECTS: Compares the user's answer to the correct answer for that question, returns true if correct.
@@ -126,6 +124,55 @@ public class QuadricApp {
 
 
     // JSON
+
+    //EFFECTS: Turns the number of correct answers from quiz into a StatValue.
+    public StatValue readCorrectAnswers() {
+        StatValue correctStat;
+
+        int correct = newQuiz.getCorrectAnswers();
+        StatCategory category = StatCategory.values()[0];
+        correctStat = new StatValue(category, correct);
+        return correctStat;
+
+    }
+
+    //EFFECTS: Turns the number of incorrect answers from quiz into a StatValue.
+    public StatValue readIncorrectAnswers() {
+        StatValue incorrectStat;
+
+        int correct = newQuiz.getCorrectAnswers();
+        int length = newQuiz.getQuizLength();
+        int incorrect = length - correct;
+        StatCategory category = StatCategory.values()[1];
+        incorrectStat = new StatValue(category, incorrect);
+        return incorrectStat;
+
+    }
+
+    //EFFECTS: Turns the quiz length into a StatValue.
+    public StatValue readQuizLength() {
+        StatValue lengthStat;
+
+        int length = newQuiz.getQuizLength();
+        StatCategory category = StatCategory.values()[2];
+        lengthStat = new StatValue(category, length);
+        return lengthStat;
+
+    }
+
+
+    // MODIFIES: this
+    // EFFECTS: prompt user for name and category of thingy and adds to workroom
+    private void addQuizResults() {
+
+        StatValue correct = readCorrectAnswers();
+        StatValue incorrect = readIncorrectAnswers();
+        StatValue length = readQuizLength();
+
+        statsManager.addThingy(correct);
+        statsManager.addThingy(incorrect);
+        statsManager.addThingy(length);
+    }
 
 
     // EFFECTS: prints all the thingies in workroom to the console
@@ -154,14 +201,10 @@ public class QuadricApp {
     private void loadWorkRoom() {
         try {
             statsManager = jsonReader.read();
-            System.out.println("Loaded " + "quiz history" + " from " + JSON_STORE);
+            System.out.println("Loaded " + statsManager.getStatHistory() + " from " + JSON_STORE);
         } catch (IOException e) {
-            System.out.println("Unable to read from file: " + JSON_STORE);
+            System.out.println("Unable to read from file: " + statsManager.getStatHistory() + JSON_STORE);
         }
     }
-
-
-
-
-
 }
+

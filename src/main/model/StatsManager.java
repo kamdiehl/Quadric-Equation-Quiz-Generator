@@ -15,18 +15,19 @@ public class StatsManager implements Writable {
     private int totalIncorrectAnswers;
     private int totalQuestionsAsked;
     private List<StatValue> statList;
+    private String statHistory;
 
     // JSON
-    private String history;
+
 
     // constructor
-    public StatsManager(String stat) {
+    public StatsManager(String statHistory) {
+        this.statHistory = statHistory;
         statList = new ArrayList<>();
         //this.correctAnswers = qm.getCorrectAnswers();
      //   this.totalCorrectAnswers = qm.getOverallCorrectAnswers(); // this will have to be saved somehow
 
     }
-
 
     // MODIFIES: this
     // EFFECTS: adds another QuizResult to this Statistic List.
@@ -44,8 +45,8 @@ public class StatsManager implements Writable {
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("history", history);
-        json.put("statistics", statsToJson());
+        json.put("statHistory", statHistory);
+        json.put("allStats", statsToJson());
         return json;
     }
 
@@ -64,6 +65,10 @@ public class StatsManager implements Writable {
 
 
     // getters
+
+    public String getStatHistory() {
+        return statHistory;
+    }
 
     public int getTotalCorrectAnswers() {
         return totalCorrectAnswers;

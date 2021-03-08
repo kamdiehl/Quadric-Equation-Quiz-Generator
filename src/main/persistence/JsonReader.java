@@ -49,16 +49,20 @@ public class JsonReader {
 
     // EFFECTS: parses StatsManager from JSON object and returns it
     private StatsManager parseStatsManager(JSONObject jsonObject) {
-        String statistics = jsonObject.getString("category");
-        StatsManager stats = new StatsManager(statistics);
+        String statHistory = jsonObject.getString("statHistory");
+        StatsManager stats = new StatsManager(statHistory);
         addAllStats(stats, jsonObject);
         return stats;
     }
 
+   // JSONObject obj =  new JSONObject(json);
+  //  JSONObject results = obj.getJSONObject("results");
+  //  JSONArray bindings = results.getJSONArray("bindings");
+
     // MODIFIES: sm
     // EFFECTS: parses thingies from JSON object and adds them to StatsManager
     private void addAllStats(StatsManager sm, JSONObject jsonObject) {
-        JSONArray jsonArray = jsonObject.getJSONArray("statList");
+        JSONArray jsonArray = jsonObject.getJSONArray("allStats");
         for (Object json : jsonArray) {
             JSONObject nextStat = (JSONObject) json;
             addIsolatedStat(sm, nextStat);
