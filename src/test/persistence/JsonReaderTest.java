@@ -3,6 +3,7 @@ package persistence;
 import model.StatCategory;
 import model.StatValue;
 import model.StatsManager;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.List;
@@ -11,6 +12,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class JsonReaderTest extends JsonTest {
+
+
+    @BeforeEach
+    void runBefore() {
+        StatsManager st = new StatsManager("statHistory");
+    }
 
     // creds to JSON Serialization Demo.
     @Test
@@ -30,9 +37,9 @@ public class JsonReaderTest extends JsonTest {
     void testReaderEmptyWorkRoom() {
         JsonReader reader = new JsonReader("./data/testReaderEmptyWorkRoom.json");
         try {
-            StatsManager st = reader.read();
-            assertEquals("My work room", st.getStatHistory());
-            assertEquals(0, st.getAllStats().size());
+            StatsManager sc = reader.read();
+            assertEquals("statHistory", sc.getStatHistory());
+            assertEquals(0, sc.getAllStats().size());
         } catch (IOException e) {
             fail("Couldn't read from file");
         }
@@ -48,10 +55,11 @@ public class JsonReaderTest extends JsonTest {
             StatsManager st = reader.read();
             assertEquals("My work room", st.getStatHistory());
             List<StatValue> stats = st.getAllStats();
-            assertEquals(2, stats.size())
-            ;
+            StatValue stat = stats.get(0);
+            assertEquals(2, stats.size());
+
             StatCategory category = StatCategory.values()[0];
-            checkStatValue(category, stats.get(0));
+            checkStatValue(category, stat.getValue());
 
         } catch (IOException e) {
             fail("Couldn't read from file");
