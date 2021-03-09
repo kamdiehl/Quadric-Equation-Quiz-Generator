@@ -16,7 +16,6 @@ public class QuadricApp {
     QuestionMaster newQuiz;
     QuizEntry currentQuiz;
     StatsManager statsManager = new StatsManager("statHistory");
-    StatValue statValue;
 
     private Scanner input;
     private int userQuizLength;
@@ -27,7 +26,6 @@ public class QuadricApp {
 
 
     private static final String JSON_STORE = "./data/workroom.json";
-    JSONObject jsonObject;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
@@ -35,7 +33,6 @@ public class QuadricApp {
     // EFFECTS: Starts the quadric surface generator application
     public QuadricApp() throws FileNotFoundException {
         newQuiz = new QuestionMaster(userQuizLength, 10, 1);
-       // statsManager = new StatsManager("statHistory");
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
         runApp();

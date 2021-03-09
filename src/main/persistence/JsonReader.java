@@ -3,22 +3,15 @@ package persistence;
 import model.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import ui.QuadricApp;
-
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.stream.Stream;
 
 // How do I properly give citations? Took this from demo
 public class JsonReader {
     private String source;
-    QuadricApp qa;
-    QuestionMaster qm;
-    QuizEntry qe;
-    List<QuizEntry> questionList;
 
 
     // Constructor

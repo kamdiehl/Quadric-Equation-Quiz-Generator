@@ -1,7 +1,5 @@
 package model;
 
-import ui.QuadricApp;
-
 import java.util.ArrayList;
 import java.util.List;
 
