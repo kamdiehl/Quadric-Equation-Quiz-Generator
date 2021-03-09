@@ -1,7 +1,5 @@
 package model;
 
-import org.json.JSONObject;
-
 // This class creates 1 quiz question (an equation) that will be added to the list of questions in QuestionMaster.
 public class QuizEntry {
     private String question;
@@ -9,9 +7,6 @@ public class QuizEntry {
 
     int maxValue = 10;
     int minValue = 1;
-
-    // JSON
-    private String name;
 
 
     // Constructor
@@ -68,18 +63,6 @@ public class QuizEntry {
         answer = "cone";
     }
 
-
-
-    // JSON
-//
-//   // @Override
-//    public JSONObject toJson() {
-//        JSONObject json = new JSONObject();
-//        json.put("name", name);
-//       // json.put("category", );
-//        return json;
-//    }
-//
 
 
 

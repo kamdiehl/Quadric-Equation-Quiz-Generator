@@ -61,8 +61,8 @@ public class QuadricApp {
         }
 
         while (userInput == 2) {
-            loadWorkRoom();
-            printThingies();
+            loadStats();
+            printStats();
         }
 
     }
@@ -100,8 +100,9 @@ public class QuadricApp {
         System.out.println("Quiz score: " + correctAnswers + "/" + newQuiz.getQuizLength());
         overallCorrectAnswers += newQuiz.getCorrectAnswers();
         questionsAsked += newQuiz.getQuizLength();
+
         System.out.println("Overall score: " + overallCorrectAnswers + "/" + questionsAsked);
-        newQuiz.setOverallCorrectAnswers(overallCorrectAnswers);
+        //newQuiz.setOverallCorrectAnswers(overallCorrectAnswers);
 
         addQuizResults(); // temporary
 
@@ -126,7 +127,7 @@ public class QuadricApp {
     public StatValue readCorrectAnswers() {
         StatValue correctStat;
 
-        int correct = newQuiz.getCorrectAnswers();
+        int correct = correctAnswers;
         StatCategory category = StatCategory.values()[0];
         correctStat = new StatValue(category, correct);
         return correctStat;
@@ -137,7 +138,7 @@ public class QuadricApp {
     public StatValue readIncorrectAnswers() {
         StatValue incorrectStat;
 
-        int correct = newQuiz.getCorrectAnswers();
+        int correct = correctAnswers;
         int length = newQuiz.getQuizLength();
         int incorrect = length - correct;
         StatCategory category = StatCategory.values()[1];
@@ -172,7 +173,7 @@ public class QuadricApp {
 
 
     // EFFECTS: prints all the thingies in workroom to the console
-    private void printThingies() {
+    private void printStats() {
         List<StatValue> thingies = statsManager.getAllStats();
 
         for (StatValue t: thingies) {
@@ -193,7 +194,7 @@ public class QuadricApp {
 
     // MODIFIES: this
     // EFFECTS: loads workroom from file
-    private void loadWorkRoom() {
+    private void loadStats() {
         try {
             statsManager = jsonReader.read();
             System.out.println("Loaded " + statsManager.getStatHistory() + " from " + JSON_STORE);
@@ -201,5 +202,8 @@ public class QuadricApp {
             System.out.println("Unable to read from file: " + statsManager.getStatHistory() + JSON_STORE);
         }
     }
+
+
+
 }
 

@@ -1,7 +1,6 @@
 package model;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
+import ui.QuadricApp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,10 +17,6 @@ public class QuestionMaster {
     private int quizLength;
     private int overallCorrectAnswers;
     private ArrayList<QuizEntry> questionList;
-
-
-    // JSON
-    private String name;
 
 
     // Constructor
@@ -76,16 +71,9 @@ public class QuestionMaster {
         return correctAnswers;
     }
 
-    public void setCorrectAnswers(int yes) {
-        this.correctAnswers = yes;
-    }
-
-
-    public int getOverallCorrectAnswers() {
-        return overallCorrectAnswers;
-    }
-
     public void setOverallCorrectAnswers(int correct) {
         this.overallCorrectAnswers = correct;
     }
+
+
 }

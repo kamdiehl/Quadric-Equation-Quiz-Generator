@@ -55,9 +55,6 @@ public class JsonReader {
         return stats;
     }
 
-   // JSONObject obj =  new JSONObject(json);
-  //  JSONObject results = obj.getJSONObject("results");
-  //  JSONArray bindings = results.getJSONArray("bindings");
 
     // MODIFIES: sm
     // EFFECTS: parses thingies from JSON object and adds them to StatsManager

@@ -46,6 +46,11 @@ public class StatsManager implements Writable {
     private JSONArray statsToJson() {
         JSONArray jsonArray = new JSONArray();
 
+//        for (int t = 0; t > 5; t++) {
+//            StatValue currentStat = statList.get(t);
+//            jsonArray.put(currentStat.toJson());
+//        }
+
         for (StatValue i : statList) {
             jsonArray.put(i.toJson());
         }

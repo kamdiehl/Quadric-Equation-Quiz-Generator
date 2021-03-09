@@ -3,6 +3,7 @@ package model;
 import org.json.JSONObject;
 import persistence.Writable;
 
+
 public class StatValue implements Writable {
 
     private int value;
