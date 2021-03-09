@@ -12,10 +12,10 @@ public class QuestionMaster {
     // These provide the range of what the coefficients a,b,c can exist between
     private int maxValue;
     private int minValue;
-    private int correctAnswers;
+    private int correctAnswers; // this is "never assigned", but if I delete it my program doesn't work.
+
     // This is the length of the quiz, and the list of questions the user will be asked.
     private int quizLength;
-    private int overallCorrectAnswers;
     private ArrayList<QuizEntry> questionList;
 
 
@@ -45,6 +45,8 @@ public class QuestionMaster {
 
 
 
+
+
     // Getters & setters
 
     public int getMaxValue() {
@@ -69,10 +71,6 @@ public class QuestionMaster {
 
     public int getCorrectAnswers() {
         return correctAnswers;
-    }
-
-    public void setOverallCorrectAnswers(int correct) {
-        this.overallCorrectAnswers = correct;
     }
 
 

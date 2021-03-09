@@ -3,6 +3,7 @@ package model;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
+import ui.QuadricApp;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,6 +14,10 @@ public class StatsManager implements Writable {
 
     private List<StatValue> statList;
     private String statHistory;
+    private int overallCorrectAnswers;
+    private int overallIncorrectAnswers;
+    private int overallQuestionsAsked;
+
 
 
     // constructor
@@ -34,6 +39,25 @@ public class StatsManager implements Writable {
     }
 
 
+    public void setGlobalStats(QuestionMaster qm) {
+
+        // setting global correct answers stat
+        int globalCorrect = qm.getCorrectAnswers();
+        setOverallCorrectAnswers(globalCorrect);
+
+        // setting total questions asked stat
+        int globalAsked = qm.getCorrectAnswers();
+        setOverallQuestionsAsked(globalAsked);
+
+        // setting global incorrect answers stat
+        int globalIncorrect = globalCorrect - globalAsked;
+        setOverallIncorrectAnswers(globalIncorrect);
+    }
+
+
+    // I want to put the overall correct and incorrect answers here, but I'm not sure how.
+    // Also, to do a global thing like this, I'm gonna have to call the json file holding the overall
+    // correct and incorrect answers to add them on right
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -63,4 +87,31 @@ public class StatsManager implements Writable {
     public String getStatHistory() {
         return statHistory;
     }
+
+    public int getOverallCorrectAnswers() {
+        return overallCorrectAnswers;
+    }
+
+    public void setOverallCorrectAnswers(int correct) {
+        this.overallCorrectAnswers = correct;
+    }
+
+    public int getOverallIncorrectAnswers() {
+        return overallCorrectAnswers;
+    }
+
+    public void setOverallIncorrectAnswers(int incorrect) {
+        this.overallIncorrectAnswers = incorrect;
+    }
+
+    public void setOverallQuestionsAsked(int total) {
+        this.overallQuestionsAsked = total;
+    }
+
+    public int getOverallQuestionsAsked() {
+        return overallQuestionsAsked;
+    }
+
+
+
 }
