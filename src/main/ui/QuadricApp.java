@@ -48,23 +48,28 @@ public class QuadricApp {
     public void runApp() {
         input = new Scanner(System.in);
         System.out.println("Enter 1 to start, enter 0 to exit, 2 to load");
-        int userInput = input.nextInt();
-        while (userInput == 1) {
-            System.out.println("How many questions do you want to be asked?");
-            userQuizLength = input.nextInt();
-            newQuiz.setQuizLength(userQuizLength);
 
-            runQuiz();
 
-            System.out.println("Enter 1 to start, enter 0 to exit, 2 to load");
-            userInput = input.nextInt();
+        while (true) {
+            int userInput = input.nextInt();
+            if (userInput == 1) {
+                System.out.println("How many questions do you want to be asked?");
+                userQuizLength = input.nextInt();
+                newQuiz.setQuizLength(userQuizLength);
+
+                runQuiz();
+
+                System.out.println("Enter 1 to start, enter 0 to exit, 2 to load");
+                userInput = input.nextInt();
+            } else if (userInput == 2) {
+//                System.out.println("Enter 1 to start, enter 0 to exit, 2 to load");
+                loadStats();
+                printStats();
+            } else {
+//                System.out.println("Enter 1 to start, enter 0 to exit, 2 to load");
+                break;
+            }
         }
-
-        while (userInput == 2) {
-            loadStats();
-            printStats();
-        }
-
     }
 
 
@@ -166,9 +171,9 @@ public class QuadricApp {
         StatValue incorrect = readIncorrectAnswers();
         StatValue length = readQuizLength();
 
-        statsManager.addThingy(correct);
-        statsManager.addThingy(incorrect);
-        statsManager.addThingy(length);
+        statsManager.addStat(correct);
+        statsManager.addStat(incorrect);
+        statsManager.addStat(length);
     }
 
 

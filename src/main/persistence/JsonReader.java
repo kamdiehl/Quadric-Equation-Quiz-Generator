@@ -72,7 +72,7 @@ public class JsonReader {
         int value = jsonObject.getInt("value");
         StatCategory category = StatCategory.valueOf(jsonObject.getString("category"));
         StatValue isolatedStat = new StatValue(category, value);
-        sm.addThingy(isolatedStat);
+        sm.addStat(isolatedStat);
 
     }
 

@@ -27,10 +27,11 @@ public class StatsManager implements Writable {
     }
 
     // MODIFIES: this
-    // EFFECTS: adds another QuizResult to this Statistic List.
-    public void addThingy(StatValue results) {
+    // EFFECTS: adds another StatValue to this Statistic List.
+    public void addStat(StatValue results) {
         statList.add(results);
-    }
+    } // I think part of the problem has something to do with this.
+    // (regarding why its not separating the stat tuples)
 
 
     // EFFECTS: returns an unmodifiable list of thingies in this workroom
@@ -46,7 +47,7 @@ public class StatsManager implements Writable {
         setOverallCorrectAnswers(globalCorrect);
 
         // setting total questions asked stat
-        int globalAsked = qm.getCorrectAnswers();
+        int globalAsked = qm.getQuizLength();
         setOverallQuestionsAsked(globalAsked);
 
         // setting global incorrect answers stat
@@ -62,6 +63,11 @@ public class StatsManager implements Writable {
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("statHistory", statHistory);
+
+        //json.put("TotalCorrectAnswers",overallCorrectAnswers);
+        //json.put("TotalIncorrectAnswers",overallIncorrectAnswers);
+       // json.put("TotalQuestionsAsked",overallQuestionsAsked);
+
         json.put("allStats", statsToJson());
         return json;
     }
