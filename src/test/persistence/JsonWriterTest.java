@@ -50,7 +50,7 @@ public class JsonWriterTest extends JsonTest{
      @Test
      void testWriterGeneralWorkroom() {
         try {
-            StatsManager st = new StatsManager("statHistory");
+            StatsManager st = new StatsManager("statHistory2");
 
             StatCategory category1 = StatCategory.values()[0];
             StatCategory category2 = StatCategory.values()[1];
@@ -72,7 +72,7 @@ public class JsonWriterTest extends JsonTest{
             JsonReader reader = new JsonReader("./data/testWriterGeneralWorkroom.json");
             st = reader.read();
 
-            assertEquals("statHistory", st.getStatHistory());
+            assertEquals("statHistory2", st.getStatHistory());
             List<StatValue> allStats = st.getAllStats();
             assertEquals(3, allStats.size());
 
