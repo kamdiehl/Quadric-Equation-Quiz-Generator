@@ -61,12 +61,15 @@ public class QuadricApp {
 
                 System.out.println("Enter 1 to start, enter 0 to exit, 2 to load");
                 userInput = input.nextInt();
-            } else if (userInput == 2) {
-//                System.out.println("Enter 1 to start, enter 0 to exit, 2 to load");
+            }
+            if (userInput == 2) {
+                System.out.println("Fetching Quiz Stats ...");
                 loadStats();
                 printStats();
-            } else {
-//                System.out.println("Enter 1 to start, enter 0 to exit, 2 to load");
+            }
+            if (userInput == 0) {
+                System.out.println("Exiting program ...");
+                System.out.println("Goodbye!");
                 break;
             }
         }
@@ -107,7 +110,6 @@ public class QuadricApp {
         questionsAsked += newQuiz.getQuizLength();
 
         System.out.println("Overall score: " + overallCorrectAnswers + "/" + questionsAsked);
-        //newQuiz.setOverallCorrectAnswers(overallCorrectAnswers);
 
         addQuizResults(); // temporary
 
