@@ -1,10 +1,8 @@
 package ui;
 
 import model.*;
-import org.json.JSONObject;
 import persistence.JsonReader;
 import persistence.JsonWriter;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
@@ -24,7 +22,7 @@ public class QuadricApp {
     private int questionsAsked;
     private int currentQuestion;
 
-
+    // json
     private static final String JSON_STORE = "./data/workroom.json";
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
@@ -73,8 +71,9 @@ public class QuadricApp {
     }
 
 
+
     // EFFECTS: Causes the QuestionMaster to produce x number of questions and iterates through them after each
-    //          user answer. Once quiz is over, produces results.
+    //          user answer.
     public void runQuiz() {
 
         newQuiz.createNewQuestionList(userQuizLength);
@@ -101,14 +100,20 @@ public class QuadricApp {
             }
             currentQuestion++;
         }
+        postQuiz();
+    }
 
+
+
+    // EFFECTS: Displays quiz score to user and loops back to the start.
+    public void postQuiz() {
         System.out.println("Quiz score: " + correctAnswers + "/" + newQuiz.getQuizLength());
         overallCorrectAnswers += newQuiz.getCorrectAnswers();
         questionsAsked += newQuiz.getQuizLength();
 
         System.out.println("Overall score: " + overallCorrectAnswers + "/" + questionsAsked);
 
-        addQuizResults(); // temporary
+        addQuizResults();
 
         System.out.println("Do you want to save these quiz stats?");
         System.out.println("1 for yes, 0 for no");
@@ -125,7 +130,6 @@ public class QuadricApp {
     }
 
 
-    // JSON
 
     //EFFECTS: Turns the number of correct answers from quiz into a StatValue.
     public StatValue readCorrectAnswers() {

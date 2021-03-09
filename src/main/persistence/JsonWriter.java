@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
+// Represents a writer that writes a StatManager to file.
 public class JsonWriter {
     private String destination;
     private PrintWriter writer;

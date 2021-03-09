@@ -9,7 +9,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
-// How do I properly give citations? Took this from demo
+// Citation: Model of code was taken from JsonSterilizationDemo.
+// Represents a reader that reads StatManager from JSON data stored in a file.
 public class JsonReader {
     private String source;
 

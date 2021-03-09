@@ -3,13 +3,12 @@ package model;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+// Represents a list of StatValues that compile to make the list of stats.
 public class StatsManager implements Writable {
-// only have the global statistics in this class. QuizResult will have the individual quiz results.
 
     private List<StatValue> statList;
     private String statHistory;
@@ -17,13 +16,12 @@ public class StatsManager implements Writable {
     private int overallIncorrectAnswers;
     private int overallQuestionsAsked;
 
-
-
     // constructor
     public StatsManager(String statHistory) {
         this.statHistory = statHistory;
         statList = new ArrayList<>();
     }
+
 
     // MODIFIES: this
     // EFFECTS: adds another StatValue to this Statistic List.
@@ -33,10 +31,12 @@ public class StatsManager implements Writable {
     // (regarding why its not separating the stat tuples)
 
 
+
     // EFFECTS: returns an unmodifiable list of thingies in this workroom
     public List<StatValue> getAllStats() {
         return Collections.unmodifiableList(statList);
     }
+
 
 
     public void setGlobalStats(QuestionMaster qm) {
@@ -55,9 +55,7 @@ public class StatsManager implements Writable {
     }
 
 
-    // I want to put the overall correct and incorrect answers here, but I'm not sure how.
-    // Also, to do a global thing like this, I'm gonna have to call the json file holding the overall
-    // correct and incorrect answers to add them on right
+
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -71,6 +69,7 @@ public class StatsManager implements Writable {
         return json;
     }
 
+
     // EFFECTS: returns things in this statList as a JSON array
     private JSONArray statsToJson() {
         JSONArray jsonArray = new JSONArray();
@@ -80,6 +79,7 @@ public class StatsManager implements Writable {
         }
         return jsonArray;
     }
+
 
 
     // getters

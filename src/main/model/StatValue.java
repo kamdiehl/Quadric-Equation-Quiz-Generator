@@ -3,7 +3,7 @@ package model;
 import org.json.JSONObject;
 import persistence.Writable;
 
-
+// Represents a single stat value, with the type of stat (ex. correctAnswers) and the value of the stat.
 public class StatValue implements Writable {
 
     private int value;
