@@ -54,8 +54,8 @@ public class QuadricApp {
 
                 runQuiz();
 
-                System.out.println("Enter 1 to start, enter 0 to exit, 2 to load");
-                userInput = input.nextInt();
+                //System.out.println("Enter 1 to start, enter 0 to exit, 2 to load");
+               // userInput = input.nextInt();
             }
             if (userInput == 2) {
                 System.out.println("Fetching Quiz Stats ...");
@@ -67,6 +67,9 @@ public class QuadricApp {
                 System.out.println("Goodbye!");
                 break;
             }
+            //if (userInput == 1) {
+            //    runQuiz();
+           // }
         }
     }
 
@@ -101,6 +104,7 @@ public class QuadricApp {
             currentQuestion++;
         }
         postQuiz();
+        runApp();
     }
 
 
@@ -158,7 +162,6 @@ public class QuadricApp {
     //EFFECTS: Turns the quiz length into a StatValue.
     public StatValue readQuizLength() {
         StatValue lengthStat;
-
         int length = newQuiz.getQuizLength();
         StatCategory category = StatCategory.values()[2];
         lengthStat = new StatValue(category, length);
