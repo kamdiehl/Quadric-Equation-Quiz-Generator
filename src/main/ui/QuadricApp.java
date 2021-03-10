@@ -67,9 +67,7 @@ public class QuadricApp {
                 System.out.println("Goodbye!");
                 break;
             }
-            //if (userInput == 1) {
-            //    runQuiz();
-           // }
+
         }
     }
 
@@ -186,9 +184,17 @@ public class QuadricApp {
     // EFFECTS: prints all the thingies in workroom to the console
     private void printStats() {
         List<StatValue> thingies = statsManager.getAllStats();
-
+        int counter = 1;
+        System.out.println("Quiz 1");
         for (StatValue t: thingies) {
             System.out.println(t);
+            int indexNum = thingies.lastIndexOf(t); // if statement below is temporary
+            if ((indexNum == 2 || indexNum == 5 || indexNum == 8 || indexNum == 11) && indexNum < thingies.size() - 1) {
+                System.out.println(" ");
+                counter++;
+                System.out.println("Quiz " + counter);
+
+            }
         }
     }
 
