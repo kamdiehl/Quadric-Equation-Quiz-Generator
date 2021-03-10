@@ -48,7 +48,7 @@ public class JsonWriterTest extends JsonTest{
 
 
      @Test
-     void testWriterGeneralWorkroom() {
+     void testWriterGeneralStatList() {
         try {
             StatsManager st = new StatsManager("statHistory2");
 
@@ -64,12 +64,12 @@ public class JsonWriterTest extends JsonTest{
             st.addStat(incorrectAnswers);
             st.addStat(quizLength);
 
-            JsonWriter writer = new JsonWriter("./data/testWriterGeneralWorkroom.json");
+            JsonWriter writer = new JsonWriter("./data/testWriterGeneralStatList.json");
             writer.open();
             writer.write(st);
             writer.close();
 
-            JsonReader reader = new JsonReader("./data/testWriterGeneralWorkroom.json");
+            JsonReader reader = new JsonReader("./data/testWriterGeneralStatList.json");
             st = reader.read();
 
             assertEquals("statHistory2", st.getStatHistory());
