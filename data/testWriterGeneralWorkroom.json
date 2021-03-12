@@ -1,0 +1,17 @@
+{
+    "statHistory": "statHistory2",
+    "allStats": [
+        {
+            "category": "CorrectAnswers",
+            "value": 4
+        },
+        {
+            "category": "IncorrectAnswers",
+            "value": 6
+        },
+        {
+            "category": "QuestionsAsked",
+            "value": 10
+        }
+    ]
+}

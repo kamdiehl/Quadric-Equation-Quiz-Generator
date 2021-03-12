@@ -1,0 +1,60 @@
+<html>
+<head>
+<title>Cone.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #808080;}
+.s3 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Cone.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">model</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">model.QuestionMaster</span><span class="s0">;</span>
+
+<span class="s2">// sub-class of Surface, contains the criteria needed for an equation of a cone. This includes 4 coefficients</span>
+<span class="s2">// attached to variables in the createTerm method. One coefficient is negative.</span>
+<span class="s0">public class </span><span class="s1">Cone </span><span class="s0">extends </span><span class="s1">Surface {</span>
+
+    <span class="s0">public </span><span class="s1">Cone() {</span>
+        <span class="s2">// Equation: ax^2 + by^2 - cz^2 = d</span>
+    <span class="s1">}</span>
+
+    <span class="s2">// REQUIRES: co1, co2, co3 &gt; 0.</span>
+    <span class="s2">// EFFECTS: creates the coefficients for each term in the equation of a cone.</span>
+    <span class="s0">public void </span><span class="s1">generateCone(QuestionMaster questionMaster) {</span>
+
+        <span class="s0">int </span><span class="s1">co1 = (</span><span class="s0">int</span><span class="s1">) (Math.random() * (questionMaster.getMaxValue() - questionMaster.getMinValue() + </span><span class="s3">1</span><span class="s1">)</span>
+                <span class="s1">+ questionMaster.getMinValue())</span><span class="s0">;</span>
+
+        <span class="s0">int </span><span class="s1">co2 = (</span><span class="s0">int</span><span class="s1">) (Math.random() * (questionMaster.getMaxValue() - questionMaster.getMinValue() + </span><span class="s3">1</span><span class="s1">)</span>
+                <span class="s1">+ questionMaster.getMinValue())</span><span class="s0">;</span>
+
+        <span class="s0">int </span><span class="s1">co3 = (</span><span class="s0">int</span><span class="s1">) (Math.random() * (questionMaster.getMaxValue() - questionMaster.getMinValue() + </span><span class="s3">1</span><span class="s1">)</span>
+                <span class="s1">+ questionMaster.getMinValue())</span><span class="s0">;</span>
+        <span class="s1">co3 = -co3</span><span class="s0">;</span>
+
+        <span class="s0">int </span><span class="s1">co4 = (</span><span class="s0">int</span><span class="s1">) (Math.random() * (questionMaster.getMaxValue() - questionMaster.getMinValue() + </span><span class="s3">1</span><span class="s1">)</span>
+                <span class="s1">+ questionMaster.getMinValue())</span><span class="s0">;</span>
+
+        <span class="s2">// ax^2 + by^2 - cz^2 = d where a,b,c are random coefficients.</span>
+        <span class="s2">// var = the variable the integer coefficient is attached to (x,y,z)</span>
+        <span class="s2">// co1,2,3,4 = Randomly generated integer between max and min</span>
+        <span class="s2">// si = Which side the term is on, 0 being left side of &quot;=&quot; and 1 being right side of &quot;=&quot;</span>
+
+        <span class="s1">createTerm(co1</span><span class="s0">,</span><span class="s3">1</span><span class="s0">, </span><span class="s3">0</span><span class="s1">)</span><span class="s0">; </span><span class="s2">// ax^2 = 0</span>
+        <span class="s1">createTerm(co2</span><span class="s0">,</span><span class="s3">2</span><span class="s0">, </span><span class="s3">0</span><span class="s1">)</span><span class="s0">; </span><span class="s2">// by^2 = 0</span>
+        <span class="s1">createTerm(co3</span><span class="s0">,</span><span class="s3">3</span><span class="s0">, </span><span class="s3">0</span><span class="s1">)</span><span class="s0">; </span><span class="s2">// -cz^2 = 0</span>
+        <span class="s1">createTerm(co4</span><span class="s0">,</span><span class="s3">4</span><span class="s0">, </span><span class="s3">1</span><span class="s1">)</span><span class="s0">; </span><span class="s2">// 0 = d</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+</pre>
+</body>
+</html>
