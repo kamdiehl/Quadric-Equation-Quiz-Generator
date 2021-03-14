@@ -5,15 +5,19 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Scanner;
 
 public class QuadricGui extends JFrame implements ActionListener {
+  //  private JFrame numOfQuestionsFrame;
+
     private JLabel label;
     private ImageIcon unscaledTitleIcon;
     private JLabel titlePageLabel;
-    private JTextField field;
+    private Scanner input;
+    private QuizLengthGui quizLengthFrame;
 
-    public static final int WIDTH = 1000;
-    public static final int HEIGHT = 700;
+    private static final int WIDTH = 1000;
+    private static final int HEIGHT = 700;
     public static final int IMAGE_WIDTH = 450;
     public static final int IMAGE_HEIGHT = 470;
     public static final int TITLE_FONT = 27;
@@ -24,6 +28,11 @@ public class QuadricGui extends JFrame implements ActionListener {
     public static final Color instructionBtnColor = new Color(5, 170, 157);
     public static final Color loadBtnColor = new Color(4, 118, 109);
     public static final Color exitBtnColor = new Color(2, 92, 94);
+
+    JButton startBtn = new JButton("START");
+    JButton instructionBtn = new JButton("HOW TO PLAY");
+    JButton loadBtn = new JButton("LOAD DATA");
+    JButton exitBtn = new JButton("EXIT");
 
 
 
@@ -41,9 +50,6 @@ public class QuadricGui extends JFrame implements ActionListener {
         initializeGraphics();
         initializeTitlePage(topPanel, bottomPanel);
 
-        // startBtn.setActionCommand("myButton");
-        // startBtn.addActionListener(this);
-
         // from project guide
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -52,6 +58,45 @@ public class QuadricGui extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         setVisible(true);
         setResizable(false);
+
+        runQuadricApp();
+
+    }
+
+    // EFFECTS: Runs the app
+    public void runQuadricApp() {
+
+        startBtn.setActionCommand("startButton");
+        startBtn.addActionListener(this);
+        instructionBtn.setActionCommand("instructionButton");
+        instructionBtn.addActionListener(this);
+        loadBtn.setActionCommand("loadButton");
+        loadBtn.addActionListener(this);
+        exitBtn.setActionCommand("exitButton");
+        exitBtn.addActionListener(this);
+
+        input = new Scanner(System.in);
+
+
+    }
+
+    // EFFECTS: Method that is called when the the JButton btn is clicked
+    public void actionPerformed(ActionEvent e) {
+        if (e.getActionCommand().equals("startButton")) {
+            dispose();
+            new QuizLengthGui();
+
+
+        }
+        if (e.getActionCommand().equals("instructionButton")) {
+            // label.setText(field.getText());
+        }
+        if (e.getActionCommand().equals("loadButton")) {
+            // label.setText(field.getText());
+        }
+        if (e.getActionCommand().equals("exitButton")) {
+            // label.setText(field.getText());
+        }
 
     }
 
@@ -81,13 +126,7 @@ public class QuadricGui extends JFrame implements ActionListener {
 
 
 
-    // EFFECTS: Method that is called when the the JButton btn is clicked
-    public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("myButton")) {
-            label.setText(field.getText());
-        }
 
-    }
 
 
 
@@ -103,10 +142,7 @@ public class QuadricGui extends JFrame implements ActionListener {
     // EFFECTS: Initializes the menu options on the title page
     private void initializeTitleButtons(JPanel bottomPanel) {
 
-        JButton startBtn = new JButton("START");
-        JButton instructionBtn = new JButton("HOW TO PLAY");
-        JButton loadBtn = new JButton("LOAD DATA");
-        JButton exitBtn = new JButton("EXIT");
+
 
         bottomPanel.add(startBtn);
         bottomPanel.add(instructionBtn);
@@ -166,6 +202,11 @@ public class QuadricGui extends JFrame implements ActionListener {
             return null;
         }
     }
+
+
+
+    // GETTERS AND SETTERS ----------------------------------------------------------------------------------
+
 
 
 }
