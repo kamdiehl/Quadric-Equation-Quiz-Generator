@@ -39,7 +39,7 @@ public class QuadricGui extends JFrame implements ActionListener {
     // Constructor
     // EFFECTS: Initializes everything needed for quiz
     public QuadricGui() {
-        super("Quadric App");
+      //  super("Quadric App");
 
         setLayout(new GridBagLayout());
         setLayout(new BorderLayout());
