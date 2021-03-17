@@ -34,6 +34,7 @@ public class StatValue implements Writable {
         JSONObject json = new JSONObject();
         json.put("category", category);
         json.put("value", value);
+        //json.put("stat", this);
         return json;
     }
 }

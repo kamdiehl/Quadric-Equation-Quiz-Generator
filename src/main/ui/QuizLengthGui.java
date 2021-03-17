@@ -22,22 +22,17 @@ public class QuizLengthGui extends JFrame {
         quizLengthFrame.setLayout(new GridBagLayout());
         quizLengthFrame.setLayout(new BorderLayout());
 
-
-        // input = new Scanner(System.in);
-
         JPanel topPanel = new JPanel();
         JPanel bottomPanel = new JPanel(new GridLayout(4, 4, 1, 1));
 
         initializeGraphics(quizLengthFrame);
         initializeTitle(topPanel, quizLengthFrame);
 
-        //field = new JTextField(5);
-        //add(field);
-
         ((JPanel) getContentPane()).setBorder(new EmptyBorder(13, 13, 13, 13));
-        pack();
 
-
+        // WHY IS THIS NOT DOING THE THING
+        field = new JTextField(5);
+        quizLengthFrame.add(field);
 
     }
 

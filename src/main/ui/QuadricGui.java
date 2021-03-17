@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Scanner;
 
-public class QuadricGui extends JFrame implements ActionListener {
+public class QuadricGui extends JframeMaker implements ActionListener {
   //  private JFrame numOfQuestionsFrame;
 
     private JLabel label;
@@ -34,12 +34,13 @@ public class QuadricGui extends JFrame implements ActionListener {
     JButton loadBtn = new JButton("LOAD DATA");
     JButton exitBtn = new JButton("EXIT");
 
+    JFrame startWindow;
+
 
 
     // Constructor
     // EFFECTS: Initializes everything needed for quiz
     public QuadricGui() {
-        super("Quadric App");
 
         setLayout(new GridBagLayout());
         setLayout(new BorderLayout());
@@ -47,13 +48,17 @@ public class QuadricGui extends JFrame implements ActionListener {
         JPanel topPanel = new JPanel();
         JPanel bottomPanel = new JPanel(new GridLayout(4, 4, 1, 1));
 
-        initializeGraphics();
-        initializeTitlePage(topPanel, bottomPanel);
+        startWindow = newViewWindow(TITLE_TEXT);
+
+        //initializeGraphics();
+        initializeTitleButtons(bottomPanel);
+        initializeTitleImage(topPanel);
+        //initializeTitle(topPanel, startWindow, "QUADRIC EQUATION QUIZ");
 
         // from project guide
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
-        ((JPanel) getContentPane()).setBorder(new EmptyBorder(13, 13, 13, 13));
+       // ((JPanel) getContentPane()).setBorder(new EmptyBorder(13, 13, 13, 13));
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
@@ -101,28 +106,28 @@ public class QuadricGui extends JFrame implements ActionListener {
     }
 
 
-    // MODIFIES: this
-    // EFFECTS:  draws the JFrame window where this quadric app will operate
-    public void initializeGraphics() {
-        setLayout(new BorderLayout());
-        setMinimumSize(new Dimension(WIDTH, HEIGHT));
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setVisible(true);
+//    // MODIFIES: this
+//    // EFFECTS:  draws the JFrame window where this quadric app will operate
+//    public void initializeGraphics() {
+//        setLayout(new BorderLayout());
+//        setMinimumSize(new Dimension(WIDTH, HEIGHT));
+//        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        setLocationRelativeTo(null);
+//        setVisible(true);
+//
+//        // background colours
+//        setBackground(Color.cyan);
+//        setForeground(Color.blue);
+//    }
 
-        // background colours
-        setBackground(Color.cyan);
-        setForeground(Color.blue);
-    }
 
-
-    // MODIFIES: this
-    // EFFECTS:  initializes the title page that starts the quiz
-    public void initializeTitlePage(JPanel topPanel, JPanel bottomPanel) {
-        initializeTitleButtons(bottomPanel);
-        initializeTitle(topPanel);
-        initializeTitleImage(topPanel);
-    }
+//    // MODIFIES: this
+//    // EFFECTS:  initializes the title page that starts the quiz
+//    public void initializeTitlePage(JPanel topPanel, JPanel bottomPanel) {
+//        initializeTitleButtons(bottomPanel);
+//        initializeTitle(topPanel);
+//        initializeTitleImage(topPanel);
+//    }
 
 
 
@@ -141,8 +146,6 @@ public class QuadricGui extends JFrame implements ActionListener {
 
     // EFFECTS: Initializes the menu options on the title page
     private void initializeTitleButtons(JPanel bottomPanel) {
-
-
 
         bottomPanel.add(startBtn);
         bottomPanel.add(instructionBtn);
@@ -166,17 +169,17 @@ public class QuadricGui extends JFrame implements ActionListener {
     }
 
 
-    // EFFECTS: Initializes the title text that displays title name on title page.
-    private void initializeTitle(JPanel topPanel) {
-        JLabel titleLabel = new JLabel(TITLE_TEXT, SwingConstants.CENTER);
-        titleLabel.setFont(titleLabel.getFont().deriveFont(Font.BOLD, TITLE_FONT));
-        titleLabel.setForeground(TITLE_COLOR);
-        JPanel titlePanel = new JPanel();
-        titlePanel.add(titleLabel);
-        topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.PAGE_AXIS));
-        topPanel.add(titlePanel);
-        add(topPanel, BorderLayout.NORTH);
-    }
+//    // EFFECTS: Initializes the title text that displays title name on title page.
+//    private void initializeTitle(JPanel topPanel) {
+//        JLabel titleLabel = new JLabel(TITLE_TEXT, SwingConstants.CENTER);
+//        titleLabel.setFont(titleLabel.getFont().deriveFont(Font.BOLD, TITLE_FONT));
+//        titleLabel.setForeground(TITLE_COLOR);
+//        JPanel titlePanel = new JPanel();
+//        titlePanel.add(titleLabel);
+//        topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.PAGE_AXIS));
+//        topPanel.add(titlePanel);
+//        add(topPanel, BorderLayout.NORTH);
+//    }
 
 
     // MODIFIES: This

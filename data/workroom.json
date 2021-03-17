@@ -3,7 +3,7 @@
     "allStats": [
         {
             "category": "CorrectAnswers",
-            "value": 3
+            "value": 2
         },
         {
             "category": "IncorrectAnswers",
@@ -11,39 +11,15 @@
         },
         {
             "category": "QuestionsAsked",
-            "value": 4
+            "value": 3
         },
         {
             "category": "CorrectAnswers",
-            "value": 5
-        },
-        {
-            "category": "IncorrectAnswers",
             "value": 1
         },
         {
-            "category": "QuestionsAsked",
-            "value": 6
-        },
-        {
-            "category": "CorrectAnswers",
-            "value": 7
-        },
-        {
             "category": "IncorrectAnswers",
-            "value": 3
-        },
-        {
-            "category": "QuestionsAsked",
-            "value": 10
-        },
-        {
-            "category": "CorrectAnswers",
-            "value": 3
-        },
-        {
-            "category": "IncorrectAnswers",
-            "value": 0
+            "value": 2
         },
         {
             "category": "QuestionsAsked",
