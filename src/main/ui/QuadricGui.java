@@ -14,7 +14,7 @@ public class QuadricGui extends JframeMaker implements ActionListener {
     private ImageIcon unscaledTitleIcon;
     private JLabel titlePageLabel;
     private Scanner input;
-    private QuizLengthGui quizLengthFrame;
+
 
     private static final int WIDTH = 1000;
     private static final int HEIGHT = 700;
@@ -89,7 +89,6 @@ public class QuadricGui extends JframeMaker implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("startButton")) {
             dispose();
-            new QuizLengthGui();
 
 
         }
