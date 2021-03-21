@@ -5,7 +5,6 @@ import java.awt.*;
 
 public class InstructionPopUp {
     private JFrame popUp;
-    private int userInputNum;
 
 
     // constructor
@@ -25,9 +24,5 @@ public class InstructionPopUp {
 
     // getters & setters
 
-
-    public int getUserInputNum() {
-        return userInputNum;
-    }
 
 }
