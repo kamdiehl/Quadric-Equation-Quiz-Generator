@@ -4,6 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.AudioSystem;
 
 public class MainFrame extends JFrame implements ActionListener {
     private static final int WIDTH = 1100;
@@ -23,6 +28,8 @@ public class MainFrame extends JFrame implements ActionListener {
     JButton saveBtn = new JButton("SAVE");
 
     GridBagConstraints gbc;
+//    ImagePanel startQuizPanel;
+//    JPanel sidePanel;
 
 
     // constructor
@@ -33,6 +40,10 @@ public class MainFrame extends JFrame implements ActionListener {
         createWindow(mainWindow);
         createTitlePanel(mainWindow);
         initiateButtons(mainWindow);
+
+//        sidePanel = new JPanel();
+//        startQuizPanel = new ImagePanel(sidePanel);
+
 
     }
 
@@ -101,6 +112,7 @@ public class MainFrame extends JFrame implements ActionListener {
     // EFFECTS: Method that is called when the the JButton btn is clicked
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("startButton")) {
+            playSound("/sounds/button.wav");
             new QuizLengthPopUp();
         }
 
@@ -118,6 +130,21 @@ public class MainFrame extends JFrame implements ActionListener {
             System.exit(0);
         }
 
+    }
+
+    // function STRUCTURE credit to sauveSnippets.com
+
+    public void playSound(String soundName) {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+
+        } catch (Exception ex) {
+            System.out.println("Error with playing sound.");
+            ex.printStackTrace();
+        }
     }
 
 
