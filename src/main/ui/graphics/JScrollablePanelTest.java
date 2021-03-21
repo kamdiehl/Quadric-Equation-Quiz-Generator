@@ -8,9 +8,10 @@ import java.awt.event.*;
 import javax.swing.*;
 // https://www.tutorialspoint.com/how-can-we-implement-a-scrollable-jpanel-in-java
 
-public class JScrollablePanelTest extends JFrame {
+public class JScrollablePanelTest extends JFrame implements ActionListener {
+    private JButton submitBtn;
+    private JTextField field;
 
-    //QuizLengthPopUp quizLength;
 
     public JScrollablePanelTest(int quizLength) {
         setTitle("Quiz Panel");
@@ -28,18 +29,33 @@ public class JScrollablePanelTest extends JFrame {
 
         JPanel questionPanel = new JPanel();
         questionPanel.setLayout(new GridLayout(quizLength, 1, 10, 10));
+
         for (int i = 0; i < quizLength; i++) {
-            for (int j = 0; j < 1; j++) {
-                JLabel label = new JLabel("label " + i);
-                JLabel emptySpace = new JLabel(" ");
-                label.setFont(new Font("Arial", Font.PLAIN, 20));
-                questionPanel.add(label);
-                questionPanel.add(emptySpace);
-            }
+          //  for (int j = 0; j < 1; j++) {
+
+            JLabel label = new JLabel("label " + i);
+            field = new JTextField();
+            submitBtn = new JButton("Submit");
+            submitBtn.setActionCommand("submitAnswer");
+            submitBtn.addActionListener(this);
+            JLabel emptySpace = new JLabel(" ");
+            label.setFont(new Font("Arial", Font.PLAIN, 20));
+
+            questionPanel.add(label);
+            questionPanel.add(field);
+            questionPanel.add(submitBtn);
+            questionPanel.add(emptySpace);
+
+          //  }
         }
         return questionPanel;
     }
 
 
-
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getActionCommand().equals("submitAnswer")) {
+            //
+        }
+    }
 }
