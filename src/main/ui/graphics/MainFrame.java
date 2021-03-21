@@ -35,12 +35,17 @@ public class MainFrame extends JFrame implements ActionListener {
     // constructor
     public MainFrame() {
         JFrame mainWindow = new JFrame("Quadric Quiz");
-        mainWindow.setLayout(new GridBagLayout());
-        gbc = new GridBagConstraints();
+        JPanel mainPanel = new JPanel(new GridLayout(4,6));
+        mainWindow.setLayout(new BorderLayout());
+        //gbc = new GridBagConstraints();
         createWindow(mainWindow);
-        createTitlePanel(mainWindow);
-        initiateButtons(mainWindow);
 
+
+        mainWindow.add(mainPanel);
+       // createTitlePanel(mainWindow);
+       // initiateButtons(mainWindow);
+        compilePanels(mainPanel);
+        mainWindow.add(mainPanel);
 //        sidePanel = new JPanel();
 //        startQuizPanel = new ImagePanel(sidePanel);
 
@@ -48,7 +53,29 @@ public class MainFrame extends JFrame implements ActionListener {
     }
 
 
+    public void compilePanels(JPanel mainPanel) {
+        JPanel titlePanel = new JPanel();
+
+       //GridBagConstraints c = new GridBagConstraints();
+
+        JLabel titleLabel = new JLabel("QUADRIC EQUATION QUIZ");
+        titleLabel.setFont(titleLabel.getFont().deriveFont(Font.BOLD, TITLE_FONT));
+        titleLabel.setForeground(TITLE_COLOR);
+        titleLabel.setPreferredSize(new Dimension(300, 100));
+        titlePanel.add(titleLabel);
+      //  c.fill = GridBagConstraints.HORIZONTAL;
+       // c.weightx = 1;
+        //c.weighty = 1;
+        //c.anchor = GridBagConstraints.NORTHWEST;
+
+        mainPanel.add(titlePanel,);
+
+
+    }
+
+
     // EFFECTS: Creates a new window (JFrame)
+
     public static void createWindow(JFrame newWindow) {
 
         newWindow.setDefaultCloseOperation(EXIT_ON_CLOSE);
