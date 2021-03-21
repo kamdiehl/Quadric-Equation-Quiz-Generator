@@ -10,9 +10,11 @@ public class MainFrame extends JFrame implements ActionListener {
     private static final int HEIGHT = 900;
     public static final int TITLE_FONT = 22;
     public static final Color TITLE_COLOR = new Color(1, 108, 104);
+    public static final Color TITLE_BACKGROUND = new Color(2, 239, 231);
 
     public static final Color startBtnColor = new Color(0, 198, 183);
     public static final Color instructionBtnColor = new Color(5, 170, 157);
+    public static final Color saveBtnColor = new Color(8, 137, 127);
     public static final Color loadBtnColor = new Color(4, 118, 109);
     public static final Color exitBtnColor = new Color(2, 92, 94);
 
@@ -26,13 +28,13 @@ public class MainFrame extends JFrame implements ActionListener {
 
 
     // constructor
+    // EFFECTS: Constructs the main JFrame containing all of the panels for the program.
     public MainFrame() {
         JFrame mainWindow = new JFrame("Quadric Quiz");
         mainWindow.setLayout(new GridBagLayout());
         gbc = new GridBagConstraints();
         createWindow(mainWindow);
         createTitlePanel(mainWindow);
-        initiateButtons(mainWindow);
 
     }
 
@@ -50,6 +52,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
     }
 
+
     // EFFECTS: Creates title panel with title label.
     public void createTitlePanel(JFrame mainWindow) {
 
@@ -63,20 +66,32 @@ public class MainFrame extends JFrame implements ActionListener {
         gbc.weightx = 1;
         gbc.weighty = 1;
         gbc.anchor = GridBagConstraints.NORTHWEST;
-       // titlePanel.setBackground(Color.blue);
+        titlePanel.setBackground(TITLE_BACKGROUND);
 
-        mainWindow.add(titlePanel, gbc);
-    }
-
-
-    // EFFECTS: Runs the app
-    public void initiateButtons(JFrame mainWindow) {
-
-        JPanel buttonPanel = new JPanel(new GridLayout(5, 1, 10, 5));
+        JPanel buttonPanel = new JPanel(new GridLayout(6, 1, 10, 5));
         gbc.weightx = 1;
         gbc.weighty = 1;
         gbc.anchor = GridBagConstraints.WEST;
 
+        initiateButtons();
+
+        buttonPanel.add(titlePanel, gbc);
+        buttonPanel.add(startBtn);
+        buttonPanel.add(instructionBtn);
+        buttonPanel.add(saveBtn);
+        buttonPanel.add(loadBtn);
+        buttonPanel.add(exitBtn);
+
+        mainWindow.add(buttonPanel, gbc);
+
+    }
+
+
+
+    // EFFECTS: Creates the buttons and adds their background colors.
+    public void initiateButtons() {
+
+        buttonColors();
         startBtn.setActionCommand("startButton");
         startBtn.addActionListener(this);
         instructionBtn.setActionCommand("instructionButton");
@@ -88,15 +103,31 @@ public class MainFrame extends JFrame implements ActionListener {
         saveBtn.setActionCommand("saveButton");
         saveBtn.addActionListener(this);
 
-        buttonPanel.add(startBtn);
-        buttonPanel.add(instructionBtn);
-        buttonPanel.add(saveBtn);
-        buttonPanel.add(loadBtn);
-        buttonPanel.add(exitBtn);
-
-        mainWindow.add(buttonPanel, gbc);
-
     }
+
+
+
+    // EFFECTS: Initiates button colors.
+    public void buttonColors() {
+
+        startBtn.setBackground(startBtnColor);
+        startBtn.setForeground(exitBtnColor);
+        startBtn.setOpaque(true);
+        instructionBtn.setBackground(instructionBtnColor);
+        instructionBtn.setForeground(loadBtnColor);
+        instructionBtn.setOpaque(true);
+        saveBtn.setBackground(saveBtnColor);
+        saveBtn.setForeground(loadBtnColor);
+        saveBtn.setOpaque(true);
+        loadBtn.setBackground(loadBtnColor);
+        loadBtn.setForeground(instructionBtnColor);
+        loadBtn.setOpaque(true);
+        exitBtn.setBackground(exitBtnColor);
+        exitBtn.setForeground(startBtnColor);
+        exitBtn.setOpaque(true);
+    }
+
+
 
     // EFFECTS: Method that is called when the the JButton btn is clicked
     public void actionPerformed(ActionEvent e) {
@@ -119,6 +150,12 @@ public class MainFrame extends JFrame implements ActionListener {
         }
 
     }
+
+
+
+
+
+    // GETTERS AND SETTERS ----------------------------------------------------------------------------------
 
 
 
