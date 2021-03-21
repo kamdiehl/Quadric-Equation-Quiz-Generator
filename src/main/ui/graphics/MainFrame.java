@@ -4,11 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.AudioSystem;
 
 public class MainFrame extends JFrame implements ActionListener {
     private static final int WIDTH = 1100;
@@ -28,54 +23,21 @@ public class MainFrame extends JFrame implements ActionListener {
     JButton saveBtn = new JButton("SAVE");
 
     GridBagConstraints gbc;
-//    ImagePanel startQuizPanel;
-//    JPanel sidePanel;
 
 
     // constructor
     public MainFrame() {
         JFrame mainWindow = new JFrame("Quadric Quiz");
-        JPanel mainPanel = new JPanel(new GridLayout(4,6));
-        mainWindow.setLayout(new BorderLayout());
-        //gbc = new GridBagConstraints();
+        mainWindow.setLayout(new GridBagLayout());
+        gbc = new GridBagConstraints();
         createWindow(mainWindow);
-
-
-        mainWindow.add(mainPanel);
-       // createTitlePanel(mainWindow);
-       // initiateButtons(mainWindow);
-        compilePanels(mainPanel);
-        mainWindow.add(mainPanel);
-//        sidePanel = new JPanel();
-//        startQuizPanel = new ImagePanel(sidePanel);
-
-
-    }
-
-
-    public void compilePanels(JPanel mainPanel) {
-        JPanel titlePanel = new JPanel();
-
-       //GridBagConstraints c = new GridBagConstraints();
-
-        JLabel titleLabel = new JLabel("QUADRIC EQUATION QUIZ");
-        titleLabel.setFont(titleLabel.getFont().deriveFont(Font.BOLD, TITLE_FONT));
-        titleLabel.setForeground(TITLE_COLOR);
-        titleLabel.setPreferredSize(new Dimension(300, 100));
-        titlePanel.add(titleLabel);
-      //  c.fill = GridBagConstraints.HORIZONTAL;
-       // c.weightx = 1;
-        //c.weighty = 1;
-        //c.anchor = GridBagConstraints.NORTHWEST;
-
-        mainPanel.add(titlePanel,);
-
+        createTitlePanel(mainWindow);
+        initiateButtons(mainWindow);
 
     }
 
 
     // EFFECTS: Creates a new window (JFrame)
-
     public static void createWindow(JFrame newWindow) {
 
         newWindow.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -139,7 +101,6 @@ public class MainFrame extends JFrame implements ActionListener {
     // EFFECTS: Method that is called when the the JButton btn is clicked
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("startButton")) {
-            playSound("/sounds/button.wav");
             new QuizLengthPopUp();
         }
 
@@ -157,21 +118,6 @@ public class MainFrame extends JFrame implements ActionListener {
             System.exit(0);
         }
 
-    }
-
-    // function STRUCTURE credit to sauveSnippets.com
-
-    public void playSound(String soundName) {
-        try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile());
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
-            clip.start();
-
-        } catch (Exception ex) {
-            System.out.println("Error with playing sound.");
-            ex.printStackTrace();
-        }
     }
 
 
