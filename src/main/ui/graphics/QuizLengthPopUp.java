@@ -5,6 +5,7 @@ import model.QuizEntry;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 // Controls the pop-up window that asks the user how many quiz questions they want. Sends userInputNum to QuestionMaster
 // for further interpretation by the quiz classes.
@@ -27,8 +28,9 @@ public class QuizLengthPopUp {
         // HERE IS WHERE WE INSTANTIATE THE NEW QUIZ
         newQuiz = new QuestionMaster(userInputNum, 10, 1);
         newQuiz.setQuizLength(userInputNum);
+        List<QuizEntry> questionList = newQuiz.createNewQuestionList(userInputNum);
 
-        new JScrollablePanelTest(userInputNum);
+        new JScrollablePanelTest(userInputNum, questionList, newQuiz);
     }
 
     public void initiatePopUp() {
