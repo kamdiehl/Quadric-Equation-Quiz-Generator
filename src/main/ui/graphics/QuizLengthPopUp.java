@@ -16,6 +16,7 @@ public class QuizLengthPopUp {
     private QuestionMaster newQuiz;
 
 
+
     // constructor
     public QuizLengthPopUp() {
         initiatePopUp();
