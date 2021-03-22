@@ -5,32 +5,28 @@ import model.QuizEntry;
 
 import javax.swing.*;
 import java.awt.*;
-
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+// Structure credit a bit ?
 // https://www.tutorialspoint.com/how-can-we-implement-a-scrollable-jpanel-in-java
 
 public class JScrollablePanelTest extends JFrame implements ActionListener {
 
-    private JTextField field;
     private QuizEntry currentQuiz;
-    private String currentEquation;
-    private String currentAnswer;
     private int quizLen;
     private QuestionMaster quiz;
     private int overallCorrectAnswers;
     private int correctAnswers;
     private int questionsAsked;
-    private int currentQuestion;
     private JPanel questionPanel;
+    private JTextField field;
 
+    private HashMap<Integer, JTextField> map;
 
-
-    HashMap<Integer, JTextField> map;
-
-
+    // Constructor
     public JScrollablePanelTest(int quizLength, List<QuizEntry> questionList, QuestionMaster newQuiz) {
         setTitle("Quiz Panel");
         setLayout(new BorderLayout());
@@ -59,7 +55,7 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
         for (int i = 0; i < quizLength; i++) {
 
             currentQuiz = newQuiz.getQuestionList().get(i);
-            currentEquation = currentQuiz.getQuestion();
+            String currentEquation = currentQuiz.getQuestion();
             JLabel question = new JLabel(currentEquation);
             field = new JTextField();
             map.put(i, field);
@@ -68,28 +64,25 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
 
             questionPanel.add(question);
             questionPanel.add(field);
-            //questionPanel.add(submitBtn);
+
         }
 
-
-       // submitBtn = new JButton("Submit");
-       // questionPanel.add(submitBtn);
         return questionPanel;
     }
 
-
+    // EFFECTS: Creates a list of answers from the question list for the current quiz.
     public ArrayList<String> createAnswerList(int quizLength, QuestionMaster newQuiz) {
         ArrayList<String> answerList = new ArrayList<>();
         
         for (int i = 0; i < quizLength; i++) {
             currentQuiz = newQuiz.getQuestionList().get(i);
-            currentAnswer = currentQuiz.getAnswer();
+            String currentAnswer = currentQuiz.getAnswer();
             answerList.add(currentAnswer);
         }
         return answerList;
     }
 
-
+    // EFFECTS: Scans all the text boxes to make a list of the user's inputted answers.
     public ArrayList<String> createUserAnswerList(int quizLength) {
         ArrayList<String> userAnswerList = new ArrayList<>();
 
@@ -103,10 +96,12 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
     }
 
 
+
+
     // EFFECTS: Compares the userAnswer's list to the actual answer list
     public void checkUserAnswers(ArrayList<String> userAnswers, ArrayList<String> answers) {
-        currentQuestion = 0;
         correctAnswers = 0;
+        boolean isRight = true;
 
         for (int i = 0; i < quizLen; i++) {
             String user = userAnswers.get(i);
@@ -114,12 +109,24 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
 
             if (user.equals(ans)) {
                 System.out.println("Correct!");
+                isRight = true;
                 correctAnswers++;
                 overallCorrectAnswers++;
+
             } else {
+                isRight = false;
                 System.out.println("Incorrect!");
             }
-            currentQuestion++;
+
+            for (int j = 0; j < quizLen; j++) {
+                JTextField filledField = map.get(j);
+                if (isRight) {
+                    filledField.setForeground(Color.green);
+                }
+                if (!isRight) {
+                    filledField.setForeground(Color.red);
+                }
+            }
         }
         postQuiz();
     }
@@ -136,7 +143,7 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
         String sentence2 = "              ";
         String sentence3 = "Overall score: " + overallCorrectAnswers + "/" + questionsAsked;
 
-        int n = JOptionPane.showInternalOptionDialog(questionPanel, sentence1 + sentence2 + sentence3,
+        int n = JOptionPane.showOptionDialog(questionPanel, sentence1 + sentence2 + sentence3,
                 "- Quiz Results -",
                 JOptionPane.YES_NO_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
@@ -170,8 +177,6 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
     }
 
 
-    public void setQuizLen(int quizLen) {
-        this.quizLen = quizLen;
-    }
+
 }
 
