@@ -13,13 +13,18 @@ import java.util.List;
 // https://www.tutorialspoint.com/how-can-we-implement-a-scrollable-jpanel-in-java
 
 public class JScrollablePanelTest extends JFrame implements ActionListener {
-    private JButton submitBtn;
+
     private JTextField field;
     private QuizEntry currentQuiz;
     private String currentEquation;
     private String currentAnswer;
     private int quizLen;
     private QuestionMaster quiz;
+    private int overallCorrectAnswers;
+    private int correctAnswers;
+    private int questionsAsked;
+    private int currentQuestion;
+    private JPanel questionPanel;
 
 
 
@@ -46,7 +51,7 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
 
     public JPanel createPanel(int quizLength, QuestionMaster newQuiz) {
 
-        JPanel questionPanel = new JPanel();
+        questionPanel = new JPanel();
         questionPanel.setLayout(new GridLayout(quizLength, 1, 10, 10));
         quizLen = quizLength;
         map = new HashMap<>();
@@ -93,13 +98,15 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
             String userAnswer = filledField.getText();
             userAnswerList.add(userAnswer);
         }
-        //System.out.println(userAnswerList);
+
         return userAnswerList;
     }
 
 
-    //
+    // EFFECTS: Compares the userAnswer's list to the actual answer list
     public void checkUserAnswers(ArrayList<String> userAnswers, ArrayList<String> answers) {
+        currentQuestion = 0;
+        correctAnswers = 0;
 
         for (int i = 0; i < quizLen; i++) {
             String user = userAnswers.get(i);
@@ -107,11 +114,38 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
 
             if (user.equals(ans)) {
                 System.out.println("Correct!");
+                correctAnswers++;
+                overallCorrectAnswers++;
             } else {
                 System.out.println("Incorrect!");
             }
+            currentQuestion++;
         }
+        postQuiz();
     }
+
+
+    // EFFECTS: Displays quiz score to user and loops back to the start.
+    public void postQuiz() {
+        overallCorrectAnswers += quiz.getCorrectAnswers();
+        questionsAsked += quiz.getQuizLength();
+
+        Object[] options = {"Save", "Home"};
+
+        String sentence1 = "Quiz score: " + correctAnswers + "/" + quiz.getQuizLength();
+        String sentence2 = "              ";
+        String sentence3 = "Overall score: " + overallCorrectAnswers + "/" + questionsAsked;
+
+        int n = JOptionPane.showInternalOptionDialog(questionPanel, sentence1 + sentence2 + sentence3,
+                "- Quiz Results -",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[1]);
+
+    }
+
 
 
 
