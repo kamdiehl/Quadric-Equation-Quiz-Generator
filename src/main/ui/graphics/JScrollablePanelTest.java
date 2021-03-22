@@ -23,31 +23,37 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
     private int questionsAsked;
     private JPanel questionPanel;
     private JTextField field;
+    private JPanel panel;
 
     private HashMap<Integer, JTextField> map;
 
     // Constructor
     public JScrollablePanelTest(int quizLength, List<QuizEntry> questionList, QuestionMaster newQuiz) {
+
+        questionPanel = new JPanel();
+
         setTitle("Quiz Panel");
         setLayout(new BorderLayout());
-        JPanel panel = createPanel(quizLength, newQuiz);
+        createPanel(quizLength, newQuiz);
+
         JButton submitBtn = new JButton("Submit");
-        panel.add(submitBtn);
+        questionPanel.add(submitBtn);
         submitBtn.addActionListener(this);
         submitBtn.setActionCommand("submitAnswers");
 
-        add(BorderLayout.CENTER, new JScrollPane(panel));
+        add(BorderLayout.CENTER, new JScrollPane(questionPanel));
         setSize(600, 400);
        // setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
+        //pack();
         quiz = newQuiz;
 
     }
 
     public JPanel createPanel(int quizLength, QuestionMaster newQuiz) {
 
-        questionPanel = new JPanel();
+      //  questionPanel = new JPanel();
         questionPanel.setLayout(new GridLayout(quizLength, 1, 10, 10));
         quizLen = quizLength;
         map = new HashMap<>();
@@ -133,19 +139,37 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
         overallCorrectAnswers += quiz.getCorrectAnswers();
         questionsAsked += quiz.getQuizLength();
 
-        Object[] options = {"Save", "Home"};
+        JPanel resultsPanel = new JPanel();
+        JButton saveBtn = new JButton("Save");
+        JButton homeBtn = new JButton("Home");
 
         String sentence1 = "Quiz score: " + correctAnswers + "/" + quiz.getQuizLength();
         String sentence2 = "              ";
         String sentence3 = "Overall score: " + overallCorrectAnswers + "/" + questionsAsked;
 
-        int n = JOptionPane.showOptionDialog(questionPanel, sentence1 + sentence2 + sentence3,
-                "- Quiz Results -",
-                JOptionPane.YES_NO_CANCEL_OPTION,
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                options,
-                options[1]);
+        String allText = sentence1 + sentence2 + sentence3;
+        JLabel allT = new JLabel(allText);
+
+        resultsPanel.add(allT);
+        resultsPanel.add(saveBtn);
+        resultsPanel.add(homeBtn);
+        resultsPanel.setVisible(true);
+
+        questionPanel.add(resultsPanel);
+
+//        Object[] options = {"Save", "Home"};
+//
+//        String sentence1 = "Quiz score: " + correctAnswers + "/" + quiz.getQuizLength();
+//        String sentence2 = "              ";
+//        String sentence3 = "Overall score: " + overallCorrectAnswers + "/" + questionsAsked;
+//
+//        int n = JOptionPane.showOptionDialog(questionPanel, sentence1 + sentence2 + sentence3,
+//                "- Quiz Results -",
+//                JOptionPane.YES_NO_CANCEL_OPTION,
+//                JOptionPane.QUESTION_MESSAGE,
+//                null,
+//                options,
+//                options[1]);
 
     }
 
