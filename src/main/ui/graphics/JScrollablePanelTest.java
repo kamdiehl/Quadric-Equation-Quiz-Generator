@@ -101,31 +101,27 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
     // EFFECTS: Compares the userAnswer's list to the actual answer list
     public void checkUserAnswers(ArrayList<String> userAnswers, ArrayList<String> answers) {
         correctAnswers = 0;
-        boolean isRight = true;
+        Color correctText = new Color(73, 134, 14);
+        Color correctField = new Color(232, 255, 192);
+        Color incorrectText = new Color(186, 23, 23);
+        Color incorrectField = new Color(255, 202, 202);
 
         for (int i = 0; i < quizLen; i++) {
+            JTextField filledField = map.get(i);
             String user = userAnswers.get(i);
             String ans = answers.get(i);
 
             if (user.equals(ans)) {
                 System.out.println("Correct!");
-                isRight = true;
+                filledField.setForeground(correctText);
+                filledField.setBackground(correctField);
                 correctAnswers++;
                 overallCorrectAnswers++;
 
             } else {
-                isRight = false;
+                filledField.setForeground(incorrectText);
+                filledField.setBackground(incorrectField);
                 System.out.println("Incorrect!");
-            }
-
-            for (int j = 0; j < quizLen; j++) {
-                JTextField filledField = map.get(j);
-                if (isRight) {
-                    filledField.setForeground(Color.green);
-                }
-                if (!isRight) {
-                    filledField.setForeground(Color.red);
-                }
             }
         }
         postQuiz();
