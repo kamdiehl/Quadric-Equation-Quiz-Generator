@@ -12,7 +12,7 @@ import java.util.List;
 // Structure credit a bit ?
 // https://www.tutorialspoint.com/how-can-we-implement-a-scrollable-jpanel-in-java
 
-
+// This class is in charge of the panel that holds the quiz questions and the quiz results.
 public class JScrollablePanelTest extends JFrame implements ActionListener {
 
     private QuizEntry currentQuiz;
@@ -31,25 +31,22 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
     public JScrollablePanelTest(int quizLength, List<QuizEntry> questionList, QuestionMaster newQuiz) {
 
         questionPanel = new JPanel();
-
         setTitle("Quiz Panel");
         setLayout(new BorderLayout());
         createPanel(quizLength, newQuiz);
-
         add(BorderLayout.CENTER, new JScrollPane(questionPanel));
         setSize(600, 400);
-       // setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
-        //pack();
         quiz = newQuiz;
 
     }
 
+
+    // EFFECTS: Creates the quizPanel and uses HashMap to associate the textField to a number.
     public JPanel createPanel(int quizLength, QuestionMaster newQuiz) {
 
-      //  questionPanel = new JPanel();
-        questionPanel.setLayout(new GridLayout(quizLength, 1, 10, 10));
+        questionPanel.setLayout(new GridLayout(0, 1, 10, 10));
         quizLen = quizLength;
         map = new HashMap<>();
 
@@ -60,7 +57,6 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
             JLabel question = new JLabel(currentEquation);
             field = new JTextField();
             map.put(i, field);
-
             question.setFont(new Font("Arial", Font.PLAIN, 15));
 
             questionPanel.add(question);
@@ -68,16 +64,19 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
 
         }
 
-        //JButton submitBtn = new JButton("Submit");      // !!!!!!!!!!!!!!!!!!!!!!
-        //questionPanel.add(submitBtn, BorderLayout.SOUTH);
-        //submitBtn.addActionListener(this);
-        //submitBtn.setActionCommand("submitAnswers");
+        JButton submitBtn = new JButton("Submit");      // !!!!!!!!!!!!!!!!!!!!!!
+        questionPanel.add(submitBtn, BorderLayout.SOUTH);
+        submitBtn.addActionListener(this);
+        submitBtn.setActionCommand("submitAnswers");
 
         return questionPanel;
     }
 
+
+
     // EFFECTS: Creates a list of answers from the question list for the current quiz.
     public ArrayList<String> createAnswerList(int quizLength, QuestionMaster newQuiz) {
+
         ArrayList<String> answerList = new ArrayList<>();
         
         for (int i = 0; i < quizLength; i++) {
@@ -87,6 +86,8 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
         }
         return answerList;
     }
+
+
 
     // EFFECTS: Scans all the text boxes to make a list of the user's inputted answers.
     public ArrayList<String> createUserAnswerList(int quizLength) {
@@ -100,7 +101,6 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
 
         return userAnswerList;
     }
-
 
 
 
@@ -118,7 +118,7 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
             String ans = answers.get(i);
 
             if (user.equals(ans)) {
-                System.out.println("Correct!");
+               // System.out.println("Correct!");
                 filledField.setForeground(correctText);
                 filledField.setBackground(correctField);
                 correctAnswers++;
@@ -127,7 +127,7 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
             } else {
                 filledField.setForeground(incorrectText);
                 filledField.setBackground(incorrectField);
-                System.out.println("Incorrect!");
+               // System.out.println("Incorrect!");
             }
         }
         postQuiz();
@@ -172,12 +172,11 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
 //                options,
 //                options[1]);
 
+
     }
 
 
-
-
-
+    // EFFECTS: Deals with actions prompted by button clicks.
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -192,10 +191,7 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
 
 
 
-    // EFFECTS: Compares the user's answer to the correct answer for that question, returns true if correct.
-    public boolean checkAnswer(String userAnswer, String answer) {
-        return userAnswer.equals(answer);
-    }
+
 
 
 
