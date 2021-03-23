@@ -1,10 +1,13 @@
 package ui.graphics;
 
-import model.QuestionMaster;
-import model.QuizEntry;
+import model.*;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +18,8 @@ import java.util.List;
 // This class is in charge of the panel that holds the quiz questions and the quiz results.
 public class JScrollablePanelTest extends JFrame implements ActionListener {
 
+    StatsManager statsManager = new StatsManager("statHistory");
+
     private QuizEntry currentQuiz;
     private int quizLen;
     private QuestionMaster quiz;
@@ -23,9 +28,15 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
     private int questionsAsked;
     private JPanel questionPanel;
     private JTextField field;
-    private JPanel panel;
+    private JScrollPane quizScroll;
+
 
     private HashMap<Integer, JTextField> map;
+
+    // json
+    private static final String JSON_STORE = "./data/workroom.json";
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // Constructor
     public JScrollablePanelTest(int quizLength, List<QuizEntry> questionList, QuestionMaster newQuiz) {
@@ -34,11 +45,17 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
         setTitle("Quiz Panel");
         setLayout(new BorderLayout());
         createPanel(quizLength, newQuiz);
-        add(BorderLayout.CENTER, new JScrollPane(questionPanel));
+
+        quizScroll = new JScrollPane(questionPanel);
+
+        add(BorderLayout.CENTER, quizScroll);
         setSize(600, 400);
         setLocationRelativeTo(null);
         setVisible(true);
         quiz = newQuiz;
+
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
 
     }
 
@@ -64,7 +81,7 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
 
         }
 
-        JButton submitBtn = new JButton("Submit");      // !!!!!!!!!!!!!!!!!!!!!!
+        JButton submitBtn = new JButton("Submit");
         questionPanel.add(submitBtn, BorderLayout.SOUTH);
         submitBtn.addActionListener(this);
         submitBtn.setActionCommand("submitAnswers");
@@ -143,6 +160,14 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
         JPanel resultsPanel = new JPanel();
         JButton saveBtn = new JButton("Save");
         JButton homeBtn = new JButton("Home");
+        JButton loadBtn = new JButton("Load");
+
+        saveBtn.setActionCommand("saveButton");
+        saveBtn.addActionListener(this);
+        homeBtn.setActionCommand("homeButton");
+        homeBtn.addActionListener(this);
+        loadBtn.setActionCommand("loadButton");
+        loadBtn.addActionListener(this);
 
         String sentence1 = "Quiz score: " + correctAnswers + "/" + quiz.getQuizLength();
         String sentence2 = "              ";
@@ -153,25 +178,11 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
 
         resultsPanel.add(allT);
         resultsPanel.add(saveBtn);
+        resultsPanel.add(loadBtn);
         resultsPanel.add(homeBtn);
         resultsPanel.setVisible(true);
 
         questionPanel.add(resultsPanel);
-
-//        Object[] options = {"Save", "Home"};
-//
-//        String sentence1 = "Quiz score: " + correctAnswers + "/" + quiz.getQuizLength();
-//        String sentence2 = "              ";
-//        String sentence3 = "Overall score: " + overallCorrectAnswers + "/" + questionsAsked;
-//
-//        int n = JOptionPane.showOptionDialog(questionPanel, sentence1 + sentence2 + sentence3,
-//                "- Quiz Results -",
-//                JOptionPane.YES_NO_CANCEL_OPTION,
-//                JOptionPane.QUESTION_MESSAGE,
-//                null,
-//                options,
-//                options[1]);
-
 
     }
 
@@ -187,7 +198,115 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
 
             checkUserAnswers(userAnsList, ansList);
         }
+
+        if (e.getActionCommand().equals("saveButton")) {
+            addQuizResults();
+            saveQuiz();
+        }
+
+        if (e.getActionCommand().equals("loadButton")) {
+            loadStats();
+            printStats();
+
+        }
+
+        if (e.getActionCommand().equals("homeButton")) {
+            quizScroll.setVisible(false); // MAY CAUSE ISSUES !!!!
+            questionPanel.setVisible(false);
+        }
     }
+
+
+// JSON ++++++++++++++++++++++
+
+    //EFFECTS: Turns the number of correct answers from quiz into a StatValue.
+    public StatValue readCorrectAnswers() {
+        StatValue correctStat;
+
+        int correct = correctAnswers;
+        StatCategory category = StatCategory.values()[0];
+        correctStat = new StatValue(category, correct);
+        return correctStat;
+
+    }
+
+    //EFFECTS: Turns the number of incorrect answers from quiz into a StatValue.
+    public StatValue readIncorrectAnswers() {
+        StatValue incorrectStat;
+
+        int correct = correctAnswers;
+        int length = quiz.getQuizLength();
+        int incorrect = length - correct;
+        StatCategory category = StatCategory.values()[1];
+        incorrectStat = new StatValue(category, incorrect);
+        return incorrectStat;
+
+    }
+
+    //EFFECTS: Turns the quiz length into a StatValue.
+    public StatValue readQuizLength() {
+        StatValue lengthStat;
+        int length = quiz.getQuizLength();
+        StatCategory category = StatCategory.values()[2];
+        lengthStat = new StatValue(category, length);
+        return lengthStat;
+    }
+
+
+    // MODIFIES: this
+    // EFFECTS: prompt user for name and category of thingy and adds to workroom
+    private void addQuizResults() {
+
+        StatValue correct = readCorrectAnswers();
+        StatValue incorrect = readIncorrectAnswers();
+        StatValue length = readQuizLength();
+
+        statsManager.addStat(correct);
+        statsManager.addStat(incorrect);
+        statsManager.addStat(length);
+    }
+
+
+    // EFFECTS: prints all the thingies in workroom to the console
+    private void printStats() {
+        List<StatValue> thingies = statsManager.getAllStats();
+        int counter = 1;
+        System.out.println("Quiz 1");
+        for (StatValue t: thingies) {
+            System.out.println(t);
+            int indexNum = thingies.lastIndexOf(t); // if statement below is temporary
+            if ((indexNum == 2 || indexNum == 5 || indexNum == 8 || indexNum == 11) && indexNum < thingies.size() - 1) {
+                System.out.println(" ");
+                counter++;
+                System.out.println("Quiz " + counter);
+
+            }
+        }
+    }
+
+
+    // EFFECTS: saves the workroom to file
+    private void saveQuiz() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(statsManager);
+            jsonWriter.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    private void loadStats() {
+        try {
+            statsManager = jsonReader.read();
+            System.out.println("Loaded " + statsManager.getStatHistory() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + statsManager.getStatHistory() + JSON_STORE);
+        }
+    }
+
 
 
 

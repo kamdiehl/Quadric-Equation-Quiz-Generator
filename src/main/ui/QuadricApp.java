@@ -115,7 +115,7 @@ public class QuadricApp {
 
         System.out.println("Overall score: " + overallCorrectAnswers + "/" + questionsAsked);
 
-        addQuizResults(); // !!!!!!!!!!!!!
+        addQuizResults();
 
         System.out.println("Do you want to save these quiz stats?");
         System.out.println("1 for yes, 0 for no");

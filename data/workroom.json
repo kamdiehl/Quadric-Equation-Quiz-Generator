@@ -3,27 +3,15 @@
     "allStats": [
         {
             "category": "CorrectAnswers",
-            "value": 2
+            "value": 4
         },
         {
             "category": "IncorrectAnswers",
-            "value": 1
+            "value": 6
         },
         {
             "category": "QuestionsAsked",
-            "value": 3
-        },
-        {
-            "category": "CorrectAnswers",
-            "value": 1
-        },
-        {
-            "category": "IncorrectAnswers",
-            "value": 2
-        },
-        {
-            "category": "QuestionsAsked",
-            "value": 3
+            "value": 10
         }
     ]
 }

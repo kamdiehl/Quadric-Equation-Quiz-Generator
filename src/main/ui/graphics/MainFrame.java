@@ -7,6 +7,7 @@ import java.awt.*;
 
 // This class is in charge of initializing the main JFrame that holds the quiz and the menu buttons.
 public class MainFrame extends JFrame implements ActionListener {
+
     private static final int WIDTH = 1100;
     private static final int HEIGHT = 900;
     public static final int TITLE_FONT = 22;
@@ -27,15 +28,11 @@ public class MainFrame extends JFrame implements ActionListener {
 
     GridBagConstraints gbc;
 
-
     private JLabel label;
     private ImageIcon unscaledTitleIcon;
     private JLabel titlePageLabel;
     public static final int IMAGE_WIDTH = 450;
     public static final int IMAGE_HEIGHT = 470;
-
-
-
 
     // constructor
     // EFFECTS: Constructs the main JFrame containing all of the panels for the program.
@@ -48,7 +45,6 @@ public class MainFrame extends JFrame implements ActionListener {
         JPanel eastPanel = new JPanel();
         eastPanel.setLayout(new BorderLayout());
         initializeTitleImage(eastPanel);
-
 
     }
 
@@ -157,7 +153,7 @@ public class MainFrame extends JFrame implements ActionListener {
             // label.setText(field.getText());
         }
         if (e.getActionCommand().equals("loadButton")) {
-            // label.setText(field.getText());
+            //
         }
         if (e.getActionCommand().equals("exitButton")) {
             System.exit(0);
