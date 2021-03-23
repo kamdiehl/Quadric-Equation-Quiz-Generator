@@ -33,11 +33,17 @@ public class MainFrame extends JFrame implements ActionListener {
     private JLabel titlePageLabel;
     public static final int IMAGE_WIDTH = 450;
     public static final int IMAGE_HEIGHT = 470;
+    private JFrame mainWindow;
+
+
+    public JFrame getMainWindow() {
+        return mainWindow;
+    }
 
     // constructor
     // EFFECTS: Constructs the main JFrame containing all of the panels for the program.
     public MainFrame() {
-        JFrame mainWindow = new JFrame("Quadric Quiz");
+        mainWindow = new JFrame("Quadric Quiz"); /// eeeeee
         mainWindow.setLayout(new GridBagLayout());
         gbc = new GridBagConstraints();
         createWindow(mainWindow);

@@ -38,6 +38,7 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
     private LoadQuizPanel loadedQuiz;
+    private MainFrame mainFrame;
 
     // Constructor
     public JScrollablePanelTest(int quizLength, List<QuizEntry> questionList, QuestionMaster newQuiz) {
@@ -46,14 +47,24 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
         setTitle("Quiz Panel");
         setLayout(new BorderLayout());
         createPanel(quizLength, newQuiz);
-
         quizScroll = new JScrollPane(questionPanel);
 
+//        GridBagConstraints gbc = new GridBagConstraints();
+//        mainFrame = new MainFrame();
+//        JFrame frame = mainFrame.getMainWindow();
+//        gbc.anchor = GridBagConstraints.SOUTHEAST;
+//        frame.add(questionPanel, gbc);
+
+
+
         add(BorderLayout.CENTER, quizScroll);
+
         setSize(600, 400);
         setLocationRelativeTo(null);
         setVisible(true);
         quiz = newQuiz;
+
+        // x=parentComponent.width-w; y=0; w=100; h=100;
 
         jsonWriter = new JsonWriter(JSON_STORE);
        // jsonReader = new JsonReader(JSON_STORE);
