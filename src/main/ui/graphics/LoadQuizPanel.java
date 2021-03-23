@@ -3,8 +3,6 @@ package ui.graphics;
 import model.StatValue;
 import model.StatsManager;
 import persistence.JsonReader;
-import persistence.JsonWriter;
-
 import javax.swing.*;
 import java.io.IOException;
 import java.util.List;
@@ -18,11 +16,16 @@ public class LoadQuizPanel {
 
     public LoadQuizPanel(StatsManager statsManager) {
         resultsPanel = new JPanel();
+        resultsPanel.setVisible(true);
         quizScroll = new JScrollPane(resultsPanel);
+        quizScroll.setVisible(true);
         jsonReader = new JsonReader(JSON_STORE);
+
         loadStats(statsManager);
         printStats(statsManager);
+
     }
+
 
     // MODIFIES: this
     // EFFECTS: loads workroom from file
@@ -34,6 +37,7 @@ public class LoadQuizPanel {
             System.out.println("Unable to read from file: " + statsManager.getStatHistory() + JSON_STORE);
         }
     }
+
 
 
     // EFFECTS: prints all the thingies in workroom to the console
