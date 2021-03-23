@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.awt.*;
 
+// This class is in charge of initializing the main JFrame that holds the quiz and the menu buttons.
 public class MainFrame extends JFrame implements ActionListener {
     private static final int WIDTH = 1100;
     private static final int HEIGHT = 900;
@@ -165,8 +166,6 @@ public class MainFrame extends JFrame implements ActionListener {
     }
 
 
-
-
     // MODIFIES: This
     // EFFECTS: Initializes the image that appears on the title page.
     private void initializeTitleImage(JPanel eastPanel) {
@@ -177,6 +176,7 @@ public class MainFrame extends JFrame implements ActionListener {
         label = new JLabel("Image and Text", unscaledTitleIcon, JLabel.CENTER);
         titlePageLabel = new JLabel(unscaledTitleIcon);
         eastPanel.add(titlePageLabel, BorderLayout.EAST);
+        eastPanel.setVisible(true);
     }
 
 

@@ -2,7 +2,6 @@ package ui.graphics;
 
 import model.QuestionMaster;
 import model.QuizEntry;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -12,6 +11,7 @@ import java.util.List;
 
 // Structure credit a bit ?
 // https://www.tutorialspoint.com/how-can-we-implement-a-scrollable-jpanel-in-java
+
 
 public class JScrollablePanelTest extends JFrame implements ActionListener {
 
@@ -35,11 +35,6 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
         setTitle("Quiz Panel");
         setLayout(new BorderLayout());
         createPanel(quizLength, newQuiz);
-
-        JButton submitBtn = new JButton("Submit");
-        questionPanel.add(submitBtn);
-        submitBtn.addActionListener(this);
-        submitBtn.setActionCommand("submitAnswers");
 
         add(BorderLayout.CENTER, new JScrollPane(questionPanel));
         setSize(600, 400);
@@ -72,6 +67,11 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
             questionPanel.add(field);
 
         }
+
+        //JButton submitBtn = new JButton("Submit");      // !!!!!!!!!!!!!!!!!!!!!!
+        //questionPanel.add(submitBtn, BorderLayout.SOUTH);
+        //submitBtn.addActionListener(this);
+        //submitBtn.setActionCommand("submitAnswers");
 
         return questionPanel;
     }
@@ -132,6 +132,7 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
         }
         postQuiz();
     }
+
 
 
     // EFFECTS: Displays quiz score to user and loops back to the start.
