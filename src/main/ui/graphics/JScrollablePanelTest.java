@@ -37,6 +37,7 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
     private static final String JSON_STORE = "./data/workroom.json";
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
+    private LoadQuizPanel loadedQuiz;
 
     // Constructor
     public JScrollablePanelTest(int quizLength, List<QuizEntry> questionList, QuestionMaster newQuiz) {
@@ -55,7 +56,7 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
         quiz = newQuiz;
 
         jsonWriter = new JsonWriter(JSON_STORE);
-        jsonReader = new JsonReader(JSON_STORE);
+       // jsonReader = new JsonReader(JSON_STORE);
 
     }
 
@@ -205,8 +206,10 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
         }
 
         if (e.getActionCommand().equals("loadButton")) {
-            loadStats();
-            printStats();
+            loadedQuiz = new LoadQuizPanel(statsManager);
+
+            //loadStats();
+            //printStats();
 
         }
 
@@ -266,23 +269,23 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
         statsManager.addStat(length);
     }
 
-
-    // EFFECTS: prints all the thingies in workroom to the console
-    private void printStats() {
-        List<StatValue> thingies = statsManager.getAllStats();
-        int counter = 1;
-        System.out.println("Quiz 1");
-        for (StatValue t: thingies) {
-            System.out.println(t);
-            int indexNum = thingies.lastIndexOf(t); // if statement below is temporary
-            if ((indexNum == 2 || indexNum == 5 || indexNum == 8 || indexNum == 11) && indexNum < thingies.size() - 1) {
-                System.out.println(" ");
-                counter++;
-                System.out.println("Quiz " + counter);
-
-            }
-        }
-    }
+//
+//    // EFFECTS: prints all the thingies in workroom to the console
+//    private void printStats() {
+//        List<StatValue> thingies = statsManager.getAllStats();
+//        int counter = 1;
+//        System.out.println("Quiz 1");
+//        for (StatValue t: thingies) {
+//            System.out.println(t);
+//            int indexNum = thingies.lastIndexOf(t); // if statement below is temporary
+//          if ((indexNum == 2 || indexNum == 5 || indexNum == 8 || indexNum == 11) && indexNum < thingies.size() - 1) {
+//                System.out.println(" ");
+//                counter++;
+//                System.out.println("Quiz " + counter);
+//
+//            }
+//        }
+//    }
 
 
     // EFFECTS: saves the workroom to file
@@ -296,16 +299,16 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
         }
     }
 
-    // MODIFIES: this
-    // EFFECTS: loads workroom from file
-    private void loadStats() {
-        try {
-            statsManager = jsonReader.read();
-            System.out.println("Loaded " + statsManager.getStatHistory() + " from " + JSON_STORE);
-        } catch (IOException e) {
-            System.out.println("Unable to read from file: " + statsManager.getStatHistory() + JSON_STORE);
-        }
-    }
+//    // MODIFIES: this
+//    // EFFECTS: loads workroom from file
+//    private void loadStats() {
+//        try {
+//            statsManager = jsonReader.read();
+//            System.out.println("Loaded " + statsManager.getStatHistory() + " from " + JSON_STORE);
+//        } catch (IOException e) {
+//            System.out.println("Unable to read from file: " + statsManager.getStatHistory() + JSON_STORE);
+//        }
+//    }
 
 
 

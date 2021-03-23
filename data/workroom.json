@@ -3,11 +3,11 @@
     "allStats": [
         {
             "category": "CorrectAnswers",
-            "value": 4
+            "value": 3
         },
         {
             "category": "IncorrectAnswers",
-            "value": 6
+            "value": 7
         },
         {
             "category": "QuestionsAsked",
