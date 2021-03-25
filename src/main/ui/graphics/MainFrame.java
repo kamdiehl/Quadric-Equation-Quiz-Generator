@@ -148,7 +148,7 @@ public class MainFrame extends JFrame implements ActionListener {
     // EFFECTS: Method that is called when the the JButton btn is clicked
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("startButton")) {
-            new QuizLengthPopUp();
+            new QuizLengthPopUp(mainWindow);
         }
 
         if (e.getActionCommand().equals("instructionButton")) {

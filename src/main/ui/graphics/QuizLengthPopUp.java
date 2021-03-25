@@ -18,7 +18,7 @@ public class QuizLengthPopUp {
 
 
     // constructor
-    public QuizLengthPopUp() {
+    public QuizLengthPopUp(JFrame mainFrame) {
         initiatePopUp();
         String userInputString = JOptionPane.showInputDialog(popUp,
                 "Enter the number of questions you want in your quiz");
@@ -31,7 +31,7 @@ public class QuizLengthPopUp {
         newQuiz.setQuizLength(userInputNum);
         List<QuizEntry> questionList = newQuiz.createNewQuestionList(userInputNum);
 
-        new JScrollablePanelTest(userInputNum, questionList, newQuiz);
+        new JScrollablePanelTest(userInputNum, questionList, newQuiz, mainFrame);
     }
 
     public void initiatePopUp() {

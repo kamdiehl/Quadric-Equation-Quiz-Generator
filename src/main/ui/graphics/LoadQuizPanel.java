@@ -4,11 +4,13 @@ import model.StatValue;
 import model.StatsManager;
 import persistence.JsonReader;
 import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 import java.util.List;
 
-public class LoadQuizPanel {
+public class LoadQuizPanel extends JFrame {
 
+    private static final int TITLE_FONT = 15;
     private JScrollPane quizScroll;
     private JPanel resultsPanel;
     private static final String JSON_STORE = "./data/workroom.json";
@@ -16,9 +18,12 @@ public class LoadQuizPanel {
 
     public LoadQuizPanel(StatsManager statsManager) {
         resultsPanel = new JPanel();
-        resultsPanel.setVisible(true);
+        resultsPanel.setLayout(new GridLayout(0, 1, 10, 10));
+        setLocationRelativeTo(null);
         quizScroll = new JScrollPane(resultsPanel);
-        quizScroll.setVisible(true);
+        setSize(600, 400);
+        setVisible(true);
+
         jsonReader = new JsonReader(JSON_STORE);
 
         loadStats(statsManager);
@@ -32,6 +37,11 @@ public class LoadQuizPanel {
     private void loadStats(StatsManager statsManager) {
         try {
             statsManager = jsonReader.read();
+            String loadIntroString = "Loaded " + statsManager.getStatHistory() + " from " + JSON_STORE;
+            JLabel loadIntro = new JLabel(loadIntroString, SwingConstants.CENTER);
+            loadIntro.setFont(loadIntro.getFont().deriveFont(Font.BOLD, TITLE_FONT));
+            quizScroll.add(loadIntro);
+
             System.out.println("Loaded " + statsManager.getStatHistory() + " from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + statsManager.getStatHistory() + JSON_STORE);

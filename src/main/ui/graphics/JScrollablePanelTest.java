@@ -7,7 +7,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -38,10 +37,10 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
     private LoadQuizPanel loadedQuiz;
-    private MainFrame mainFrame;
+
 
     // Constructor
-    public JScrollablePanelTest(int quizLength, List<QuizEntry> questionList, QuestionMaster newQuiz) {
+    public JScrollablePanelTest(int quizLength, List<QuizEntry> questionList, QuestionMaster newQuiz, JFrame mainFrame) {
 
         questionPanel = new JPanel();
         setTitle("Quiz Panel");
@@ -49,13 +48,13 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
         createPanel(quizLength, newQuiz);
         quizScroll = new JScrollPane(questionPanel);
 
-//        GridBagConstraints gbc = new GridBagConstraints();
-//        mainFrame = new MainFrame();
-//        JFrame frame = mainFrame.getMainWindow();
-//        gbc.anchor = GridBagConstraints.SOUTHEAST;
-//        frame.add(questionPanel, gbc);
-
-
+// -------
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.anchor = GridBagConstraints.SOUTHEAST;
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        mainFrame.add(quizScroll, gbc);
+// --------
 
         add(BorderLayout.CENTER, quizScroll);
 
