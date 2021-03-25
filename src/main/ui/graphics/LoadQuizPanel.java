@@ -17,17 +17,32 @@ public class LoadQuizPanel extends JFrame {
     private JsonReader jsonReader;
 
     public LoadQuizPanel(StatsManager statsManager) {
+        //resultsPanel = new JPanel();
+       // resultsPanel.setLayout(new GridLayout(1, 1, 10, 10));
+        //setLocationRelativeTo(null);
+       // quizScroll = new JScrollPane();
+        //add(BorderLayout.CENTER, quizScroll);
+       // setSize(600, 400);
+        //setVisible(true);
+
         resultsPanel = new JPanel();
-        resultsPanel.setLayout(new GridLayout(0, 1, 10, 10));
-        setLocationRelativeTo(null);
+        setTitle("Saved Results");
+        setLayout(new BorderLayout());
+        resultsPanel.setLayout(new GridLayout(5, 1, 10, 10));
         quizScroll = new JScrollPane(resultsPanel);
+
+        add(BorderLayout.CENTER, quizScroll);
+
         setSize(600, 400);
+        setLocationRelativeTo(null);
         setVisible(true);
 
         jsonReader = new JsonReader(JSON_STORE);
 
         loadStats(statsManager);
         printStats(statsManager);
+
+
 
     }
 
@@ -39,8 +54,8 @@ public class LoadQuizPanel extends JFrame {
             statsManager = jsonReader.read();
             String loadIntroString = "Loaded " + statsManager.getStatHistory() + " from " + JSON_STORE;
             JLabel loadIntro = new JLabel(loadIntroString, SwingConstants.CENTER);
-            loadIntro.setFont(loadIntro.getFont().deriveFont(Font.BOLD, TITLE_FONT));
-            quizScroll.add(loadIntro);
+            loadIntro.setFont(new Font("Arial", Font.PLAIN, 15));
+            resultsPanel.add(loadIntro);
 
             System.out.println("Loaded " + statsManager.getStatHistory() + " from " + JSON_STORE);
         } catch (IOException e) {
@@ -50,7 +65,7 @@ public class LoadQuizPanel extends JFrame {
 
 
 
-    // EFFECTS: prints all the thingies in workroom to the console
+    // EFFECTS: prints all the thingies in workroom to the console and the quizScroll JPanel
     private void printStats(StatsManager statsManager) {
         List<StatValue> thingies = statsManager.getAllStats();
         int counter = 1;

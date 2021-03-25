@@ -7,11 +7,11 @@
         },
         {
             "category": "IncorrectAnswers",
-            "value": 7
+            "value": 5
         },
         {
             "category": "QuestionsAsked",
-            "value": 10
+            "value": 8
         }
     ]
 }
