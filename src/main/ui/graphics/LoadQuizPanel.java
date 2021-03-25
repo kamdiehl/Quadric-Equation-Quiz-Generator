@@ -28,7 +28,7 @@ public class LoadQuizPanel extends JFrame {
         resultsPanel = new JPanel();
         setTitle("Saved Results");
         setLayout(new BorderLayout());
-        resultsPanel.setLayout(new GridLayout(5, 1, 10, 10));
+        resultsPanel.setLayout(new GridLayout(0, 1, 10, 10));
         quizScroll = new JScrollPane(resultsPanel);
 
         add(BorderLayout.CENTER, quizScroll);
@@ -41,8 +41,6 @@ public class LoadQuizPanel extends JFrame {
 
         loadStats(statsManager);
         printStats(statsManager);
-
-
 
     }
 
@@ -70,9 +68,23 @@ public class LoadQuizPanel extends JFrame {
         List<StatValue> thingies = statsManager.getAllStats();
         int counter = 1;
         System.out.println("Quiz 1");
+
+        // JSwing
+        JLabel quizOne = new JLabel("Quiz 1", SwingConstants.CENTER);
+        quizOne.setFont(new Font("Arial", Font.PLAIN, 15));
+        resultsPanel.add(quizOne);
+
         for (StatValue t: thingies) {
+            // JSwing
+            JLabel firstQuiz = new JLabel(t.toString(), SwingConstants.CENTER);
+            firstQuiz.setFont(new Font("Arial", Font.PLAIN, 15));
+            resultsPanel.add(firstQuiz);
+
+            // console
             System.out.println(t);
             int indexNum = thingies.lastIndexOf(t);
+
+
             if ((indexNum == 2 || indexNum == 5 || indexNum == 8 || indexNum == 11) && indexNum < thingies.size() - 1) {
                 System.out.println(" ");
                 counter++;
