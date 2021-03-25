@@ -43,7 +43,7 @@ public class MainFrame extends JFrame implements ActionListener {
     // constructor
     // EFFECTS: Constructs the main JFrame containing all of the panels for the program.
     public MainFrame() {
-        mainWindow = new JFrame("Quadric Quiz"); /// eeeeee
+        mainWindow = new JFrame("Quadric Quiz");
         mainWindow.setLayout(new GridBagLayout());
         gbc = new GridBagConstraints();
         createWindow(mainWindow);
@@ -51,6 +51,9 @@ public class MainFrame extends JFrame implements ActionListener {
         JPanel eastPanel = new JPanel();
         eastPanel.setLayout(new BorderLayout());
         initializeTitleImage(eastPanel);
+
+        mainWindow.getContentPane().setBackground(new Color(154, 205, 185));
+
 
     }
 

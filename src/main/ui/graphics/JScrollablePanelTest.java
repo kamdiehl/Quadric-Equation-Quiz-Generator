@@ -40,8 +40,7 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
 
 
     // Constructor
-    public JScrollablePanelTest(int quizLength, List<QuizEntry> questionList, QuestionMaster newQuiz, JFrame mainFrame) {
-
+    public JScrollablePanelTest(int quizLength, List<QuizEntry> questionLis, QuestionMaster newQuiz, JFrame mainFrame) {
         questionPanel = new JPanel();
         setTitle("Quiz Panel");
         setLayout(new BorderLayout());
@@ -63,7 +62,7 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
         setVisible(true);
         quiz = newQuiz;
 
-        // x=parentComponent.width-w; y=0; w=100; h=100;
+
 
         jsonWriter = new JsonWriter(JSON_STORE);
        // jsonReader = new JsonReader(JSON_STORE);
@@ -169,16 +168,16 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
         questionsAsked += quiz.getQuizLength();
 
         JPanel resultsPanel = new JPanel();
-        JButton saveBtn = new JButton("Save");
+       // JButton saveBtn = new JButton("Save");
         JButton homeBtn = new JButton("Home");
-        JButton loadBtn = new JButton("Load");
+       // JButton loadBtn = new JButton("Load");
 
-        saveBtn.setActionCommand("saveButton");
-        saveBtn.addActionListener(this);
+       // saveBtn.setActionCommand("saveButton");
+       // saveBtn.addActionListener(this);
         homeBtn.setActionCommand("homeButton");
         homeBtn.addActionListener(this);
-        loadBtn.setActionCommand("loadButton");
-        loadBtn.addActionListener(this);
+       // loadBtn.setActionCommand("loadButton");
+       // loadBtn.addActionListener(this);
 
         String sentence1 = "Quiz score: " + correctAnswers + "/" + quiz.getQuizLength();
         String sentence2 = "              ";
@@ -188,8 +187,8 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
         JLabel allT = new JLabel(allText);
 
         resultsPanel.add(allT);
-        resultsPanel.add(saveBtn);
-        resultsPanel.add(loadBtn);
+       // resultsPanel.add(saveBtn);
+     //   resultsPanel.add(loadBtn);
         resultsPanel.add(homeBtn);
         resultsPanel.setVisible(true);
 
@@ -210,22 +209,24 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
             checkUserAnswers(userAnsList, ansList);
         }
 
-        if (e.getActionCommand().equals("saveButton")) {
-            addQuizResults();
-            saveQuiz();
-        }
+       // if (e.getActionCommand().equals("saveButton")) {
+       //     addQuizResults();
+       //     saveQuiz();
+       // }
 
-        if (e.getActionCommand().equals("loadButton")) {
-            loadedQuiz = new LoadQuizPanel(statsManager);
+        //if (e.getActionCommand().equals("loadButton")) {
+        //    loadedQuiz = new LoadQuizPanel(statsManager);
 
             //loadStats();
             //printStats();
 
-        }
+      //  }
 
         if (e.getActionCommand().equals("homeButton")) {
-            quizScroll.setVisible(false); // MAY CAUSE ISSUES !!!!
-            questionPanel.setVisible(false);
+            addQuizResults();
+            saveQuiz();
+            SwingUtilities.windowForComponent(this.quizScroll).dispose();
+
         }
     }
 

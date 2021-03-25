@@ -5,10 +5,12 @@ import model.StatsManager;
 import persistence.JsonReader;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.List;
 
-public class LoadQuizPanel extends JFrame {
+public class LoadQuizPanel extends JFrame implements ActionListener {
 
     private static final int TITLE_FONT = 15;
     private JScrollPane quizScroll;
@@ -16,16 +18,13 @@ public class LoadQuizPanel extends JFrame {
     private static final String JSON_STORE = "./data/workroom.json";
     private JsonReader jsonReader;
 
+    private JButton newQuizBtn;
+    private JButton homeBtn;
+
     public LoadQuizPanel(StatsManager statsManager) {
-        //resultsPanel = new JPanel();
-       // resultsPanel.setLayout(new GridLayout(1, 1, 10, 10));
-        //setLocationRelativeTo(null);
-       // quizScroll = new JScrollPane();
-        //add(BorderLayout.CENTER, quizScroll);
-       // setSize(600, 400);
-        //setVisible(true);
 
         resultsPanel = new JPanel();
+        resultsPanel.setBackground(new Color(164, 224, 205));
         setTitle("Saved Results");
         setLayout(new BorderLayout());
         resultsPanel.setLayout(new GridLayout(0, 1, 10, 10));
@@ -41,6 +40,9 @@ public class LoadQuizPanel extends JFrame {
 
         loadStats(statsManager);
         printStats(statsManager);
+
+        initiateButtons();
+
 
     }
 
@@ -67,11 +69,12 @@ public class LoadQuizPanel extends JFrame {
     private void printStats(StatsManager statsManager) {
         List<StatValue> thingies = statsManager.getAllStats();
         int counter = 1;
+        // console
         System.out.println("Quiz 1");
 
         // JSwing
         JLabel quizOne = new JLabel("Quiz 1", SwingConstants.CENTER);
-        quizOne.setFont(new Font("Arial", Font.PLAIN, 15));
+        quizOne.setFont(new Font("Arial", Font.BOLD, 15));
         resultsPanel.add(quizOne);
 
         for (StatValue t: thingies) {
@@ -84,7 +87,7 @@ public class LoadQuizPanel extends JFrame {
             System.out.println(t);
             int indexNum = thingies.lastIndexOf(t);
 
-
+            // console
             if ((indexNum == 2 || indexNum == 5 || indexNum == 8 || indexNum == 11) && indexNum < thingies.size() - 1) {
                 System.out.println(" ");
                 counter++;
@@ -94,9 +97,35 @@ public class LoadQuizPanel extends JFrame {
         }
     }
 
+    // EFFECTS: Instantiates the JButtons for the resultsPanel
+    public void initiateButtons() {
+
+        //newQuizBtn = new JButton("New Quiz");
+       // newQuizBtn.setActionCommand("newQuiz");
+       // newQuizBtn.addActionListener(this);
+
+        homeBtn = new JButton("Home");
+        homeBtn.setActionCommand("home");
+        homeBtn.addActionListener(this);
+
+       // newQuizBtn.setOpaque(true);
+        // newQuizBtn.setBackground(new Color(14, 151, 119));
+        homeBtn.setOpaque(true);
+        homeBtn.setBackground(new Color(13, 144, 83));
+
+       // resultsPanel.add(newQuizBtn);
+        resultsPanel.add(homeBtn);
+    }
 
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        //MainFrame mainframe = new MainFrame();
+       // JFrame mainWindow = mainframe.getMainWindow();
+        if (e.getActionCommand().equals("home")) {
+            //
+        }
 
 
-
+    }
 }
