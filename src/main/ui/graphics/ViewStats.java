@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.List;
 
-public class LoadQuizPanel extends JFrame implements ActionListener {
+public class ViewStats extends JFrame implements ActionListener {
 
     private static final int TITLE_FONT = 15;
     private JScrollPane quizScroll;
@@ -18,8 +18,10 @@ public class LoadQuizPanel extends JFrame implements ActionListener {
     private static final String JSON_STORE = "./data/workroom.json";
     private JsonReader jsonReader;
     private JButton homeBtn;
+    private StatsManager statMan;
 
-    public LoadQuizPanel(StatsManager statsManager) {
+    public ViewStats(StatsManager statsManager) {
+        this.statMan = statsManager;
 
         resultsPanel = new JPanel();
         resultsPanel.setBackground(new Color(164, 224, 205));
@@ -36,35 +38,38 @@ public class LoadQuizPanel extends JFrame implements ActionListener {
 
         jsonReader = new JsonReader(JSON_STORE);
 
-        loadStats(statsManager);
-        printStats(statsManager);
+       // loadStats();
+        printStats();
         initiateButtons();
 
 
     }
 
-
-    // MODIFIES: this
-    // EFFECTS: loads workroom from file
-    private void loadStats(StatsManager statsManager) {
-        try {
-            statsManager = jsonReader.read();
-            String loadIntroString = "Loaded " + statsManager.getStatHistory() + " from " + JSON_STORE;
-            JLabel loadIntro = new JLabel(loadIntroString, SwingConstants.CENTER);
-            loadIntro.setFont(new Font("Arial", Font.PLAIN, 15));
-            resultsPanel.add(loadIntro);
-
-            System.out.println("Loaded " + statsManager.getStatHistory() + " from " + JSON_STORE);
-        } catch (IOException e) {
-            System.out.println("Unable to read from file: " + statsManager.getStatHistory() + JSON_STORE);
-        }
-    }
+//
+//    // MODIFIES: this
+//    // EFFECTS: loads workroom from file
+//    private void loadStats() {
+//        try {
+//            statMan = jsonReader.read();
+//            String loadIntroString = "Loaded " + statMan.getStatHistory() + " from " + JSON_STORE;
+//            JLabel loadIntro = new JLabel(loadIntroString, SwingConstants.CENTER);
+//            loadIntro.setFont(new Font("Arial", Font.PLAIN, 15));
+//            resultsPanel.add(loadIntro);
+//
+//            System.out.println("Loaded " + statMan.getStatHistory() + " from " + JSON_STORE);
+//
+//            printStats();
+//
+//        } catch (IOException e) {
+//            System.out.println("Unable to read from file: " + statMan.getStatHistory() + JSON_STORE);
+//        }
+//    }
 
 
 
     // EFFECTS: prints all the thingies in workroom to the console and the quizScroll JPanel
-    private void printStats(StatsManager statsManager) {
-        List<StatValue> thingies = statsManager.getAllStats();
+    private void printStats() {
+        List<StatValue> thingies = statMan.getAllStats();
         int counter = 1;
         // console
         System.out.println("Quiz 1");

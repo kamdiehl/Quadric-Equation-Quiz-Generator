@@ -29,7 +29,7 @@ public class MainFrame extends JFrame implements ActionListener {
     JButton instructionBtn = new JButton("HOW TO PLAY");
     JButton loadBtn = new JButton("LOAD DATA");
     JButton exitBtn = new JButton("EXIT");
-    JButton saveBtn = new JButton("SAVE");
+    JButton viewResultsBtn = new JButton("VIEW RESULTS"); // switching save to view results and save button in there
 
     GridBagConstraints gbc;
 
@@ -45,7 +45,7 @@ public class MainFrame extends JFrame implements ActionListener {
     private QuestionMaster newQuiz;
 
     StatsManager statsManager = new StatsManager("statHistory");
-    private LoadQuizPanel loadedQuiz;
+    private ViewStats loadedQuiz;
 
 
 
@@ -106,7 +106,7 @@ public class MainFrame extends JFrame implements ActionListener {
         buttonPanel.add(titlePanel, gbc);
         buttonPanel.add(startBtn);
         buttonPanel.add(instructionBtn);
-        buttonPanel.add(saveBtn);
+        buttonPanel.add(viewResultsBtn);
         buttonPanel.add(loadBtn);
         buttonPanel.add(exitBtn);
 
@@ -128,8 +128,8 @@ public class MainFrame extends JFrame implements ActionListener {
         loadBtn.addActionListener(this);
         exitBtn.setActionCommand("exitButton");
         exitBtn.addActionListener(this);
-        saveBtn.setActionCommand("saveButton");
-        saveBtn.addActionListener(this);
+        viewResultsBtn.setActionCommand("viewResults");
+        viewResultsBtn.addActionListener(this);
 
     }
 
@@ -144,9 +144,9 @@ public class MainFrame extends JFrame implements ActionListener {
         instructionBtn.setBackground(instructionBtnColor);
         instructionBtn.setForeground(loadBtnColor);
         instructionBtn.setOpaque(true);
-        saveBtn.setBackground(saveBtnColor);
-        saveBtn.setForeground(loadBtnColor);
-        saveBtn.setOpaque(true);
+        viewResultsBtn.setBackground(saveBtnColor);
+        viewResultsBtn.setForeground(loadBtnColor);
+        viewResultsBtn.setOpaque(true);
         loadBtn.setBackground(loadBtnColor);
         loadBtn.setForeground(instructionBtnColor);
         loadBtn.setOpaque(true);
@@ -160,7 +160,6 @@ public class MainFrame extends JFrame implements ActionListener {
     // EFFECTS: Method that is called when the the JButton btn is clicked
     public void actionPerformed(ActionEvent e) {
 
-
         if (e.getActionCommand().equals("startButton")) {
             quizLengthPopUp(mainWindow, statsManager);
         }
@@ -169,11 +168,12 @@ public class MainFrame extends JFrame implements ActionListener {
             new InstructionPopUp();
         }
 
-        if (e.getActionCommand().equals("saveButton")) {
-            //
+        if (e.getActionCommand().equals("viewResults")) {
+            new ViewStats(statsManager);
         }
+
         if (e.getActionCommand().equals("loadButton")) {
-            new LoadQuizPanel(statsManager);
+            new LoadStats(statsManager);
 
         }
         if (e.getActionCommand().equals("exitButton")) {

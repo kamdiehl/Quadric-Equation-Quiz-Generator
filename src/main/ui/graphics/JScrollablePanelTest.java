@@ -35,7 +35,7 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
     private static final String JSON_STORE = "./data/workroom.json";
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
-    private LoadQuizPanel loadedQuiz;
+    private ViewStats loadedQuiz;
 
 
     // Constructor
@@ -191,10 +191,8 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getActionCommand().equals("submitAnswers")) {
-
             ArrayList<String> userAnsList = createUserAnswerList(quizLen);
             ArrayList<String> ansList = createAnswerList(quizLen, quiz);
-
             checkUserAnswers(userAnsList, ansList);
         }
 
@@ -256,24 +254,6 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
         statsManagerQ.addStat(length);
     }
 
-//
-//    // EFFECTS: prints all the thingies in workroom to the console
-//    private void printStats() {
-//        List<StatValue> thingies = statsManager.getAllStats();
-//        int counter = 1;
-//        System.out.println("Quiz 1");
-//        for (StatValue t: thingies) {
-//            System.out.println(t);
-//            int indexNum = thingies.lastIndexOf(t); // if statement below is temporary
-//          if ((indexNum == 2 || indexNum == 5 || indexNum == 8 || indexNum == 11) && indexNum < thingies.size() - 1) {
-//                System.out.println(" ");
-//                counter++;
-//                System.out.println("Quiz " + counter);
-//
-//            }
-//        }
-//    }
-
 
     // EFFECTS: saves the workroom to file
     private void saveQuiz() {
@@ -290,16 +270,6 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
         return statsManagerQ;
     }
 
-    //    // MODIFIES: this
-//    // EFFECTS: loads workroom from file
-//    private void loadStats() {
-//        try {
-//            statsManager = jsonReader.read();
-//            System.out.println("Loaded " + statsManager.getStatHistory() + " from " + JSON_STORE);
-//        } catch (IOException e) {
-//            System.out.println("Unable to read from file: " + statsManager.getStatHistory() + JSON_STORE);
-//        }
-//    }
 
 
 
