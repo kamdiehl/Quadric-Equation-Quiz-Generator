@@ -16,18 +16,25 @@ public class LoadStats {
     public LoadStats(StatsManager statsManager, JsonReader jsonReaders) {
         this.statMan = statsManager;
         this.jsonReader = jsonReaders;
-       // jsonReader = new JsonReader(JSON_STORE);
+
         loadStats();
     }
 
     // MODIFIES: this
     // EFFECTS: loads workroom from file
     private void loadStats() {
+
         try {
-            statMan = jsonReader.read();
+
+            StatsManager loadedStatMan = jsonReader.read();
+            statMan.setOverallCorrectAnswers(loadedStatMan.getOverallCorrectAnswers());
+            statMan.setOverallIncorrectAnswers(loadedStatMan.getOverallIncorrectAnswers());
+            statMan.setStatList(loadedStatMan.getAllStats());
+
             System.out.println("Loaded " + statMan.getStatHistory() + " from " + JSON_STORE);
 
         } catch (IOException e) {
+
             System.out.println("Unable to read from file: " + statMan.getStatHistory() + JSON_STORE);
         }
     }

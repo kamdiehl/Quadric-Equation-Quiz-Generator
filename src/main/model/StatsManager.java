@@ -107,4 +107,7 @@ public class StatsManager implements Writable {
         return overallQuestionsAsked;
     }
 
+    public void setStatList(List<StatValue> statList) {
+        this.statList = statList;
+    }
 }
