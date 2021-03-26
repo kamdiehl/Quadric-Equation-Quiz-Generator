@@ -17,8 +17,6 @@ public class LoadQuizPanel extends JFrame implements ActionListener {
     private JPanel resultsPanel;
     private static final String JSON_STORE = "./data/workroom.json";
     private JsonReader jsonReader;
-
-    private JButton newQuizBtn;
     private JButton homeBtn;
 
     public LoadQuizPanel(StatsManager statsManager) {
@@ -40,7 +38,6 @@ public class LoadQuizPanel extends JFrame implements ActionListener {
 
         loadStats(statsManager);
         printStats(statsManager);
-
         initiateButtons();
 
 
@@ -100,30 +97,22 @@ public class LoadQuizPanel extends JFrame implements ActionListener {
     // EFFECTS: Instantiates the JButtons for the resultsPanel
     public void initiateButtons() {
 
-        //newQuizBtn = new JButton("New Quiz");
-       // newQuizBtn.setActionCommand("newQuiz");
-       // newQuizBtn.addActionListener(this);
-
         homeBtn = new JButton("Home");
         homeBtn.setActionCommand("home");
         homeBtn.addActionListener(this);
 
-       // newQuizBtn.setOpaque(true);
-        // newQuizBtn.setBackground(new Color(14, 151, 119));
         homeBtn.setOpaque(true);
         homeBtn.setBackground(new Color(13, 144, 83));
 
-       // resultsPanel.add(newQuizBtn);
         resultsPanel.add(homeBtn);
     }
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        //MainFrame mainframe = new MainFrame();
-       // JFrame mainWindow = mainframe.getMainWindow();
+
         if (e.getActionCommand().equals("home")) {
-            //
+            SwingUtilities.windowForComponent(this.resultsPanel).dispose();
         }
 
 

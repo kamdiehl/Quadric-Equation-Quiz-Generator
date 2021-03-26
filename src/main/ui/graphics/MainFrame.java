@@ -1,9 +1,14 @@
 package ui.graphics;
 
+import model.QuestionMaster;
+import model.QuizEntry;
+import model.StatsManager;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 // This class is in charge of initializing the main JFrame that holds the quiz and the menu buttons.
 public class MainFrame extends JFrame implements ActionListener {
@@ -35,10 +40,15 @@ public class MainFrame extends JFrame implements ActionListener {
     public static final int IMAGE_HEIGHT = 470;
     private JFrame mainWindow;
 
+    private JFrame popUp;
+    private int userInputNum;
+    private QuestionMaster newQuiz;
 
-    public JFrame getMainWindow() {
-        return mainWindow;
-    }
+    StatsManager statsManager = new StatsManager("statHistory");
+    private LoadQuizPanel loadedQuiz;
+
+
+
 
     // constructor
     // EFFECTS: Constructs the main JFrame containing all of the panels for the program.
@@ -53,7 +63,6 @@ public class MainFrame extends JFrame implements ActionListener {
         initializeTitleImage(eastPanel);
 
         mainWindow.getContentPane().setBackground(new Color(154, 205, 185));
-
 
     }
 
@@ -150,8 +159,10 @@ public class MainFrame extends JFrame implements ActionListener {
 
     // EFFECTS: Method that is called when the the JButton btn is clicked
     public void actionPerformed(ActionEvent e) {
+
+
         if (e.getActionCommand().equals("startButton")) {
-            new QuizLengthPopUp(mainWindow);
+            quizLengthPopUp(mainWindow, statsManager);
         }
 
         if (e.getActionCommand().equals("instructionButton")) {
@@ -159,10 +170,11 @@ public class MainFrame extends JFrame implements ActionListener {
         }
 
         if (e.getActionCommand().equals("saveButton")) {
-            // label.setText(field.getText());
+            //
         }
         if (e.getActionCommand().equals("loadButton")) {
-            //
+            new LoadQuizPanel(statsManager);
+
         }
         if (e.getActionCommand().equals("exitButton")) {
             System.exit(0);
@@ -195,6 +207,49 @@ public class MainFrame extends JFrame implements ActionListener {
             return null;
         }
     }
+
+
+
+
+
+
+
+    // QuizlengthpopUp
+
+    public void quizLengthPopUp(JFrame mainFrame, StatsManager statsManager) {
+        initiatePopUp();
+        String userInputString = JOptionPane.showInputDialog(popUp,
+                "Enter the number of questions you want in your quiz");
+        userInputNum = Integer.parseInt(userInputString);
+        setUserInputNum(userInputNum);
+
+        // HERE IS WHERE WE INSTANTIATE THE NEW QUIZ
+        newQuiz = new QuestionMaster(userInputNum, 10, 1);
+        newQuiz.setQuizLength(userInputNum);
+        List<QuizEntry> questionList = newQuiz.createNewQuestionList(userInputNum);
+
+        new JScrollablePanelTest(userInputNum, questionList, newQuiz, mainFrame, statsManager);
+    }
+
+    public void initiatePopUp() {
+        popUp = new JFrame();
+        popUp.setForeground(Color.pink);
+    }
+
+
+
+    // getters & setters
+
+    public int getUserInputNum() {
+        return userInputNum;
+    }
+
+    public void setUserInputNum(int userInputNum) {
+        this.userInputNum = userInputNum;
+    }
+
+
+
 
 
 

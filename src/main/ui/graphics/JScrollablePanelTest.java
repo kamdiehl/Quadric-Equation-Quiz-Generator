@@ -17,7 +17,7 @@ import java.util.List;
 // This class is in charge of the panel that holds the quiz questions and the quiz results.
 public class JScrollablePanelTest extends JFrame implements ActionListener {
 
-    StatsManager statsManager = new StatsManager("statHistory");
+    StatsManager statsManagerQ; // = new StatsManager("statHistory");
 
     private QuizEntry currentQuiz;
     private int quizLen;
@@ -29,7 +29,6 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
     private JTextField field;
     private JScrollPane quizScroll;
 
-
     private HashMap<Integer, JTextField> map;
 
     // json
@@ -40,13 +39,13 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
 
 
     // Constructor
-    public JScrollablePanelTest(int quizLength, List<QuizEntry> questionLis, QuestionMaster newQuiz, JFrame mainFrame) {
+    public JScrollablePanelTest(int quizLength, List<QuizEntry> questionLis, QuestionMaster newQuiz, JFrame mainFrame, StatsManager statsManager) {
         questionPanel = new JPanel();
         setTitle("Quiz Panel");
         setLayout(new BorderLayout());
         createPanel(quizLength, newQuiz);
         quizScroll = new JScrollPane(questionPanel);
-
+        this.statsManagerQ = statsManager;
 // -------
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.anchor = GridBagConstraints.SOUTHEAST;
@@ -61,8 +60,6 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         setVisible(true);
         quiz = newQuiz;
-
-
 
         jsonWriter = new JsonWriter(JSON_STORE);
        // jsonReader = new JsonReader(JSON_STORE);
@@ -168,16 +165,10 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
         questionsAsked += quiz.getQuizLength();
 
         JPanel resultsPanel = new JPanel();
-       // JButton saveBtn = new JButton("Save");
         JButton homeBtn = new JButton("Home");
-       // JButton loadBtn = new JButton("Load");
 
-       // saveBtn.setActionCommand("saveButton");
-       // saveBtn.addActionListener(this);
         homeBtn.setActionCommand("homeButton");
         homeBtn.addActionListener(this);
-       // loadBtn.setActionCommand("loadButton");
-       // loadBtn.addActionListener(this);
 
         String sentence1 = "Quiz score: " + correctAnswers + "/" + quiz.getQuizLength();
         String sentence2 = "              ";
@@ -187,8 +178,6 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
         JLabel allT = new JLabel(allText);
 
         resultsPanel.add(allT);
-       // resultsPanel.add(saveBtn);
-     //   resultsPanel.add(loadBtn);
         resultsPanel.add(homeBtn);
         resultsPanel.setVisible(true);
 
@@ -208,19 +197,6 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
 
             checkUserAnswers(userAnsList, ansList);
         }
-
-       // if (e.getActionCommand().equals("saveButton")) {
-       //     addQuizResults();
-       //     saveQuiz();
-       // }
-
-        //if (e.getActionCommand().equals("loadButton")) {
-        //    loadedQuiz = new LoadQuizPanel(statsManager);
-
-            //loadStats();
-            //printStats();
-
-      //  }
 
         if (e.getActionCommand().equals("homeButton")) {
             addQuizResults();
@@ -275,9 +251,9 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
         StatValue incorrect = readIncorrectAnswers();
         StatValue length = readQuizLength();
 
-        statsManager.addStat(correct);
-        statsManager.addStat(incorrect);
-        statsManager.addStat(length);
+        statsManagerQ.addStat(correct);
+        statsManagerQ.addStat(incorrect);
+        statsManagerQ.addStat(length);
     }
 
 //
@@ -303,14 +279,18 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
     private void saveQuiz() {
         try {
             jsonWriter.open();
-            jsonWriter.write(statsManager);
+            jsonWriter.write(statsManagerQ);
             jsonWriter.close();
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
         }
     }
 
-//    // MODIFIES: this
+    public StatsManager getStatsManager() {
+        return statsManagerQ;
+    }
+
+    //    // MODIFIES: this
 //    // EFFECTS: loads workroom from file
 //    private void loadStats() {
 //        try {
