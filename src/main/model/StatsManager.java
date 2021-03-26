@@ -27,8 +27,7 @@ public class StatsManager implements Writable {
     // EFFECTS: adds another StatValue to this Statistic List.
     public void addStat(StatValue results) {
         statList.add(results);
-    } // I think part of the problem has something to do with this.
-    // (regarding why its not separating the stat tuples)
+    }
 
 
 
@@ -60,10 +59,6 @@ public class StatsManager implements Writable {
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("statHistory", statHistory);
-
-        //json.put("TotalCorrectAnswers",overallCorrectAnswers);
-        //json.put("TotalIncorrectAnswers",overallIncorrectAnswers);
-       // json.put("TotalQuestionsAsked",overallQuestionsAsked);
 
         json.put("allStats", statsToJson());
         return json;

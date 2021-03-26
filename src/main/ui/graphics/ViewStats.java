@@ -1,35 +1,33 @@
 package ui.graphics;
 
-import model.QuestionMaster;
 import model.StatValue;
 import model.StatsManager;
-import persistence.JsonReader;
 import persistence.JsonWriter;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.List;
 
+// Class creates panel and loads Json files when prompted
 public class ViewStats extends JFrame implements ActionListener {
 
-    private static final int TITLE_FONT = 15;
     private JScrollPane quizScroll;
     private JPanel resultsPanel;
-    private static final String JSON_STORE = "./data/workroom.json";
-    private JsonReader jsonReader;
     private JButton homeBtn;
     private JButton saveBtn;
     private StatsManager statMan;
+    // json
     private JsonWriter jsonWriter;
+    private static final String JSON_STORE = "./data/workroom.json";
 
 
-
-    public ViewStats(StatsManager statsManager) {
+    // constructor
+    // creates and displays a panel with all your quiz stats
+    public ViewStats(StatsManager statsManager, JsonWriter jsonWriters) {
         this.statMan = statsManager;
+        this.jsonWriter = jsonWriters;
 
         resultsPanel = new JPanel();
         resultsPanel.setBackground(new Color(164, 224, 205));
@@ -44,36 +42,11 @@ public class ViewStats extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         setVisible(true);
 
-        jsonReader = new JsonReader(JSON_STORE);
-        jsonWriter = new JsonWriter(JSON_STORE);
-
-       // loadStats();
         printStats();
         initiateButtons();
 
 
     }
-
-//
-//    // MODIFIES: this
-//    // EFFECTS: loads workroom from file
-//    private void loadStats() {
-//        try {
-//            statMan = jsonReader.read();
-//            String loadIntroString = "Loaded " + statMan.getStatHistory() + " from " + JSON_STORE;
-//            JLabel loadIntro = new JLabel(loadIntroString, SwingConstants.CENTER);
-//            loadIntro.setFont(new Font("Arial", Font.PLAIN, 15));
-//            resultsPanel.add(loadIntro);
-//
-//            System.out.println("Loaded " + statMan.getStatHistory() + " from " + JSON_STORE);
-//
-//            printStats();
-//
-//        } catch (IOException e) {
-//            System.out.println("Unable to read from file: " + statMan.getStatHistory() + JSON_STORE);
-//        }
-//    }
-
 
 
     // EFFECTS: prints all the thingies in workroom to the console and the quizScroll JPanel
@@ -89,14 +62,15 @@ public class ViewStats extends JFrame implements ActionListener {
         resultsPanel.add(quizOne);
 
         for (StatValue t: thingies) {
-            // JSwing
-            JLabel firstQuiz = new JLabel(t.toString(), SwingConstants.CENTER);
-            firstQuiz.setFont(new Font("Arial", Font.PLAIN, 15));
-            resultsPanel.add(firstQuiz);
 
             // console
             System.out.println(t);
             int indexNum = thingies.lastIndexOf(t);
+
+            // JSwing
+            JLabel firstQuiz = new JLabel(t.toString(), SwingConstants.CENTER);
+            firstQuiz.setFont(new Font("Arial", Font.PLAIN, 15));
+            resultsPanel.add(firstQuiz);
 
             // console
             if ((indexNum == 2 || indexNum == 5 || indexNum == 8 || indexNum == 11) && indexNum < thingies.size() - 1) {
@@ -104,9 +78,14 @@ public class ViewStats extends JFrame implements ActionListener {
                 counter++;
                 System.out.println("Quiz " + counter);
 
+                JLabel title = new JLabel("Quiz " + counter, SwingConstants.CENTER);
+                title.setFont(new Font("Arial", Font.PLAIN, 15));
+                resultsPanel.add(title);
+
             }
         }
     }
+
 
     // EFFECTS: Instantiates the JButtons for the resultsPanel
     public void initiateButtons() {
@@ -116,14 +95,14 @@ public class ViewStats extends JFrame implements ActionListener {
         homeBtn.addActionListener(this);
 
         homeBtn.setOpaque(true);
-        homeBtn.setBackground(new Color(13, 144, 83));
+        homeBtn.setBackground(new Color(13, 144, 144));
 
-        saveBtn = new JButton("saveResults");
+        saveBtn = new JButton("Save Results");
         saveBtn.setActionCommand("save");
         saveBtn.addActionListener(this);
 
         saveBtn.setOpaque(true);
-        saveBtn.setBackground(new Color(17, 193, 123));
+        saveBtn.setBackground(new Color(17, 193, 152));
 
         resultsPanel.add(saveBtn);
         resultsPanel.add(homeBtn);
@@ -137,6 +116,7 @@ public class ViewStats extends JFrame implements ActionListener {
             jsonWriter.open();
             jsonWriter.write(statMan);
             jsonWriter.close();
+
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
         }
@@ -146,10 +126,14 @@ public class ViewStats extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getActionCommand().equals("home")) {
+            homeBtn.setBackground(new Color(39, 206, 7));
+            homeBtn.setForeground(new Color(14, 90, 1));
             SwingUtilities.windowForComponent(this.resultsPanel).dispose();
         }
 
-        if (e.getActionCommand().equals("saveResults")) {
+        if (e.getActionCommand().equals("save")) {
+            saveBtn.setBackground(new Color(39, 206, 7));
+            saveBtn.setForeground(new Color(14, 90, 1));
             saveQuiz();
             SwingUtilities.windowForComponent(this.resultsPanel).dispose();
         }

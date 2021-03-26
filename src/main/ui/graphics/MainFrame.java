@@ -1,59 +1,55 @@
 package ui.graphics;
 
 import model.QuestionMaster;
-import model.QuizEntry;
 import model.StatsManager;
-
+import persistence.JsonReader;
+import persistence.JsonWriter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
 
 // This class is in charge of initializing the main JFrame that holds the quiz and the menu buttons.
 public class MainFrame extends JFrame implements ActionListener {
 
     private static final int WIDTH = 1100;
     private static final int HEIGHT = 900;
-    public static final int TITLE_FONT = 22;
-    public static final Color TITLE_COLOR = new Color(1, 108, 104);
-    public static final Color TITLE_BACKGROUND = new Color(2, 239, 231);
+    private static final int TITLE_FONT = 22;
+    private static final Color TITLE_COLOR = new Color(1, 108, 104);
+    private static final Color TITLE_BACKGROUND = new Color(2, 239, 231);
 
-    public static final Color startBtnColor = new Color(0, 198, 183);
-    public static final Color instructionBtnColor = new Color(5, 170, 157);
-    public static final Color saveBtnColor = new Color(8, 137, 127);
-    public static final Color loadBtnColor = new Color(4, 118, 109);
-    public static final Color exitBtnColor = new Color(2, 92, 94);
+    private static final Color startBtnColor = new Color(0, 198, 183);
+    private static final Color instructionBtnColor = new Color(5, 170, 157);
+    private static final Color saveBtnColor = new Color(8, 137, 127);
+    private static final Color loadBtnColor = new Color(4, 118, 109);
+    private static final Color exitBtnColor = new Color(2, 92, 94);
 
     JButton startBtn = new JButton("START");
     JButton instructionBtn = new JButton("HOW TO PLAY");
     JButton loadBtn = new JButton("LOAD DATA");
     JButton exitBtn = new JButton("EXIT");
-    JButton viewResultsBtn = new JButton("VIEW RESULTS"); // switching save to view results and save button in there
+    JButton viewResultsBtn = new JButton("VIEW RESULTS");
 
-    GridBagConstraints gbc;
+    private GridBagConstraints gbc;
+    private static final int IMAGE_WIDTH = 450;
+    private static final int IMAGE_HEIGHT = 470;
 
-    private JLabel label;
-    private ImageIcon unscaledTitleIcon;
-    private JLabel titlePageLabel;
-    public static final int IMAGE_WIDTH = 450;
-    public static final int IMAGE_HEIGHT = 470;
+    private StatsManager statsManager;
     private JFrame mainWindow;
-
     private JFrame popUp;
     private int userInputNum;
-    private QuestionMaster newQuiz;
 
-    StatsManager statsManager = new StatsManager("statHistory");
-    private ViewStats loadedQuiz;
-
-
+    // json
+    private JsonReader jsonReader;
+    private JsonWriter jsonWriter;
+    private static final String JSON_STORE = "./data/workroom.json";
 
 
     // constructor
     // EFFECTS: Constructs the main JFrame containing all of the panels for the program.
     public MainFrame() {
         mainWindow = new JFrame("Quadric Quiz");
+        statsManager = new StatsManager("statHistory");
         mainWindow.setLayout(new GridBagLayout());
         gbc = new GridBagConstraints();
         createWindow(mainWindow);
@@ -63,6 +59,9 @@ public class MainFrame extends JFrame implements ActionListener {
         initializeTitleImage(eastPanel);
 
         mainWindow.getContentPane().setBackground(new Color(154, 205, 185));
+
+        jsonReader = new JsonReader(JSON_STORE);
+        jsonWriter = new JsonWriter(JSON_STORE);
 
     }
 
@@ -153,6 +152,7 @@ public class MainFrame extends JFrame implements ActionListener {
         exitBtn.setBackground(exitBtnColor);
         exitBtn.setForeground(startBtnColor);
         exitBtn.setOpaque(true);
+
     }
 
 
@@ -169,29 +169,28 @@ public class MainFrame extends JFrame implements ActionListener {
         }
 
         if (e.getActionCommand().equals("viewResults")) {
-            new ViewStats(statsManager);
+            new ViewStats(statsManager, jsonWriter);
         }
 
         if (e.getActionCommand().equals("loadButton")) {
-            new LoadStats(statsManager);
+            new LoadStats(statsManager, jsonReader);
 
         }
         if (e.getActionCommand().equals("exitButton")) {
             System.exit(0);
         }
-
     }
 
 
     // MODIFIES: This
     // EFFECTS: Initializes the image that appears on the title page.
     private void initializeTitleImage(JPanel eastPanel) {
-        unscaledTitleIcon = createImageIcon("/images/hyp1sh.jpg", "title picture"); // create the icon
+        ImageIcon unscaledTitleIcon = createImageIcon("/images/hyp1sh.jpg", "title picture"); // create the icon
         Image titleImage = unscaledTitleIcon.getImage(); // convert it into an image
         Image finalTitleImage = titleImage.getScaledInstance(IMAGE_WIDTH, IMAGE_HEIGHT,  java.awt.Image.SCALE_SMOOTH);
         unscaledTitleIcon = new ImageIcon(finalTitleImage); // convert it back to an image icon
-        label = new JLabel("Image and Text", unscaledTitleIcon, JLabel.CENTER);
-        titlePageLabel = new JLabel(unscaledTitleIcon);
+       // JLabel label = new JLabel("Image and Text", unscaledTitleIcon, JLabel.CENTER);
+        JLabel titlePageLabel = new JLabel(unscaledTitleIcon);
         eastPanel.add(titlePageLabel, BorderLayout.EAST);
         eastPanel.setVisible(true);
     }
@@ -211,11 +210,9 @@ public class MainFrame extends JFrame implements ActionListener {
 
 
 
+    // RIP QuizLengthPopUp Class
 
-
-
-    // QuizlengthpopUp
-
+    // EFFECTS: Instantiates new quiz and
     public void quizLengthPopUp(JFrame mainFrame, StatsManager statsManager) {
         initiatePopUp();
         String userInputString = JOptionPane.showInputDialog(popUp,
@@ -224,11 +221,11 @@ public class MainFrame extends JFrame implements ActionListener {
         setUserInputNum(userInputNum);
 
         // HERE IS WHERE WE INSTANTIATE THE NEW QUIZ
-        newQuiz = new QuestionMaster(userInputNum, 10, 1);
+        QuestionMaster newQuiz = new QuestionMaster(userInputNum, 10, 1);
         newQuiz.setQuizLength(userInputNum);
-        List<QuizEntry> questionList = newQuiz.createNewQuestionList(userInputNum);
+        newQuiz.createNewQuestionList(userInputNum);
 
-        new JScrollablePanelTest(userInputNum, questionList, newQuiz, mainFrame, statsManager);
+        new JScrollablePanelTest(userInputNum, newQuiz, mainFrame, statsManager);
     }
 
     public void initiatePopUp() {
@@ -238,25 +235,15 @@ public class MainFrame extends JFrame implements ActionListener {
 
 
 
-    // getters & setters
-
-    public int getUserInputNum() {
-        return userInputNum;
-    }
-
-    public void setUserInputNum(int userInputNum) {
-        this.userInputNum = userInputNum;
-    }
-
-
-
-
 
 
 
 
     // GETTERS AND SETTERS ----------------------------------------------------------------------------------
 
+    public void setUserInputNum(int userInputNum) {
+        this.userInputNum = userInputNum;
+    }
 
 
 }

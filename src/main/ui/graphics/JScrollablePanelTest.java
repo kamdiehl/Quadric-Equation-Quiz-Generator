@@ -1,15 +1,11 @@
 package ui.graphics;
 
 import model.*;
-import persistence.JsonReader;
-import persistence.JsonWriter;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 // Structure credit a bit ?
 // https://www.tutorialspoint.com/how-can-we-implement-a-scrollable-jpanel-in-java
@@ -17,36 +13,30 @@ import java.util.List;
 // This class is in charge of the panel that holds the quiz questions and the quiz results.
 public class JScrollablePanelTest extends JFrame implements ActionListener {
 
-    StatsManager statsManagerQ; // = new StatsManager("statHistory");
-
-    private QuizEntry currentQuiz;
-    private int quizLen;
     private QuestionMaster quiz;
+    private StatsManager statsManagerQ;
+    private QuizEntry currentQuiz;
+
+    private int quizLen;
     private int overallCorrectAnswers;
     private int correctAnswers;
     private int questionsAsked;
     private JPanel questionPanel;
-    private JTextField field;
     private JScrollPane quizScroll;
 
     private HashMap<Integer, JTextField> map;
 
-    // json
-    private static final String JSON_STORE = "./data/workroom.json";
-    private JsonWriter jsonWriter;
-    private JsonReader jsonReader;
-    private ViewStats loadedQuiz;
 
 
     // Constructor
-    public JScrollablePanelTest(int quizLength, List<QuizEntry> questionLis, QuestionMaster newQuiz, JFrame mainFrame, StatsManager statsManager) {
+    public JScrollablePanelTest(int quizLength, QuestionMaster newQuiz, JFrame mainFrame, StatsManager statsManager) {
+
         questionPanel = new JPanel();
-        setTitle("Quiz Panel");
-        setLayout(new BorderLayout());
-        createPanel(quizLength, newQuiz);
         quizScroll = new JScrollPane(questionPanel);
         this.statsManagerQ = statsManager;
-// -------
+        this.quiz = newQuiz;
+
+// ------- trying to anchor the panel to the JFrame but no luck so far
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.anchor = GridBagConstraints.SOUTHEAST;
         gbc.gridx = 1;
@@ -54,15 +44,13 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
         mainFrame.add(quizScroll, gbc);
 // --------
 
+        setTitle("Quiz Panel");
+        setLayout(new BorderLayout());
+        createPanel(quizLength, newQuiz);
         add(BorderLayout.CENTER, quizScroll);
-
         setSize(600, 400);
         setLocationRelativeTo(null);
         setVisible(true);
-        quiz = newQuiz;
-
-        jsonWriter = new JsonWriter(JSON_STORE);
-       // jsonReader = new JsonReader(JSON_STORE);
 
     }
 
@@ -79,7 +67,7 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
             currentQuiz = newQuiz.getQuestionList().get(i);
             String currentEquation = currentQuiz.getQuestion();
             JLabel question = new JLabel(currentEquation);
-            field = new JTextField();
+            JTextField field = new JTextField();
             map.put(i, field);
             question.setFont(new Font("Arial", Font.PLAIN, 15));
 
@@ -142,7 +130,6 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
             String ans = answers.get(i);
 
             if (user.equals(ans)) {
-               // System.out.println("Correct!");
                 filledField.setForeground(correctText);
                 filledField.setBackground(correctField);
                 correctAnswers++;
@@ -151,7 +138,6 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
             } else {
                 filledField.setForeground(incorrectText);
                 filledField.setBackground(incorrectField);
-               // System.out.println("Incorrect!");
             }
         }
         postQuiz();
@@ -165,8 +151,8 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
         questionsAsked += quiz.getQuizLength();
 
         JPanel resultsPanel = new JPanel();
-        JButton homeBtn = new JButton("Home");
 
+        JButton homeBtn = new JButton("Home");
         homeBtn.setActionCommand("homeButton");
         homeBtn.addActionListener(this);
 
@@ -174,10 +160,10 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
         String sentence2 = "              ";
         String sentence3 = "Overall score: " + overallCorrectAnswers + "/" + questionsAsked;
 
-        String allText = sentence1 + sentence2 + sentence3;
-        JLabel allT = new JLabel(allText);
+        String allStrings = sentence1 + sentence2 + sentence3;
+        JLabel resultString = new JLabel(allStrings);
 
-        resultsPanel.add(allT);
+        resultsPanel.add(resultString);
         resultsPanel.add(homeBtn);
         resultsPanel.setVisible(true);
 
@@ -198,14 +184,13 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
 
         if (e.getActionCommand().equals("homeButton")) {
             addQuizResults();
-            //saveQuiz();
             SwingUtilities.windowForComponent(this.quizScroll).dispose();
 
         }
     }
 
 
-// JSON ++++++++++++++++++++++
+// JSON  -----------------------------------------------------------------------------------------
 
     //EFFECTS: Turns the number of correct answers from quiz into a StatValue.
     public StatValue readCorrectAnswers() {
@@ -254,27 +239,13 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
         statsManagerQ.addStat(length);
     }
 
-// eEEEEEE
 
-//    // EFFECTS: saves the workroom to file
-//    private void saveQuiz() {
-//        try {
-//            jsonWriter.open();
-//            jsonWriter.write(statsManagerQ);
-//            jsonWriter.close();
-//        } catch (FileNotFoundException e) {
-//            System.out.println("Unable to write to file: " + JSON_STORE);
-//        }
-//    }
+
+    // getters --------------------------------------------------------------------------
 
     public StatsManager getStatsManager() {
         return statsManagerQ;
     }
-
-
-
-
-
 
 
 

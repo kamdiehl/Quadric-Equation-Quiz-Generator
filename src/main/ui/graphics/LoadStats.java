@@ -13,9 +13,10 @@ public class LoadStats {
 
     // constructor
     // calls the loadStats method to load data from file
-    public LoadStats(StatsManager statsManager) {
+    public LoadStats(StatsManager statsManager, JsonReader jsonReaders) {
         this.statMan = statsManager;
-        jsonReader = new JsonReader(JSON_STORE);
+        this.jsonReader = jsonReaders;
+       // jsonReader = new JsonReader(JSON_STORE);
         loadStats();
     }
 
