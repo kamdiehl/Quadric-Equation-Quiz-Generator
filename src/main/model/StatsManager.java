@@ -33,9 +33,9 @@ public class StatsManager implements Writable {
 
     // EFFECTS: returns an unmodifiable list of thingies in this workroom
     public List<StatValue> getAllStats() {
-        return Collections.unmodifiableList(statList);
+        return (statList);
     }
-
+//Collections.unmodifiableList
 
 
     public void setGlobalStats(QuestionMaster qm) {

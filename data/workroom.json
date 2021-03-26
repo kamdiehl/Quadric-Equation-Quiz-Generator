@@ -12,6 +12,30 @@
         {
             "category": "QuestionsAsked",
             "value": 6
+        },
+        {
+            "category": "CorrectAnswers",
+            "value": 4
+        },
+        {
+            "category": "IncorrectAnswers",
+            "value": 1
+        },
+        {
+            "category": "QuestionsAsked",
+            "value": 5
+        },
+        {
+            "category": "CorrectAnswers",
+            "value": 4
+        },
+        {
+            "category": "IncorrectAnswers",
+            "value": 1
+        },
+        {
+            "category": "QuestionsAsked",
+            "value": 5
         }
     ]
 }
