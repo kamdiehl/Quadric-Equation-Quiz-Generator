@@ -198,7 +198,7 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
 
         if (e.getActionCommand().equals("homeButton")) {
             addQuizResults();
-            saveQuiz();
+            //saveQuiz();
             SwingUtilities.windowForComponent(this.quizScroll).dispose();
 
         }
@@ -254,17 +254,18 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
         statsManagerQ.addStat(length);
     }
 
+// eEEEEEE
 
-    // EFFECTS: saves the workroom to file
-    private void saveQuiz() {
-        try {
-            jsonWriter.open();
-            jsonWriter.write(statsManagerQ);
-            jsonWriter.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("Unable to write to file: " + JSON_STORE);
-        }
-    }
+//    // EFFECTS: saves the workroom to file
+//    private void saveQuiz() {
+//        try {
+//            jsonWriter.open();
+//            jsonWriter.write(statsManagerQ);
+//            jsonWriter.close();
+//        } catch (FileNotFoundException e) {
+//            System.out.println("Unable to write to file: " + JSON_STORE);
+//        }
+//    }
 
     public StatsManager getStatsManager() {
         return statsManagerQ;

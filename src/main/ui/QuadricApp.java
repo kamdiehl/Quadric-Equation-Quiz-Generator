@@ -54,8 +54,6 @@ public class QuadricApp {
 
                 runQuiz();
 
-                //System.out.println("Enter 1 to start, enter 0 to exit, 2 to load");
-               // userInput = input.nextInt();
             }
             if (userInput == 2) {
                 System.out.println("Fetching Quiz Stats ...");

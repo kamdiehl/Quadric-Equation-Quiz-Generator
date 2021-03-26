@@ -1,12 +1,16 @@
 package ui.graphics;
 
+import model.QuestionMaster;
 import model.StatValue;
 import model.StatsManager;
 import persistence.JsonReader;
+import persistence.JsonWriter;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
@@ -18,7 +22,11 @@ public class ViewStats extends JFrame implements ActionListener {
     private static final String JSON_STORE = "./data/workroom.json";
     private JsonReader jsonReader;
     private JButton homeBtn;
+    private JButton saveBtn;
     private StatsManager statMan;
+    private JsonWriter jsonWriter;
+
+
 
     public ViewStats(StatsManager statsManager) {
         this.statMan = statsManager;
@@ -37,6 +45,7 @@ public class ViewStats extends JFrame implements ActionListener {
         setVisible(true);
 
         jsonReader = new JsonReader(JSON_STORE);
+        jsonWriter = new JsonWriter(JSON_STORE);
 
        // loadStats();
         printStats();
@@ -109,9 +118,29 @@ public class ViewStats extends JFrame implements ActionListener {
         homeBtn.setOpaque(true);
         homeBtn.setBackground(new Color(13, 144, 83));
 
+        saveBtn = new JButton("saveResults");
+        saveBtn.setActionCommand("save");
+        saveBtn.addActionListener(this);
+
+        saveBtn.setOpaque(true);
+        saveBtn.setBackground(new Color(17, 193, 123));
+
+        resultsPanel.add(saveBtn);
         resultsPanel.add(homeBtn);
+
     }
 
+
+    // EFFECTS: saves the workroom to file
+    private void saveQuiz() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(statMan);
+            jsonWriter.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -120,6 +149,9 @@ public class ViewStats extends JFrame implements ActionListener {
             SwingUtilities.windowForComponent(this.resultsPanel).dispose();
         }
 
-
+        if (e.getActionCommand().equals("saveResults")) {
+            saveQuiz();
+            SwingUtilities.windowForComponent(this.resultsPanel).dispose();
+        }
     }
 }
