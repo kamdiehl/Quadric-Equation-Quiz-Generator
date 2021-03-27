@@ -7,10 +7,10 @@ public class HyperboloidOfTwo extends Surface {
     int minValue;
 
     public HyperboloidOfTwo() {
-        // Equation: ax^2 - by^2 - cz^2 = d
+        // Equation: ax^2 - by^2 - bz^2 = d
     }
 
-    // REQUIRES: co1, co4 > 0 and co2, co3 < 0.
+    // REQUIRES: co1, co4 > 0 and co2, co3 < 0 and co2 = co3.
     // EFFECTS: Generates 4 integer coefficients for each term in the Hyperboloid of two sheets equation.
     public void generateHyperboloidOfTwo(int maxRange, int minRange) {
         maxValue = maxRange;
@@ -23,9 +23,6 @@ public class HyperboloidOfTwo extends Surface {
                 + minValue);
         co2 = -co2;
 
-        int co3 = (int)(Math.random() * (maxValue - minValue + 1)
-                + minValue);
-        co3 = -co3;
 
         int co4 = (int)(Math.random() * (maxValue - minValue + 1)
                 + minValue);
@@ -37,7 +34,7 @@ public class HyperboloidOfTwo extends Surface {
 
         createTerm(co1, 1, 0, false); // ax^2 = 0
         createTerm(co2, 2, 0, false); // by^2 = 0
-        createTerm(co3, 3, 0, false); // cz^2 = 0
+        createTerm(co2, 3, 0, false); // cz^2 = 0
         createTerm(co4, 4, 1, false); // 0 = d
     }
 }

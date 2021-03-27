@@ -7,10 +7,10 @@ public class CircularCylinder extends Surface {
     int minValue;
 
     public CircularCylinder() {
-        // Equation: ax^2 + by^2 + 0z = d where (z = 0)
+        // Equation: ax^2 + ay^2 + 0z = d where (z = 0)
     }
 
-    // REQUIRES: co3 = 0.
+    // REQUIRES: co3 = 0 and co1 = co2.
     // EFFECTS: creates the coefficients for each term in the equation of a circular cylinder.
     public void generateCircularCylinder(int maxRange, int minRange) {
         maxValue = maxRange;

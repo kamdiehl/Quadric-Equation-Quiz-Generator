@@ -1,5 +1,5 @@
 # The Quadric Surface Generator
-Quadric surfaces are 3D extensions of conics in the Euclidean plane. There are 6 main types I hope to include in this 
+Quadric surfaces are 3D extensions of conics in the Euclidean plane. There are 8 main types I've included in this 
 program:
 - Ellipsoid (or sphere if *a=b=c*)
 - Elliptic paraboloid
@@ -7,8 +7,9 @@ program:
 - Elliptic cone
 - Hyperboloid of one sheet
 - Hyperboloid of two sheets
+- Circular cylinder
 
-For now, I've only included 3/6 of the above equations.
+
 
 ***What will the application do?***
 
@@ -46,3 +47,9 @@ be unreliable and too short. To my surprise, no such program exists, so I though
 
 - I want to be able to save my quiz results to a json file.
 - I want to be able to load all my past quiz results that I've previously saved.
+
+**PHASE 3**
+- As a user, I want to be able to add multiple (random) equations to the QuizPanel so I can be quized
+on them all at once.
+- As a user, I want to be able to click a button to load the previous state of the application and view
+these loaded stats with a button.

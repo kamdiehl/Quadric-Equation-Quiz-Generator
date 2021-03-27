@@ -38,20 +38,20 @@ public class StatsManager implements Writable {
 //Collections.unmodifiableList
 
 
-    public void setGlobalStats(QuestionMaster qm) {
-
-        // setting global correct answers stat
-        int globalCorrect = qm.getCorrectAnswers();
-        setOverallCorrectAnswers(globalCorrect);
-
-        // setting total questions asked stat
-        int globalAsked = qm.getQuizLength();
-        setOverallQuestionsAsked(globalAsked);
-
-        // setting global incorrect answers stat
-        int globalIncorrect = globalCorrect - globalAsked;
-        setOverallIncorrectAnswers(globalIncorrect);
-    }
+//    public void setGlobalStats(QuestionMaster qm) {
+//
+//        // setting global correct answers stat
+//        int globalCorrect = qm.getCorrectAnswers();
+//        setOverallCorrectAnswers(globalCorrect);
+//
+//        // setting total questions asked stat
+//        int globalAsked = qm.getQuizLength();
+//        setOverallQuestionsAsked(globalAsked);
+//
+//        // setting global incorrect answers stat
+//        int globalIncorrect = globalCorrect - globalAsked;
+//        setOverallIncorrectAnswers(globalIncorrect);
+//    }
 
 
 

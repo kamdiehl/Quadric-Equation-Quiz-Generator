@@ -79,7 +79,7 @@ public abstract class Surface {
     // REQUIRES: instantiated array list of terms.
     // EFFECTS: Turns the RHS of the equation into a string.
     public String rhsEq() {
-        String localEq = "";
+        StringBuilder localEq = new StringBuilder();
         for (int i = 0; i < 4; i++) {
             if (termList.get(i).getSide() == 1) {
                 String termX = "";
@@ -96,10 +96,10 @@ public abstract class Surface {
                 if (termList.get(i).getVariable() == 4) {
                     termX += termList.get(i).getCoefficient();
                 }
-                localEq += termX;
+                localEq.append(termX);
             }
         }
-        return localEq;
+        return localEq.toString();
     }
 
 
