@@ -16,7 +16,7 @@ public class MainFrame extends JFrame implements ActionListener {
     private static final int HEIGHT = 900;
     private static final int TITLE_FONT = 22;
     private static final Color TITLE_COLOR = new Color(1, 108, 104);
-    private static final Color TITLE_BACKGROUND = new Color(2, 239, 231);
+    private static final Color TITLE_BACKGROUND = new Color(16, 226, 208);
 
     private static final Color startBtnColor = new Color(0, 198, 183);
     private static final Color instructionBtnColor = new Color(5, 170, 157);
