@@ -26,10 +26,10 @@ public class Sphere extends Surface {
         // co1 = Randomly generated variable
         // si = Which side the term is on, 0 being left side of "=" and 1 being right side of "="
 
-        createTerm(co1,1, 0);
-        createTerm(co1,2, 0);
-        createTerm(co1,3, 0);
-        createTerm(co4,4, 1);
+        createTerm(co1,1, 0, false);
+        createTerm(co1,2, 0, false);
+        createTerm(co1,3, 0, false);
+        createTerm(co4,4, 1, false);
 
 
     }

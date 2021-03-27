@@ -33,9 +33,9 @@ public class EllipticParaboloid extends Surface {
         // co1 = Randomly generated variable
         // si = Which side the term is on, 0 being left side of "=" and 1 being right side of "="
 
-        createTerm(co1, 1, 0); // ax^2 = 0
-        createTerm(co2, 2, 0); // by^2 = 0
-        createTerm(co3, 3, 0); // cz = 0 <- z is NOT squared
-        createTerm(co4, 4, 1); // 0 = d
+        createTerm(co1, 1, 0, false); // ax^2 = 0
+        createTerm(co2, 2, 0, false); // by^2 = 0
+        createTerm(co3, 3, 0, true); // cz = 0 <- z is NOT squared
+        createTerm(co4, 4, 1, false); // 0 = d
     }
 }

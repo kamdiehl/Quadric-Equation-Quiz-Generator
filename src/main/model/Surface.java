@@ -14,9 +14,9 @@ public abstract class Surface {
 
     // MODIFIES: this
     // EFFECTS: Adds new term to the list of terms needed for an equation
-    public void createTerm(int co, int var, int si) {
+    public void createTerm(int co, int var, int si, boolean ns) {
 
-        Term newTerm = new Term(co, var, si);
+        Term newTerm = new Term(co, var, si, ns);
         termList.add(newTerm);
 
     }
@@ -52,7 +52,12 @@ public abstract class Surface {
                     termX += "y^2 ";
                 }
                 if (termList.get(i).getVariable() == 3) {
-                    termX += "z^2 ";
+                    if (termList.get(i).getNotSquared()) {
+                        termX += "z ";
+                    } else {
+                        termX += "z^2 ";
+                    }
+
                 }
                 if (termList.get(i).getVariable() == 4) {
                     termX += termList.get(i).getCoefficient();
