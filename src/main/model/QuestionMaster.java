@@ -42,9 +42,6 @@ public class QuestionMaster {
 
 
 
-
-
-
     // Getters & setters
 
     public int getMaxValue() {

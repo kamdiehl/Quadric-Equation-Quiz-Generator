@@ -51,7 +51,7 @@ public abstract class Surface {
             if (termList.get(i).getSide() == 0) {
                 String termX = "";
 
-                if (termList.get(i).getCoefficient() > 0 && i != 0) {
+                if (termList.get(i).getCoefficient() >= 0 && i != 0) {
                     termX += "+ ";
                 }
 

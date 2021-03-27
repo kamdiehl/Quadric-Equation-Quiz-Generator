@@ -22,35 +22,25 @@ public class QuizEntry {
 
     // EFFECTS: Generates random number to randomly call a surface to construct an equation.
     public void generateSurfaceQ() {
-        int maxSurfaceCount = 7;
+        int maxSurfaceCount = 8;
         int randNum = (int)(Math.random() * (maxSurfaceCount - 1 + 1) + 1);
 
         if (randNum == 1) {
             sphereQuestion();
-        }
-
-        if (randNum == 2) {
+        } else if (randNum == 2) {
             ellipsoidQuestion();
-        }
-
-        if (randNum == 3) {
+        } else if (randNum == 3) {
             coneQuestion();
-        }
-
-        if (randNum == 4) {
+        } else if (randNum == 4) {
             ellipticParaboloidQuestion();
-        }
-
-        if (randNum == 5) {
+        } else if (randNum == 5) {
             hyperbolicParaboloidQuestion();
-        }
-
-        if (randNum == 6) {
+        } else if (randNum == 6) {
             hyperboloidOfOneQuestion();
-        }
-
-        if (randNum == 7) {
+        } else if (randNum == 7) {
             hyperboloidOfTwoQuestion();
+        } else if (randNum == 8) {
+            circularCylinderQuestion();
         }
     }
 
@@ -115,6 +105,14 @@ public class QuizEntry {
         ep.generateParaboloid(maxValue, minValue);
         question = ep.eqToString();
         answer = "elliptic paraboloid";
+    }
+
+    // EFFECTS: Generates a circular cylinder equation to present to user
+    void circularCylinderQuestion() {
+        CircularCylinder ep = new CircularCylinder();
+        ep.generateCircularCylinder(maxValue, minValue);
+        question = ep.eqToString();
+        answer = "circular cylinder";
     }
 
 
