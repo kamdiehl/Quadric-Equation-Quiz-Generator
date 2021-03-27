@@ -42,6 +42,8 @@ public abstract class Surface {
         return termZ;
     }
 
+    // System.out.println("\u00B2");
+
     // REQUIRES: instantiated array list of terms.
     // EFFECTS: Turns the LHS of the equation (including the variables) into a string.
     public String lhsEq() {

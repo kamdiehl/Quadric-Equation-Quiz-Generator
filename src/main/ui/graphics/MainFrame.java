@@ -80,7 +80,7 @@ public class MainFrame extends JFrame implements ActionListener {
         newWindow.setLocationRelativeTo(null);
         newWindow.setVisible(true);
         newWindow.setResizable(false);
-        newWindow.setBackground(new Color(45, 142, 0));
+        newWindow.setBackground(new Color(116, 0, 142));
 
     }
 
@@ -225,7 +225,7 @@ public class MainFrame extends JFrame implements ActionListener {
     // MODIFIES: This
     // EFFECTS: Initializes the image that appears on the title page.
     private void initializeTitleImage() {
-        ImageIcon unscaledTitleIcon = createImageIcon("/images/hyp1sh.jpg", "title picture"); // create the icon
+        ImageIcon unscaledTitleIcon = createImageIcon("/images/titlePage.png", "title picture"); // create the icon
         Image titleImage = unscaledTitleIcon.getImage(); // convert it into an image
         Image finalTitleImage = titleImage.getScaledInstance(IMAGE_WIDTH, IMAGE_HEIGHT,  java.awt.Image.SCALE_SMOOTH);
         unscaledTitleIcon = new ImageIcon(finalTitleImage); // convert it back to an image icon
@@ -264,7 +264,7 @@ public class MainFrame extends JFrame implements ActionListener {
         newQuiz.setQuizLength(userInputNum);
         newQuiz.createNewQuestionList(userInputNum);
 
-        new JScrollablePanelTest(userInputNum, newQuiz, mainFrame, statsManager);
+        new QuizPanelPopUp(userInputNum, newQuiz, mainFrame, statsManager);
     }
 
     public void initiatePopUp() {

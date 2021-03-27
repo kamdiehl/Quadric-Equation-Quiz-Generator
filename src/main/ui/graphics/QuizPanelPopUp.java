@@ -11,7 +11,7 @@ import java.util.HashMap;
 // https://www.tutorialspoint.com/how-can-we-implement-a-scrollable-jpanel-in-java
 
 // This class is in charge of the panel that holds the quiz questions and the quiz results.
-public class JScrollablePanelTest extends JFrame implements ActionListener {
+public class QuizPanelPopUp extends JFrame implements ActionListener {
 
     private QuestionMaster quiz;
     private StatsManager statsManagerQ;
@@ -29,7 +29,7 @@ public class JScrollablePanelTest extends JFrame implements ActionListener {
 
 
     // Constructor
-    public JScrollablePanelTest(int quizLength, QuestionMaster newQuiz, JFrame mainFrame, StatsManager statsManager) {
+    public QuizPanelPopUp(int quizLength, QuestionMaster newQuiz, JFrame mainFrame, StatsManager statsManager) {
 
         questionPanel = new JPanel();
         quizScroll = new JScrollPane(questionPanel);
