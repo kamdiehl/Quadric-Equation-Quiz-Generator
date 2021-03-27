@@ -6,23 +6,29 @@ import persistence.JsonReader;
 import persistence.JsonWriter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 // This class is in charge of initializing the main JFrame that holds the quiz and the menu buttons.
 public class MainFrame extends JFrame implements ActionListener {
 
     private static final int WIDTH = 1100;
     private static final int HEIGHT = 900;
-    private static final int TITLE_FONT = 22;
-    private static final Color TITLE_COLOR = new Color(1, 108, 104);
-    private static final Color TITLE_BACKGROUND = new Color(16, 226, 208);
+    private static final int TITLE_FONT = 30;
+    private static final Color TITLE_COLOR = new Color(2, 250, 171);
+    private static final Color TITLE_BACKGROUND = new Color(0, 0, 0);
 
-    private static final Color startBtnColor = new Color(0, 198, 183);
-    private static final Color instructionBtnColor = new Color(5, 170, 157);
-    private static final Color saveBtnColor = new Color(8, 137, 127);
-    private static final Color loadBtnColor = new Color(4, 118, 109);
-    private static final Color exitBtnColor = new Color(2, 92, 94);
+    private static final Color startBtnColor = new Color(106, 151, 0);
+    private static final Color instructionBtnColor = new Color(91, 193, 1);
+    private static final Color saveBtnColor = new Color(20, 206, 0);
+    private static final Color loadBtnColor = new Color(0, 189, 69);
+    private static final Color exitBtnColor = new Color(0, 189, 129);
 
     JButton startBtn = new JButton("START");
     JButton instructionBtn = new JButton("HOW TO PLAY");
@@ -31,8 +37,8 @@ public class MainFrame extends JFrame implements ActionListener {
     JButton viewResultsBtn = new JButton("VIEW RESULTS");
 
     private GridBagConstraints gbc;
-    private static final int IMAGE_WIDTH = 450;
-    private static final int IMAGE_HEIGHT = 470;
+    private static final int IMAGE_WIDTH = 750;
+    private static final int IMAGE_HEIGHT = 658;
 
     private StatsManager statsManager;
     private JFrame mainWindow;
@@ -54,11 +60,10 @@ public class MainFrame extends JFrame implements ActionListener {
         gbc = new GridBagConstraints();
         createWindow(mainWindow);
         createTitlePanel(mainWindow);
-        JPanel eastPanel = new JPanel();
-        eastPanel.setLayout(new BorderLayout());
-        initializeTitleImage(eastPanel);
 
-        mainWindow.getContentPane().setBackground(new Color(154, 205, 185));
+        initializeTitleImage();
+
+        mainWindow.getContentPane().setBackground(new Color(0, 0, 0));
 
         jsonReader = new JsonReader(JSON_STORE);
         jsonWriter = new JsonWriter(JSON_STORE);
@@ -75,7 +80,7 @@ public class MainFrame extends JFrame implements ActionListener {
         newWindow.setLocationRelativeTo(null);
         newWindow.setVisible(true);
         newWindow.setResizable(false);
-        newWindow.setBackground(Color.cyan);
+        newWindow.setBackground(new Color(45, 142, 0));
 
     }
 
@@ -84,8 +89,10 @@ public class MainFrame extends JFrame implements ActionListener {
     public void createTitlePanel(JFrame mainWindow) {
 
         JPanel titlePanel = new JPanel();
-        JLabel titleLabel = new JLabel("QUADRIC EQUATION QUIZ",SwingConstants.CENTER);
-        titleLabel.setFont(titleLabel.getFont().deriveFont(Font.BOLD, TITLE_FONT));
+        int sw = SwingConstants.CENTER;
+        //JLabel titleLabel = new JLabel("<html>QUADRIC<br/>EQUATION<br/>QUIZ</html>", sw);
+        JLabel titleLabel = new JLabel("SELECT ONE:", sw);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 35));
         titleLabel.setForeground(TITLE_COLOR);
         titleLabel.setPreferredSize(new Dimension(300, 100));
         titlePanel.add(titleLabel);
@@ -95,7 +102,7 @@ public class MainFrame extends JFrame implements ActionListener {
         gbc.anchor = GridBagConstraints.NORTHWEST;
         titlePanel.setBackground(TITLE_BACKGROUND);
 
-        JPanel buttonPanel = new JPanel(new GridLayout(6, 1, 10, 5));
+        JPanel buttonPanel = new JPanel(new GridLayout(6, 1, 0, 0));
         gbc.weightx = 1;
         gbc.weighty = 1;
         gbc.anchor = GridBagConstraints.WEST;
@@ -140,18 +147,27 @@ public class MainFrame extends JFrame implements ActionListener {
         startBtn.setBackground(startBtnColor);
         startBtn.setForeground(exitBtnColor);
         startBtn.setOpaque(true);
+        startBtn.setFont(new Font("Arial", Font.BOLD, 35));
+
         instructionBtn.setBackground(instructionBtnColor);
         instructionBtn.setForeground(loadBtnColor);
         instructionBtn.setOpaque(true);
+        instructionBtn.setFont(new Font("Arial", Font.BOLD, 35));
+
         viewResultsBtn.setBackground(saveBtnColor);
         viewResultsBtn.setForeground(loadBtnColor);
         viewResultsBtn.setOpaque(true);
+        viewResultsBtn.setFont(new Font("Arial", Font.BOLD, 35));
+
         loadBtn.setBackground(loadBtnColor);
         loadBtn.setForeground(instructionBtnColor);
         loadBtn.setOpaque(true);
+        loadBtn.setFont(new Font("Arial", Font.BOLD, 35));
+
         exitBtn.setBackground(exitBtnColor);
         exitBtn.setForeground(startBtnColor);
         exitBtn.setOpaque(true);
+        exitBtn.setFont(new Font("Arial", Font.BOLD, 35));
 
     }
 
@@ -159,40 +175,63 @@ public class MainFrame extends JFrame implements ActionListener {
 
     // EFFECTS: Method that is called when the the JButton btn is clicked
     public void actionPerformed(ActionEvent e) {
+        String btnSound = "/Users/kamryndiehl/IdeaProjects/CPSC210/Lab/project_n5y2b/src/main/sounds/btnSound.wav";
 
         if (e.getActionCommand().equals("startButton")) {
+            playBtnSound(btnSound);
             quizLengthPopUp(mainWindow, statsManager);
         }
 
         if (e.getActionCommand().equals("instructionButton")) {
+            playBtnSound(btnSound);
             new InstructionPopUp();
         }
 
         if (e.getActionCommand().equals("viewResults")) {
+            playBtnSound(btnSound);
             new ViewStats(statsManager, jsonWriter);
         }
 
         if (e.getActionCommand().equals("loadButton")) {
+            playBtnSound(btnSound);
             new LoadStats(statsManager, jsonReader);
 
         }
         if (e.getActionCommand().equals("exitButton")) {
+            playBtnSound(btnSound);
             System.exit(0);
+        }
+    }
+
+    // credit: https://stackoverflow.com/questions/36394909/i-created-a-jbutton-that-plays-a-sound-when-clicked
+    public void playBtnSound(String btnSound) {
+        Map<String, Clip> sounds = new HashMap<>();
+
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(btnSound).getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            sounds.put(btnSound, clip);
+            clip.start();
+
+        } catch (Exception ex) {
+
+            System.out.println("Error playing sound");
+            ex.printStackTrace();
         }
     }
 
 
     // MODIFIES: This
     // EFFECTS: Initializes the image that appears on the title page.
-    private void initializeTitleImage(JPanel eastPanel) {
+    private void initializeTitleImage() {
         ImageIcon unscaledTitleIcon = createImageIcon("/images/hyp1sh.jpg", "title picture"); // create the icon
         Image titleImage = unscaledTitleIcon.getImage(); // convert it into an image
         Image finalTitleImage = titleImage.getScaledInstance(IMAGE_WIDTH, IMAGE_HEIGHT,  java.awt.Image.SCALE_SMOOTH);
         unscaledTitleIcon = new ImageIcon(finalTitleImage); // convert it back to an image icon
-       // JLabel label = new JLabel("Image and Text", unscaledTitleIcon, JLabel.CENTER);
         JLabel titlePageLabel = new JLabel(unscaledTitleIcon);
-        eastPanel.add(titlePageLabel, BorderLayout.EAST);
-        eastPanel.setVisible(true);
+
+        mainWindow.add(titlePageLabel, gbc);
     }
 
 

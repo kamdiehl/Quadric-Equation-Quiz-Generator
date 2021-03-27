@@ -21,6 +21,7 @@ public class InstructionPopUp {
         UIManager.put("Panel.background",new Color(199, 217, 163));
         UIManager.put("OptionPane.messageFont", new Font("Arial", Font.BOLD, 15));
         UIManager.put("OptionPane.messageForeground", (new Color(2, 61, 55)));
+        // ---
 
         JOptionPane.showMessageDialog(popUp, compileAll(), "How to Play", JOptionPane.INFORMATION_MESSAGE, icon);
 
