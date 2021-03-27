@@ -1,8 +1,6 @@
 package model;
 
-import model.equations.Cone;
-import model.equations.Ellipsoid;
-import model.equations.Sphere;
+import model.equations.*;
 
 // This class creates 1 quiz question (an equation) that will be added to the list of questions in QuestionMaster.
 public class QuizEntry {
@@ -24,7 +22,7 @@ public class QuizEntry {
 
     // EFFECTS: Generates random number to randomly call a surface to construct an equation.
     public void generateSurfaceQ() {
-        int maxSurfaceCount = 3;
+        int maxSurfaceCount = 7;
         int randNum = (int)(Math.random() * (maxSurfaceCount - 1 + 1) + 1);
 
         if (randNum == 1) {
@@ -37,6 +35,22 @@ public class QuizEntry {
 
         if (randNum == 3) {
             coneQuestion();
+        }
+
+        if (randNum == 4) {
+            ellipticParaboloidQuestion();
+        }
+
+        if (randNum == 5) {
+            hyperbolicParaboloidQuestion();
+        }
+
+        if (randNum == 6) {
+            hyperboloidOfOneQuestion();
+        }
+
+        if (randNum == 7) {
+            hyperboloidOfTwoQuestion();
         }
     }
 
@@ -65,6 +79,42 @@ public class QuizEntry {
         c.generateCone(maxValue, minValue);
         question = c.eqToString();
         answer = "cone";
+    }
+
+
+    // EFFECTS: Generates a hyperboloid of one sheet equation to present to user
+    void hyperboloidOfOneQuestion() {
+        HyperboloidOfOne h1 = new HyperboloidOfOne();
+        h1.generateHyperboloidOfOne(maxValue, minValue);
+        question = h1.eqToString();
+        answer = "hyperboloid of one sheet";
+    }
+
+
+    // EFFECTS: Generates a hyperboloid of two sheets equation to present to user
+    void hyperboloidOfTwoQuestion() {
+        HyperboloidOfTwo h2 = new HyperboloidOfTwo();
+        h2.generateHyperboloidOfTwo(maxValue, minValue);
+        question = h2.eqToString();
+        answer = "hyperboloid of two sheets";
+    }
+
+
+    // EFFECTS: Generates a hyperbolic paraboloid equation to present to user
+    void hyperbolicParaboloidQuestion() {
+        HyperbolicParaboloid hp = new HyperbolicParaboloid();
+        hp.generateHyperParaboloid(maxValue, minValue);
+        question = hp.eqToString();
+        answer = "hyperbolic paraboloid";
+    }
+
+
+    // EFFECTS: Generates a elliptic paraboloid equation to present to user
+    void ellipticParaboloidQuestion() {
+        EllipticParaboloid ep = new EllipticParaboloid();
+        ep.generateParaboloid(maxValue, minValue);
+        question = ep.eqToString();
+        answer = "elliptic paraboloid";
     }
 
 
