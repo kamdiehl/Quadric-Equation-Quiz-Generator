@@ -7,7 +7,7 @@ public abstract class Surface {
 
     private String localEql = "";
 
-    ArrayList<Term> termList = new ArrayList<Term>(4);
+    ArrayList<Term> termList = new ArrayList<>(4);
     // Array list called termList containing data type Term has 4 spots,
     // the first three are for the ax^2, by^2, and cz^2 terms, and the
     // last one is for d (an arbitrary integer)
@@ -32,6 +32,16 @@ public abstract class Surface {
 
     }
 
+    public String zeOrZeSquared(int index) {
+        String termZ = "";
+        if (termList.get(index).getNotSquared()) {
+            termZ += "z ";
+        } else {
+            termZ += "z^2 ";
+        }
+        return termZ;
+    }
+
     // REQUIRES: instantiated array list of terms.
     // EFFECTS: Turns the LHS of the equation (including the variables) into a string.
     public String lhsEq() {
@@ -52,11 +62,7 @@ public abstract class Surface {
                     termX += "y^2 ";
                 }
                 if (termList.get(i).getVariable() == 3) {
-                    if (termList.get(i).getNotSquared()) {
-                        termX += "z ";
-                    } else {
-                        termX += "z^2 ";
-                    }
+                    termX += zeOrZeSquared(i);
 
                 }
                 if (termList.get(i).getVariable() == 4) {
