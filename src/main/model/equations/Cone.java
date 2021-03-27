@@ -1,4 +1,6 @@
-package model;
+package model.equations;
+
+import model.Surface;
 
 // sub-class of Surface, contains the criteria needed for an equation of a cone. This includes 4 coefficients
 // attached to variables in the createTerm method. One coefficient is negative.
@@ -7,7 +9,7 @@ public class Cone extends Surface {
     int minValue;
 
     public Cone() {
-        // Equation: ax^2 + by^2 - cz^2 = d
+        // Equation: ax^2 + by^2 - cz^2 = 0 (where d = 0)
     }
 
     // REQUIRES: co1, co2, co3 > 0.
@@ -26,8 +28,7 @@ public class Cone extends Surface {
                 + minValue);
         co3 = -co3;
 
-        int co4 = (int) (Math.random() * (maxValue - minValue + 1)
-                + minValue);
+        int co4 = 0;
 
         // ax^2 + by^2 - cz^2 = d where a,b,c are random coefficients.
         // var = the variable the integer coefficient is attached to (x,y,z)

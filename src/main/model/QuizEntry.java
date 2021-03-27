@@ -1,6 +1,8 @@
 package model;
 
-import javax.swing.*;
+import model.equations.Cone;
+import model.equations.Ellipsoid;
+import model.equations.Sphere;
 
 // This class creates 1 quiz question (an equation) that will be added to the list of questions in QuestionMaster.
 public class QuizEntry {

@@ -1,5 +1,8 @@
 package model;
 
+import model.equations.Cone;
+import model.equations.Ellipsoid;
+import model.equations.Sphere;
 import org.junit.jupiter.api.Test;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;

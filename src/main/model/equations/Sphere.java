@@ -1,4 +1,6 @@
-package model;
+package model.equations;
+
+import model.Surface;
 
 // sub-class of Surface, contains the criteria needed for an equation of a sphere.
 public class Sphere extends Surface {

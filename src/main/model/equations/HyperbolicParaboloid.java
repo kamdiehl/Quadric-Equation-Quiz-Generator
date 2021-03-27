@@ -1,18 +1,18 @@
-package model;
+package model.equations;
 
-// sub-class of Surface, contains the criteria needed for an equation of a ellipsoid. This includes 4 coefficients
-// attached to variables in the createTerm method.
-public class Ellipsoid extends Surface {
+import model.Surface;
+
+public class HyperbolicParaboloid extends Surface {
     int maxValue;
     int minValue;
 
-    public Ellipsoid() {
-        // Equation: ax^2 + by^2 + cz^2 = d
+    public HyperbolicParaboloid() {
+        // Equation: ax^2 - by^2 - cz = 0
     }
 
-    // REQUIRES: co1, co2, co3 > 0.
-    // EFFECTS: Generates 4 integer coefficients for each term in the ellipsoid equation.
-    public void generateEllipsoid(int maxRange, int minRange) {
+    // REQUIRES: co1 > 0 and co2, co3 < 0 and co4 = 0.
+    // EFFECTS: Generates 4 integer coefficients for each term in the Hyperboloid of one sheet equation.
+    public void generateHyperParaboloid(int maxRange, int minRange) {
         maxValue = maxRange;
         minValue = minRange;
 
@@ -21,12 +21,13 @@ public class Ellipsoid extends Surface {
 
         int co2 = (int)(Math.random() * (maxValue - minValue + 1)
                 + minValue);
+        co2 = -co2;
 
         int co3 = (int)(Math.random() * (maxValue - minValue + 1)
                 + minValue);
+        co3 = -co3;
 
-        int co4 = (int)(Math.random() * (maxValue - minValue + 1)
-                + minValue);
+        int co4 = 0;
 
         // ax^2 + by^2 + cz^2 = d where a,b,c are random coefficients.
         // var = the variable the coefficient is attached to (x,y,z)
@@ -35,8 +36,7 @@ public class Ellipsoid extends Surface {
 
         createTerm(co1, 1, 0); // ax^2 = 0
         createTerm(co2, 2, 0); // by^2 = 0
-        createTerm(co3, 3, 0); // cz^2 = 0
+        createTerm(co3, 3, 0); // cz = 0 <- z is NOT squared
         createTerm(co4, 4, 1); // 0 = d
     }
-
 }
