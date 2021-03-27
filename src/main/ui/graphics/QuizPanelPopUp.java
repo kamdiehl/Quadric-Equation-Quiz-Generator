@@ -27,8 +27,8 @@ public class QuizPanelPopUp extends JFrame implements ActionListener {
     private HashMap<Integer, JTextField> map;
 
 
-
     // Constructor
+    // EFFECTS: constructs the scrollable window that holds all the questions.
     public QuizPanelPopUp(int quizLength, QuestionMaster newQuiz, JFrame mainFrame, StatsManager statsManager) {
 
         questionPanel = new JPanel();

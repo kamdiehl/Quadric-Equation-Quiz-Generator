@@ -24,17 +24,17 @@ public class MainFrame extends JFrame implements ActionListener {
     private static final Color TITLE_COLOR = new Color(2, 250, 171);
     private static final Color TITLE_BACKGROUND = new Color(0, 0, 0);
 
-    private static final Color startBtnColor = new Color(106, 151, 0);
-    private static final Color instructionBtnColor = new Color(91, 193, 1);
-    private static final Color saveBtnColor = new Color(20, 206, 0);
-    private static final Color loadBtnColor = new Color(0, 189, 69);
-    private static final Color exitBtnColor = new Color(0, 189, 129);
+    private static final Color startBtnColor = new Color(33, 189, 140);
+    private static final Color instructionBtnColor = new Color(33, 189, 140);
+    private static final Color saveBtnColor = new Color(33, 189, 140);
+    private static final Color loadBtnColor = new Color(33, 189, 140);
+    private static final Color exitBtnColor = new Color(33, 189, 140);
 
-    JButton startBtn = new JButton("START");
-    JButton instructionBtn = new JButton("HOW TO PLAY");
-    JButton loadBtn = new JButton("LOAD DATA");
-    JButton exitBtn = new JButton("EXIT");
-    JButton viewResultsBtn = new JButton("VIEW RESULTS");
+    JButton startBtn = new JButton();
+    JButton instructionBtn = new JButton();
+    JButton loadBtn = new JButton();
+    JButton exitBtn = new JButton();
+    JButton viewResultsBtn = new JButton();
 
     private GridBagConstraints gbc;
     private static final int IMAGE_WIDTH = 750;
@@ -68,6 +68,8 @@ public class MainFrame extends JFrame implements ActionListener {
         jsonReader = new JsonReader(JSON_STORE);
         jsonWriter = new JsonWriter(JSON_STORE);
 
+
+        initializeBtnIcons();
     }
 
 
@@ -145,29 +147,27 @@ public class MainFrame extends JFrame implements ActionListener {
     public void buttonColors() {
 
         startBtn.setBackground(startBtnColor);
-        startBtn.setForeground(exitBtnColor);
         startBtn.setOpaque(true);
-        startBtn.setFont(new Font("Arial", Font.BOLD, 35));
 
         instructionBtn.setBackground(instructionBtnColor);
-        instructionBtn.setForeground(loadBtnColor);
+       // instructionBtn.setForeground(loadBtnColor);
         instructionBtn.setOpaque(true);
-        instructionBtn.setFont(new Font("Arial", Font.BOLD, 35));
+        //instructionBtn.setFont(new Font("Arial", Font.BOLD, 35));
 
         viewResultsBtn.setBackground(saveBtnColor);
-        viewResultsBtn.setForeground(loadBtnColor);
+        //viewResultsBtn.setForeground(loadBtnColor);
         viewResultsBtn.setOpaque(true);
-        viewResultsBtn.setFont(new Font("Arial", Font.BOLD, 35));
+        //viewResultsBtn.setFont(new Font("Arial", Font.BOLD, 35));
 
         loadBtn.setBackground(loadBtnColor);
-        loadBtn.setForeground(instructionBtnColor);
+        //loadBtn.setForeground(instructionBtnColor);
         loadBtn.setOpaque(true);
-        loadBtn.setFont(new Font("Arial", Font.BOLD, 35));
+        //loadBtn.setFont(new Font("Arial", Font.BOLD, 35));
 
         exitBtn.setBackground(exitBtnColor);
-        exitBtn.setForeground(startBtnColor);
+        //exitBtn.setForeground(startBtnColor);
         exitBtn.setOpaque(true);
-        exitBtn.setFont(new Font("Arial", Font.BOLD, 35));
+        //exitBtn.setFont(new Font("Arial", Font.BOLD, 35));
 
     }
 
@@ -178,6 +178,7 @@ public class MainFrame extends JFrame implements ActionListener {
         String btnSound = "/Users/kamryndiehl/IdeaProjects/CPSC210/Lab/project_n5y2b/src/main/sounds/btnSound.wav";
 
         if (e.getActionCommand().equals("startButton")) {
+            //initializeStartBtnImage();
             playBtnSound(btnSound);
             quizLengthPopUp(mainWindow, statsManager);
         }
@@ -204,6 +205,7 @@ public class MainFrame extends JFrame implements ActionListener {
     }
 
     // credit: https://stackoverflow.com/questions/36394909/i-created-a-jbutton-that-plays-a-sound-when-clicked
+    // EFFECTS: Plays a button sound from file.
     public void playBtnSound(String btnSound) {
         Map<String, Clip> sounds = new HashMap<>();
 
@@ -249,6 +251,87 @@ public class MainFrame extends JFrame implements ActionListener {
 
 
 
+    public void initializeBtnIcons() {
+        initializeStartBtnImage();
+        initializeInstructionBtnImage();
+        initializeResultsBtnImage();
+        initializeLoadBtnImage();
+        initializeExitBtnImage();
+    }
+
+
+    private void initializeStartBtnImage() {
+        try {
+            ImageIcon img = createImageIcon("/images/startBtn.png", "btnPicture");
+            Image titleImage = img.getImage(); // convert it into an image
+            Image finalTitleImage = titleImage.getScaledInstance(355, 130,  java.awt.Image.SCALE_SMOOTH);
+            img = new ImageIcon(finalTitleImage);
+            startBtn.setIcon(img);
+
+        } catch (Exception ex) {
+            System.out.println("NO IMAGE??");
+        }
+    }
+
+    private void initializeInstructionBtnImage() {
+
+        try {
+            ImageIcon img = createImageIcon("/images/instructionsBtn.png", "btnPicture");
+            Image titleImage = img.getImage(); // convert it into an image
+            Image finalTitleImage = titleImage.getScaledInstance(355, 130,  java.awt.Image.SCALE_SMOOTH);
+            img = new ImageIcon(finalTitleImage);
+            instructionBtn.setIcon(img);
+
+        } catch (Exception ex) {
+            System.out.println("NO IMAGE??");
+        }
+    }
+
+    private void initializeResultsBtnImage() {
+
+        try {
+            ImageIcon img = createImageIcon("/images/resultsBtn.png", "btnPicture");
+            Image titleImage = img.getImage(); // convert it into an image
+            Image finalTitleImage = titleImage.getScaledInstance(355, 130,  java.awt.Image.SCALE_SMOOTH);
+            img = new ImageIcon(finalTitleImage);
+            viewResultsBtn.setIcon(img);
+
+        } catch (Exception ex) {
+            System.out.println("NO IMAGE??");
+        }
+    }
+
+    private void initializeLoadBtnImage() {
+
+        try {
+            ImageIcon img = createImageIcon("/images/loadBtn.png", "btnPicture");
+            Image titleImage = img.getImage(); // convert it into an image
+            Image finalTitleImage = titleImage.getScaledInstance(355, 130,  java.awt.Image.SCALE_SMOOTH);
+            img = new ImageIcon(finalTitleImage);
+            loadBtn.setIcon(img);
+
+        } catch (Exception ex) {
+            System.out.println("NO IMAGE??");
+        }
+    }
+
+    private void initializeExitBtnImage() {
+
+        try {
+            ImageIcon img = createImageIcon("/images/exitBtn.png", "btnPicture");
+            Image titleImage = img.getImage(); // convert it into an image
+            Image finalTitleImage = titleImage.getScaledInstance(355, 130,  java.awt.Image.SCALE_SMOOTH);
+            img = new ImageIcon(finalTitleImage);
+            exitBtn.setIcon(img);
+
+        } catch (Exception ex) {
+            System.out.println("NO IMAGE??");
+        }
+    }
+
+
+
+
     // RIP QuizLengthPopUp Class
 
     // EFFECTS: Instantiates new quiz and
@@ -267,12 +350,11 @@ public class MainFrame extends JFrame implements ActionListener {
         new QuizPanelPopUp(userInputNum, newQuiz, mainFrame, statsManager);
     }
 
+    // EFFECTS: Initiates the new JFrame.
     public void initiatePopUp() {
         popUp = new JFrame();
         popUp.setForeground(Color.pink);
     }
-
-
 
 
 

@@ -17,10 +17,10 @@ public class InstructionPopUp {
         ImageIcon icon = new ImageIcon("images/hyp1sh.jpg");
 
         // credit: https://www.roseindia.net/tutorial/java/swing/showtextcolor.html
-        UIManager.put("OptionPane.background",new Color(132, 224, 57));
-        UIManager.put("Panel.background",new Color(199, 217, 163));
+        UIManager.put("OptionPane.background",new Color(0, 227, 197));
+        UIManager.put("Panel.background",new Color(135, 222, 214));
         UIManager.put("OptionPane.messageFont", new Font("Arial", Font.BOLD, 15));
-        UIManager.put("OptionPane.messageForeground", (new Color(2, 61, 55)));
+        UIManager.put("OptionPane.messageForeground", (new Color(60, 34, 88)));
         // ---
 
         JOptionPane.showMessageDialog(popUp, compileAll(), "How to Play", JOptionPane.INFORMATION_MESSAGE, icon);
