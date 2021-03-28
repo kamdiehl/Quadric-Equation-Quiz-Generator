@@ -20,7 +20,6 @@ public class MainFrame extends JFrame implements ActionListener {
 
     private static final int WIDTH = 1100;
     private static final int HEIGHT = 900;
-    private static final int TITLE_FONT = 30;
     private static final Color TITLE_COLOR = new Color(2, 250, 171);
     private static final Color TITLE_BACKGROUND = new Color(0, 0, 0);
 
@@ -249,8 +248,7 @@ public class MainFrame extends JFrame implements ActionListener {
     }
 
 
-
-
+    // EFFECTS: Initializes all of the button images.
     public void initializeBtnIcons() {
         initializeStartBtnImage();
         initializeInstructionBtnImage();
@@ -258,6 +256,48 @@ public class MainFrame extends JFrame implements ActionListener {
         initializeLoadBtnImage();
         initializeExitBtnImage();
     }
+
+
+
+
+
+    // RIP QuizLengthPopUp Class
+
+    // EFFECTS: Instantiates new quiz and
+    public void quizLengthPopUp(JFrame mainFrame, StatsManager statsManager) {
+        initiatePopUp();
+        String userInputString = JOptionPane.showInputDialog(popUp,
+                "Enter the number of questions you want in your quiz");
+        userInputNum = Integer.parseInt(userInputString);
+        setUserInputNum(userInputNum);
+
+        // HERE IS WHERE WE INSTANTIATE THE NEW QUIZ
+        QuestionMaster newQuiz = new QuestionMaster(userInputNum, 10, 1);
+        newQuiz.setQuizLength(userInputNum);
+        newQuiz.createNewQuestionList(userInputNum);
+
+        new QuizPanelPopUp(userInputNum, newQuiz, mainFrame, statsManager);
+    }
+
+    // EFFECTS: Initiates the new JFrame.
+    public void initiatePopUp() {
+        popUp = new JFrame();
+        popUp.setForeground(Color.pink);
+    }
+
+
+
+
+
+    // GETTERS AND SETTERS ----------------------------------------------------------------------------------
+
+    public void setUserInputNum(int userInputNum) {
+        this.userInputNum = userInputNum;
+    }
+
+
+
+    // PRIVATE ----------------------------------------------------------------------------------------------
 
 
     private void initializeStartBtnImage() {
@@ -329,42 +369,6 @@ public class MainFrame extends JFrame implements ActionListener {
         }
     }
 
-
-
-
-    // RIP QuizLengthPopUp Class
-
-    // EFFECTS: Instantiates new quiz and
-    public void quizLengthPopUp(JFrame mainFrame, StatsManager statsManager) {
-        initiatePopUp();
-        String userInputString = JOptionPane.showInputDialog(popUp,
-                "Enter the number of questions you want in your quiz");
-        userInputNum = Integer.parseInt(userInputString);
-        setUserInputNum(userInputNum);
-
-        // HERE IS WHERE WE INSTANTIATE THE NEW QUIZ
-        QuestionMaster newQuiz = new QuestionMaster(userInputNum, 10, 1);
-        newQuiz.setQuizLength(userInputNum);
-        newQuiz.createNewQuestionList(userInputNum);
-
-        new QuizPanelPopUp(userInputNum, newQuiz, mainFrame, statsManager);
-    }
-
-    // EFFECTS: Initiates the new JFrame.
-    public void initiatePopUp() {
-        popUp = new JFrame();
-        popUp.setForeground(Color.pink);
-    }
-
-
-
-
-
-    // GETTERS AND SETTERS ----------------------------------------------------------------------------------
-
-    public void setUserInputNum(int userInputNum) {
-        this.userInputNum = userInputNum;
-    }
 
 
 }

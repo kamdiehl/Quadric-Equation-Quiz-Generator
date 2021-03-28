@@ -101,10 +101,10 @@ public class QuizEntry {
 
     // EFFECTS: Generates a elliptic paraboloid equation to present to user
     void ellipticParaboloidQuestion() {
-        EllipticParaboloid ep = new EllipticParaboloid();
+        Paraboloid ep = new Paraboloid();
         ep.generateParaboloid(maxValue, minValue);
         question = ep.eqToString();
-        answer = "elliptic paraboloid";
+        answer = "paraboloid";
     }
 
     // EFFECTS: Generates a circular cylinder equation to present to user

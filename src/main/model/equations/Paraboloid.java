@@ -2,11 +2,11 @@ package model.equations;
 
 import model.Surface;
 
-public class EllipticParaboloid extends Surface {
+public class Paraboloid extends Surface {
     int maxValue;
     int minValue;
 
-    public EllipticParaboloid() {
+    public Paraboloid() {
         // Equation: ax^2 + by^2 - cz = 0
     }
 

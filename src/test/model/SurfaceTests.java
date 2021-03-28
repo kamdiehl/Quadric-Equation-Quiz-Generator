@@ -1,7 +1,16 @@
 package model;
 
+import com.oracle.javafx.jmx.json.JSONReader;
+import javafx.scene.input.Clipboard;
 import model.equations.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
+import persistence.JsonReader;
+import persistence.JsonWriter;
+
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,6 +26,14 @@ class SurfaceTests {
         assertEquals(1, term1.getVariable());
         assertEquals(0, term1.getSide());
 
+    }
+
+    @Test
+    void testQuestionMasterLength() {
+        QuestionMaster qm1 = new QuestionMaster(10,10,1);
+        assertEquals(10, qm1.getQuizLength());
+        qm1.setQuizLength(11);
+        assertEquals(11, qm1.getQuizLength());
     }
 
     @Test
@@ -139,7 +156,7 @@ class SurfaceTests {
 
     @Test
     void testParaboloidToString() {
-        EllipticParaboloid c = new EllipticParaboloid();
+        Paraboloid c = new Paraboloid();
         QuestionMaster q = new QuestionMaster(10,10,1);
 
         Term testX = new Term(2, 1, 0, false);
@@ -237,6 +254,61 @@ class SurfaceTests {
         assertNotEquals(equation.getAnswer(), "sphere");
     }
 
+    @Test
+    void testCylinderQuestion() {
+
+        QuizEntry equation = new QuizEntry();
+        equation.circularCylinderQuestion();
+
+        assertEquals("circular cylinder", equation.getAnswer());
+        assertNotEquals(equation.getAnswer(), "ellipsoid");
+        assertNotEquals(equation.getAnswer(), "sphere");
+    }
+
+    @Test
+    void testHyperOfOneQuestion() {
+
+        QuizEntry equation = new QuizEntry();
+        equation.hyperboloidOfOneQuestion();
+
+        assertEquals("hyperboloid of one sheet", equation.getAnswer());
+        assertNotEquals(equation.getAnswer(), "ellipsoid");
+        assertNotEquals(equation.getAnswer(), "sphere");
+    }
+
+    @Test
+    void testHyperOfTwoQuestion() {
+
+        QuizEntry equation = new QuizEntry();
+        equation.hyperboloidOfTwoQuestion();
+
+        assertEquals("hyperboloid of two sheets", equation.getAnswer());
+        assertNotEquals(equation.getAnswer(), "ellipsoid");
+        assertNotEquals(equation.getAnswer(), "sphere");
+    }
+
+    @Test
+    void testHyperParaboloidQuestion() {
+
+        QuizEntry equation = new QuizEntry();
+        equation.hyperbolicParaboloidQuestion();
+
+        assertEquals("hyperbolic paraboloid", equation.getAnswer());
+        assertNotEquals(equation.getAnswer(), "ellipsoid");
+        assertNotEquals(equation.getAnswer(), "sphere");
+    }
+
+    @Test
+    void testParaboloidQuestion() {
+
+        QuizEntry equation = new QuizEntry();
+        equation.ellipticParaboloidQuestion();
+
+        assertEquals("paraboloid", equation.getAnswer());
+        assertNotEquals(equation.getAnswer(), "ellipsoid");
+        assertNotEquals(equation.getAnswer(), "sphere");
+    }
+
 
     @Test
     void testCreateNewQuestionList() {
@@ -257,6 +329,83 @@ class SurfaceTests {
 
 
     }
+
+
+
+    // STATS ----------------
+
+    @Test
+    void testAddStats() {
+        StatValue stat = new StatValue(StatCategory.CorrectAnswers, 3);
+        ArrayList<StatValue> statList = new ArrayList<>();
+        statList.add(stat);
+        StatsManager statsManager = new StatsManager("statHistory");
+        statsManager.addStat(stat);
+        assertEquals(statsManager.getAllStats(), statList);
+
+    }
+
+    @Test
+    void testToJsonStatValue() {
+        StatValue statValue = new StatValue(StatCategory.CorrectAnswers, 10);
+        assertEquals(StatCategory.CorrectAnswers, statValue.getCategory());
+        assertEquals(10, statValue.getValue());
+        assertEquals("CorrectAnswers: 10", statValue.toString());
+
+        JSONObject jsonObject = statValue.toJson();
+        assertFalse(jsonObject.isEmpty());
+        assertEquals(2, jsonObject.length());
+
+    }
+
+
+    @Test
+    void testJsonStatManager() {
+
+        StatsManager statsManager = new StatsManager("statHistory");
+        StatValue stat1 = new StatValue(StatCategory.CorrectAnswers, 10);
+        StatValue stat2 = new StatValue(StatCategory.IncorrectAnswers, 10);
+        StatValue stat3 = new StatValue(StatCategory.QuestionsAsked, 20);
+
+        statsManager.addStat(stat1);
+        statsManager.addStat(stat2);
+        statsManager.addStat(stat3);
+
+        JSONObject jsonObject = statsManager.toJson();
+        assertFalse(jsonObject.isEmpty());
+
+        List statList = statsManager.getAllStats();
+        assertEquals(3, statList.toArray().length);
+
+        assertEquals(statsManager.getStatHistory(), "statHistory");
+        assertEquals(statsManager.getOverallCorrectAnswers(), 0);
+        assertEquals(statsManager.getOverallIncorrectAnswers(), 0);
+
+
+
+    }
+
+
+
+//
+//    @Override
+//    public JSONObject toJson() {
+//        JSONObject json = new JSONObject();
+//        json.put("statHistory", statHistory);
+//        json.put("allStats", statsToJson());
+//        return json;
+//    }
+//
+//
+//    // EFFECTS: returns things in this statList as a JSON array
+//    private JSONArray statsToJson() {
+//        JSONArray jsonArray = new JSONArray();
+//
+//        for (StatValue i : statList) {
+//            jsonArray.put(i.toJson());
+//        }
+//        return jsonArray;
+//    }
 
 
 }

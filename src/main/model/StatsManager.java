@@ -4,7 +4,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 // Represents a list of StatValues that compile to make the list of stats.
@@ -35,23 +34,6 @@ public class StatsManager implements Writable {
     public List<StatValue> getAllStats() {
         return (statList);
     }
-//Collections.unmodifiableList
-
-
-//    public void setGlobalStats(QuestionMaster qm) {
-//
-//        // setting global correct answers stat
-//        int globalCorrect = qm.getCorrectAnswers();
-//        setOverallCorrectAnswers(globalCorrect);
-//
-//        // setting total questions asked stat
-//        int globalAsked = qm.getQuizLength();
-//        setOverallQuestionsAsked(globalAsked);
-//
-//        // setting global incorrect answers stat
-//        int globalIncorrect = globalCorrect - globalAsked;
-//        setOverallIncorrectAnswers(globalIncorrect);
-//    }
 
 
 
@@ -59,7 +41,6 @@ public class StatsManager implements Writable {
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("statHistory", statHistory);
-
         json.put("allStats", statsToJson());
         return json;
     }
@@ -97,14 +78,6 @@ public class StatsManager implements Writable {
 
     public void setOverallIncorrectAnswers(int incorrect) {
         this.overallIncorrectAnswers = incorrect;
-    }
-
-    public void setOverallQuestionsAsked(int total) {
-        this.overallQuestionsAsked = total;
-    }
-
-    public int getOverallQuestionsAsked() {
-        return overallQuestionsAsked;
     }
 
     public void setStatList(List<StatValue> statList) {

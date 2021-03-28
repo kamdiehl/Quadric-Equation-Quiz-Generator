@@ -67,9 +67,9 @@ public abstract class Surface {
                     termX += zeOrZeSquared(i);
 
                 }
-                if (termList.get(i).getVariable() == 4) {
-                    termX += termList.get(i).getCoefficient();
-                }
+              //  if (termList.get(i).getVariable() == 4) {
+              //      termX += termList.get(i).getCoefficient();
+            //    }
                 localEql += termX;
             }
         }
@@ -84,15 +84,15 @@ public abstract class Surface {
             if (termList.get(i).getSide() == 1) {
                 String termX = "";
 
-                if (termList.get(i).getVariable() == 1) {
-                    termX += "x^2 ";
-                }
-                if (termList.get(i).getVariable() == 2) {
-                    termX += "y^2 ";
-                }
-                if (termList.get(i).getVariable() == 3) {
-                    termX += "z^2 ";
-                }
+//                if (termList.get(i).getVariable() == 1) {
+//                    termX += "x^2 ";
+//                }
+//                if (termList.get(i).getVariable() == 2) {
+//                    termX += "y^2 ";
+//                }
+//                if (termList.get(i).getVariable() == 3) {
+//                    termX += "z^2 ";
+//                }
                 if (termList.get(i).getVariable() == 4) {
                     termX += termList.get(i).getCoefficient();
                 }
