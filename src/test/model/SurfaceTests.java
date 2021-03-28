@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import persistence.JsonReader;
 import persistence.JsonWriter;
+import com.oracle.javafx.jmx.json.JSONReader; // my project wouldn't compile and said to import this?
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -385,27 +386,6 @@ class SurfaceTests {
 
     }
 
-
-
-//
-//    @Override
-//    public JSONObject toJson() {
-//        JSONObject json = new JSONObject();
-//        json.put("statHistory", statHistory);
-//        json.put("allStats", statsToJson());
-//        return json;
-//    }
-//
-//
-//    // EFFECTS: returns things in this statList as a JSON array
-//    private JSONArray statsToJson() {
-//        JSONArray jsonArray = new JSONArray();
-//
-//        for (StatValue i : statList) {
-//            jsonArray.put(i.toJson());
-//        }
-//        return jsonArray;
-//    }
 
 
 }
