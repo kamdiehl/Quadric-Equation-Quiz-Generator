@@ -13,13 +13,13 @@ import java.util.List;
 // Class creates panel and loads Json files when prompted
 public class ViewStats extends JFrame implements ActionListener {
 
-    private JScrollPane quizScroll;
     private JPanel resultsPanel;
     private JButton homeBtn;
     private JButton saveBtn;
     private StatsManager statMan;
+
     // json
-    private JsonWriter jsonWriter;
+    private final JsonWriter jsonWriter;
     private static final String JSON_STORE = "./data/workroom.json";
 
 
@@ -34,7 +34,7 @@ public class ViewStats extends JFrame implements ActionListener {
         setTitle("Saved Results");
         setLayout(new BorderLayout());
         resultsPanel.setLayout(new GridLayout(0, 1, 10, 10));
-        quizScroll = new JScrollPane(resultsPanel);
+        JScrollPane quizScroll = new JScrollPane(resultsPanel);
 
         add(BorderLayout.CENTER, quizScroll);
 
@@ -44,7 +44,6 @@ public class ViewStats extends JFrame implements ActionListener {
 
         printStats();
         initiateButtons();
-
 
     }
 

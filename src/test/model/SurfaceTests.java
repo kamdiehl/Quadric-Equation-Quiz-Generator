@@ -254,6 +254,9 @@ class SurfaceTests {
         QuizEntry equation = new QuizEntry();
         equation.circularCylinderQuestion();
 
+        assertTrue(equation.getQuestion().contains("0z"));
+        assertFalse(equation.getQuestion().contains("z^2"));
+
         assertEquals("circular cylinder", equation.getAnswer());
         assertNotEquals(equation.getAnswer(), "ellipsoid");
         assertNotEquals(equation.getAnswer(), "sphere");
@@ -288,6 +291,8 @@ class SurfaceTests {
         equation.hyperbolicParaboloidQuestion();
 
         assertEquals("hyperbolic paraboloid", equation.getAnswer());
+        assertTrue(equation.getQuestion().contains("z"));
+        assertFalse(equation.getQuestion().contains("z^2"));
         assertNotEquals(equation.getAnswer(), "ellipsoid");
         assertNotEquals(equation.getAnswer(), "sphere");
     }
@@ -297,6 +302,9 @@ class SurfaceTests {
 
         QuizEntry equation = new QuizEntry();
         equation.ellipticParaboloidQuestion();
+
+        assertTrue(equation.getQuestion().contains("z"));
+        assertFalse(equation.getQuestion().contains("z^2"));
 
         assertEquals("paraboloid", equation.getAnswer());
         assertNotEquals(equation.getAnswer(), "ellipsoid");
@@ -368,7 +376,7 @@ class SurfaceTests {
         JSONObject jsonObject = statsManager.toJson();
         assertFalse(jsonObject.isEmpty());
 
-        List statList = statsManager.getAllStats();
+        List<StatValue> statList = statsManager.getAllStats();
         assertEquals(3, statList.toArray().length);
 
         assertEquals(statsManager.getStatHistory(), "statHistory");

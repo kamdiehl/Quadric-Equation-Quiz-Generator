@@ -2,6 +2,8 @@ package model.equations;
 
 import model.Surface;
 
+// sub-class of Surface, contains the criteria needed for an equation of a hyperbolic paraboloid. This includes 4
+// coefficients attached to variables in the createTerm method. Two coefficients are negative and z isn't squared.
 public class HyperbolicParaboloid extends Surface {
     int maxValue;
     int minValue;

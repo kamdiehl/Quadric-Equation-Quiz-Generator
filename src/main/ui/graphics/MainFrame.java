@@ -35,18 +35,18 @@ public class MainFrame extends JFrame implements ActionListener {
     JButton exitBtn = new JButton();
     JButton viewResultsBtn = new JButton();
 
-    private GridBagConstraints gbc;
+    private final GridBagConstraints gbc;
     private static final int IMAGE_WIDTH = 750;
     private static final int IMAGE_HEIGHT = 658;
 
     private StatsManager statsManager;
-    private JFrame mainWindow;
+    private final JFrame mainWindow;
     private JFrame popUp;
     private int userInputNum;
 
     // json
-    private JsonReader jsonReader;
-    private JsonWriter jsonWriter;
+    private final JsonReader jsonReader;
+    private final JsonWriter jsonWriter;
     private static final String JSON_STORE = "./data/workroom.json";
 
 
@@ -149,24 +149,16 @@ public class MainFrame extends JFrame implements ActionListener {
         startBtn.setOpaque(true);
 
         instructionBtn.setBackground(instructionBtnColor);
-       // instructionBtn.setForeground(loadBtnColor);
         instructionBtn.setOpaque(true);
-        //instructionBtn.setFont(new Font("Arial", Font.BOLD, 35));
 
         viewResultsBtn.setBackground(saveBtnColor);
-        //viewResultsBtn.setForeground(loadBtnColor);
         viewResultsBtn.setOpaque(true);
-        //viewResultsBtn.setFont(new Font("Arial", Font.BOLD, 35));
 
         loadBtn.setBackground(loadBtnColor);
-        //loadBtn.setForeground(instructionBtnColor);
         loadBtn.setOpaque(true);
-        //loadBtn.setFont(new Font("Arial", Font.BOLD, 35));
 
         exitBtn.setBackground(exitBtnColor);
-        //exitBtn.setForeground(startBtnColor);
         exitBtn.setOpaque(true);
-        //exitBtn.setFont(new Font("Arial", Font.BOLD, 35));
 
     }
 
@@ -177,7 +169,6 @@ public class MainFrame extends JFrame implements ActionListener {
         String btnSound = "/Users/kamryndiehl/IdeaProjects/CPSC210/Lab/project_n5y2b/src/main/sounds/btnSound.wav";
 
         if (e.getActionCommand().equals("startButton")) {
-            //initializeStartBtnImage();
             playBtnSound(btnSound);
             quizLengthPopUp(mainWindow, statsManager);
         }
@@ -299,6 +290,8 @@ public class MainFrame extends JFrame implements ActionListener {
 
     // PRIVATE ----------------------------------------------------------------------------------------------
 
+
+    // EFFECTS: All of these methods fetch the button image from file so they can be used as icons.
 
     private void initializeStartBtnImage() {
         try {

@@ -15,7 +15,7 @@ public class InstructionPopUp {
         JFrame popUp = new JFrame();
         ImageIcon icon = new ImageIcon("images/hyp1sh.jpg");
 
-        // credit: https://www.roseindia.net/tutorial/java/swing/showtextcolor.html
+        // credit kinda: https://www.roseindia.net/tutorial/java/swing/showtextcolor.html
         UIManager.put("OptionPane.background",new Color(0, 227, 197));
         UIManager.put("Panel.background",new Color(179, 234, 229));
         UIManager.put("OptionPane.messageFont", new Font("Arial", Font.BOLD, 15));

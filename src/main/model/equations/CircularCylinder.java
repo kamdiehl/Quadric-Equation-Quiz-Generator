@@ -2,6 +2,8 @@ package model.equations;
 
 import model.Surface;
 
+// sub-class of Surface, contains the criteria needed for an equation of a cylinder. This includes 4 coefficients
+// attached to variables in the createTerm method. z's coefficient is 0.
 public class CircularCylinder extends Surface {
     int maxValue;
     int minValue;

@@ -2,6 +2,8 @@ package model.equations;
 
 import model.Surface;
 
+// sub-class of Surface, contains the criteria needed for an equation of a hyperboloid of two sheets. This
+// includes 4 coefficients attached to variables in the createTerm method. Two coefficients are negative.
 public class HyperboloidOfTwo extends Surface {
     int maxValue;
     int minValue;
@@ -23,6 +25,10 @@ public class HyperboloidOfTwo extends Surface {
                 + minValue);
         co2 = -co2;
 
+        int co3 = (int)(Math.random() * (maxValue - minValue + 1)
+                + minValue);
+        co3 = -co3;
+
 
         int co4 = (int)(Math.random() * (maxValue - minValue + 1)
                 + minValue);
@@ -34,7 +40,7 @@ public class HyperboloidOfTwo extends Surface {
 
         createTerm(co1, 1, 0, false); // ax^2 = 0
         createTerm(co2, 2, 0, false); // by^2 = 0
-        createTerm(co2, 3, 0, false); // cz^2 = 0
+        createTerm(co3, 3, 0, false); // cz^2 = 0
         createTerm(co4, 4, 1, false); // 0 = d
     }
 }

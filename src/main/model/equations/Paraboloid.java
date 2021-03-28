@@ -2,6 +2,8 @@ package model.equations;
 
 import model.Surface;
 
+// sub-class of Surface, contains the criteria needed for an equation of a paraboloid. This includes 4 coefficients
+// attached to variables in the createTerm method. One coefficient is negative and z isn't squared.
 public class Paraboloid extends Surface {
     int maxValue;
     int minValue;

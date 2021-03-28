@@ -17,7 +17,6 @@ public class JsonWriterTest extends JsonTest{
     @Test
     void testWriterInvalidFile() {
         try {
-            StatsManager st = new StatsManager("statHistory");
             JsonWriter writer = new JsonWriter("./data/my\0illegal:fileName.json");
             writer.open();
             fail("IOException was expected");
@@ -76,9 +75,9 @@ public class JsonWriterTest extends JsonTest{
             List<StatValue> allStats = st.getAllStats();
             assertEquals(3, allStats.size());
 
-            checkStatValue(category1.CorrectAnswers, correctAnswers.getValue());
-            checkStatValue(category1.IncorrectAnswers, incorrectAnswers.getValue());
-            checkStatValue(category1.QuestionsAsked, quizLength.getValue());
+            checkStatValue(StatCategory.CorrectAnswers, correctAnswers.getValue());
+            checkStatValue(StatCategory.IncorrectAnswers, incorrectAnswers.getValue());
+            checkStatValue(StatCategory.QuestionsAsked, quizLength.getValue());
 
 
         } catch (IOException e) {

@@ -7,22 +7,22 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-// Structure credit a bit ?
+// Credit for a bit of the structure?
 // https://www.tutorialspoint.com/how-can-we-implement-a-scrollable-jpanel-in-java
 
 // This class is in charge of the panel that holds the quiz questions and the quiz results.
 public class QuizPanelPopUp extends JFrame implements ActionListener {
 
-    private QuestionMaster quiz;
-    private StatsManager statsManagerQ;
+    private final QuestionMaster quiz;
+    private final StatsManager statsManagerQ;
     private QuizEntry currentQuiz;
 
     private int quizLen;
     private int overallCorrectAnswers;
     private int correctAnswers;
     private int questionsAsked;
-    private JPanel questionPanel;
-    private JScrollPane quizScroll;
+    private final JPanel questionPanel;
+    private final JScrollPane quizScroll;
 
     private HashMap<Integer, JTextField> map;
 
