@@ -1,16 +1,9 @@
 package model;
 
-import com.oracle.javafx.jmx.json.JSONReader;
-import javafx.scene.input.Clipboard;
+
 import model.equations.*;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
-import persistence.JsonReader;
-import persistence.JsonWriter;
-import com.oracle.javafx.jmx.json.JSONReader; // my project wouldn't compile and said to import this?
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
