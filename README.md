@@ -51,5 +51,7 @@ be unreliable and too short. To my surprise, no such program exists, so I though
 **PHASE 3**
 - As a user, I want to be able to add multiple (random) equations to the QuizPanel so I can be quized
 on them all at once.
+-- Furthermore, I want there to be a button for you to click and begin the quiz, as well as
+a button you click once you've submitted your quiz length.
 - As a user, I want to be able to click a button to load the previous state of the application and view
 these loaded stats with a button.
