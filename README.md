@@ -55,3 +55,15 @@ on them all at once.
 a button you click once you've submitted your quiz length.
 - As a user, I want to be able to click a button to load the previous state of the application and view
 these loaded stats with a button.
+
+**PHASE 4: Task 2**
+Criteria: Make appropriate us of the Map interface somewhere in your code.
+- In the class QuizPanelPopUp.graphics.ui, I used a Hashmap (called map) in the createPanel and createUserAnswerList
+methods.  
+- In createPanel (which is where I create the question panel with an arbitrary number of JTextFields for the user)  
+I used the hashmap to give each JTextField a unique integer so I could number them and treat each as a
+unique field. This was in a for loop because the program won't know how many questions the user wants beforehand, so 
+once the user inputs their number, the for loop will create a key-value pair for each JTextField created.
+- Then, in createUserAnswerList, I call the map's keys in the order they were stored (key = 1,2,3...) to make a
+list of the user's inputs within each JTextField once they hit submit. This will allow me to have a list of string 
+answers from the user that can then be compared to the actual answer list in the checkAnswers method.
