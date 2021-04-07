@@ -290,9 +290,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
     // PRIVATE ----------------------------------------------------------------------------------------------
 
-
-    // EFFECTS: All of these methods fetch the button image from file so they can be used as icons.
-
+    // EFFECTS: Fetch the start button image from file so it can be used as a button icon.
     private void initializeStartBtnImage() {
         try {
             ImageIcon img = createImageIcon("/images/startBtn.png", "btnPicture");
@@ -306,6 +304,7 @@ public class MainFrame extends JFrame implements ActionListener {
         }
     }
 
+    // EFFECTS: Fetch the instruction button image from file so it can be used as a button icon.
     private void initializeInstructionBtnImage() {
 
         try {
@@ -320,6 +319,7 @@ public class MainFrame extends JFrame implements ActionListener {
         }
     }
 
+    // EFFECTS: Fetch the result button image from file so it can be used as a button icon.
     private void initializeResultsBtnImage() {
 
         try {
@@ -334,6 +334,7 @@ public class MainFrame extends JFrame implements ActionListener {
         }
     }
 
+    // EFFECTS: Fetch the load button image from file so it can be used as a button icon.
     private void initializeLoadBtnImage() {
 
         try {
@@ -348,6 +349,7 @@ public class MainFrame extends JFrame implements ActionListener {
         }
     }
 
+    // EFFECTS: Fetch the exit button image from file so it can be used as a button icon.
     private void initializeExitBtnImage() {
 
         try {
