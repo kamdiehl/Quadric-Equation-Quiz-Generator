@@ -57,6 +57,7 @@ a button you click once you've submitted your quiz length.
 these loaded stats with a button.
 
 **PHASE 4: Task 2**
+
 Criteria: Make appropriate us of the Map interface somewhere in your code.
 - In the class QuizPanelPopUp.graphics.ui, I used a Hashmap (called map) in the createPanel and createUserAnswerList
 methods.  
@@ -67,3 +68,8 @@ once the user inputs their number, the for loop will create a key-value pair for
 - Then, in createUserAnswerList, I call the map's keys in the order they were stored (key = 1,2,3...) to make a
 list of the user's inputs within each JTextField once they hit submit. This will allow me to have a list of string 
 answers from the user that can then be compared to the actual answer list in the checkAnswers method.
+
+**PHASE 4: Task 3**
+
+The cohesion of my program is trash, so there are a lot of things I would change. But the 
+main one is probably how I designed my graphics.ui class. 
