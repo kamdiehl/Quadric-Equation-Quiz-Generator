@@ -72,4 +72,8 @@ answers from the user that can then be compared to the actual answer list in the
 **PHASE 4: Task 3**
 
 The cohesion of my program is trash, so there are a lot of things I would change. But the 
-main one is probably how I designed my graphics.ui class. 
+main one is I probably should have recombined the QuizEntry class and the QuestionMaster class. Initially, they were 
+one class, but when I was programming my Json extension I had to split them up so I could follow the Json demo more 
+easily. This decreased the cohesion of my code, since I had two classes that really had the same goal in mind. 
+Recombining them would have been easy, and it would eliminate the extra QuizEntry array lists in my gui package (when I
+need to refer to the questionList, etc.) 
