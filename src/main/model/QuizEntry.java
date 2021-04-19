@@ -118,7 +118,7 @@ public class QuizEntry {
 
 
 
-    // getters
+    // getters and setters
 
     public String getQuestion() {
         return question;

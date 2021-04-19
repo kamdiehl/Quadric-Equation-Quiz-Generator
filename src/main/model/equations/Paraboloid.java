@@ -40,4 +40,10 @@ public class Paraboloid extends Surface {
         createTerm(co3, 3, 0, true); // cz = 0 <- z is NOT squared
         createTerm(co4, 4, 1, false); // 0 = d
     }
+
+
+
+
+
+
 }
